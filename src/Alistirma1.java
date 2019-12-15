@@ -19,7 +19,7 @@ public class Alistirma1 {
         int sayi = girdi.nextInt();
         int sayiT = sayi;
         int gecici = 0;
-        ArrayList<Integer> basamakTers = new ArrayList<Integer>();
+        ArrayList<Integer> basamakTers = new ArrayList<>();
         while (sayi != 0){
             gecici = sayi % 10;
             sayi = (sayi - gecici) / 10;
