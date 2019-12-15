@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Alistirma2 {
+public class Steps {
     public static int sayiToplam(int sayi){
         int toplam = 0;
         if (sayi == 0){

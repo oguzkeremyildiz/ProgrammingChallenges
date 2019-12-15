@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Alistirma5 {
+public class CheckTheCheck {
     private  static void blackKnight(char[][] tahta, int sayi1, int sayi2){
         if (tahta[sayi1][sayi2] == 'n'){
             if (sayi1 - 2 >= 0 && sayi2 + 1 < tahta[0].length) {
@@ -544,7 +544,7 @@ public class Alistirma5 {
     public static void main(String[]args){
         int count = 0;
         try {
-            Scanner kaynak = new Scanner(new File("Satranc.txt"));
+            Scanner kaynak = new Scanner(new File("Chess.txt"));
             while (true){
                 int tahta1 = kaynak.nextInt();
                 int tahta2 = kaynak.nextInt();

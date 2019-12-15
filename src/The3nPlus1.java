@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Alistirma3 {
+public class The3nPlus1 {
     private static int kural(int sayi1, int sayi2){
         int enBuyuk = 0;
         int count = 0;
@@ -34,7 +34,7 @@ public class Alistirma3 {
         int i = 0;
         ArrayList<Integer> sayi = new ArrayList<>();
         try {
-            Scanner kaynak = new Scanner(new File("Sayilar.txt"));
+            Scanner kaynak = new Scanner(new File("Numbers.txt"));
             while (kaynak.hasNext()){
                 i++;
                 sayi.add(kaynak.nextInt());

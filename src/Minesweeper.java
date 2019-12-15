@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Alistirma4 {
+public class Minesweeper {
     private static void solTaraf(int sayi1, int sayi2, int[][] carpi){
         if (sayi2 - 1 > -1){
             carpi[sayi1][sayi2 - 1]++;
@@ -54,7 +54,7 @@ public class Alistirma4 {
     public static void main(String[]args){
         int count = 0;
         try {
-            Scanner kaynak = new Scanner(new File("MayinTarlasi.txt"));
+            Scanner kaynak = new Scanner(new File("Minesweeper.txt"));
 
             while (true){
                 int bolge1 = kaynak.nextInt();

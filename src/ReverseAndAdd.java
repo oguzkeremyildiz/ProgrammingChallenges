@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Alistirma1 {
+public class ReverseAndAdd {
     public static int us(int x, int y){
         int result = 1;
         if (y == 0){
