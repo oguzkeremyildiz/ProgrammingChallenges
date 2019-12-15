@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Alistirma6 {
+public class AustralianVoting {
     private static void secilen(int[][] oy){
         double[] ilkBolum = new double[oy[0].length];
         ArrayList<Double> enKucuk = new ArrayList<>();
@@ -51,7 +51,7 @@ public class Alistirma6 {
     }
     public static void main(String[]args){
         try {
-            Scanner kaynak = new Scanner(new File("Secim.txt"));
+            Scanner kaynak = new Scanner(new File("Voting.txt"));
             int ilkSatir = kaynak.nextInt();
             int ikinciSatir = kaynak.nextInt();
             while (ilkSatir != 0 && ikinciSatir != 0){
