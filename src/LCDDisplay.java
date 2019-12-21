@@ -402,7 +402,7 @@ public class LCDDisplay {
             for (int m = 0; m < basamak.size(); m++){
                 basamakTers.add(basamak.get(basamak.size() - m - 1));
             }
-            bolge = new String[(2 * alan) + 4][((alan + 2) * basamak.size()) + (basamak.size())];
+            bolge = new String[(2 * alan) + 3][((alan + 2) * basamak.size()) + (basamak.size() - 1)];
             for (int i = 0; i < bolge.length; i++){
                 for (int j = 0; j < bolge[0].length; j++){
                     bolge[i][j] = " ";
