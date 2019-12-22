@@ -52,9 +52,12 @@ public class AustralianVoting {
     public static void main(String[]args){
         try {
             Scanner kaynak = new Scanner(new File("Voting.txt"));
-            int ilkSatir = kaynak.nextInt();
-            int ikinciSatir = kaynak.nextInt();
-            while (ilkSatir != 0 && ikinciSatir != 0){
+            while (true){
+                int ilkSatir = kaynak.nextInt();
+                int ikinciSatir = kaynak.nextInt();
+                if (ilkSatir == 0 && ikinciSatir == 0){
+                    break;
+                }
                 int[][] oy = new int[ilkSatir][ikinciSatir];
                 for (int j = 0; j < oy[0].length; j++){
                     for (int i = 0; i < oy.length; i++){
@@ -62,7 +65,6 @@ public class AustralianVoting {
                     }
                 }
                 secilen(oy);
-                break;
             }
         }catch (FileNotFoundException e){
             e.printStackTrace();
