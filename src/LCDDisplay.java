@@ -184,9 +184,9 @@ public class LCDDisplay {
             }
         }
             print(alan, bolge, basamakTers);
+        while (alan != 0){
             alan = girdi.nextInt();
             sayi = girdi.nextInt();
-        while (alan != 0 || sayi != 0){
             basamak = new ArrayList<>();
             basamakTers = new ArrayList<>();
             while (sayi != 0){
@@ -197,13 +197,15 @@ public class LCDDisplay {
             for (int m = 0; m < basamak.size(); m++){
                 basamakTers.add(basamak.get(basamak.size() - m - 1));
             }
-            bolge = new String[(2 * alan) + 3][((alan + 2) * basamak.size()) + (basamak.size() - 1)];
-            for (int i = 0; i < bolge.length; i++){
-                for (int j = 0; j < bolge[0].length; j++){
-                    bolge[i][j] = " ";
+            bolge = new String[(2 * alan) + 4][((alan + 2) * basamak.size()) + (basamak.size())];
+            if (alan != 0){
+                for (int i = 0; i < bolge.length; i++){
+                    for (int j = 0; j < bolge[0].length; j++){
+                        bolge[i][j] = " ";
+                    }
                 }
+                print(alan, bolge, basamakTers);
             }
-            print(alan, bolge, basamakTers);
         }
     }
 }
