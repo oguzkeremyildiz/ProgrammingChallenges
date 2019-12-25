@@ -18,7 +18,7 @@ public class ReverseAndAdd {
         Scanner girdi = new Scanner(System.in);
         int sayi = girdi.nextInt();
         int sayiT = sayi;
-        int gecici = 0;
+        int gecici;
         ArrayList<Integer> basamakTers = new ArrayList<>();
         while (sayi != 0){
             gecici = sayi % 10;
