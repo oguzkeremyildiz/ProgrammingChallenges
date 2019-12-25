@@ -6,8 +6,8 @@ public class TheTrip {
         int transfer = 0;
         int toplam = 0;
 
-        for (int i = 0; i < paralar.size(); i++) {
-            toplam += paralar.get(i);
+        for (Integer integer : paralar) {
+            toplam += integer;
         }
         toplam = toplam / paralar.size();
         for (int z = 0; z < paralar.size(); z++){
