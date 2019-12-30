@@ -1,3 +1,5 @@
+package GettingStarted;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
