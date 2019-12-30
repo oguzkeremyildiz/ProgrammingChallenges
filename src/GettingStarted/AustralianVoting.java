@@ -10,12 +10,13 @@ public class AustralianVoting {
         double[] ilkBolum = new double[oy[0].length];
         ArrayList<Double> enKucuk = new ArrayList<>();
         int i = 0;
+        int t = 0;
         ArrayList<Double> simdiki = new ArrayList<>();
         while (simdiki.size() < ilkBolum.length / 2){
             for (int j = 0; j < oy[0].length; j++){
                 if (enKucuk.size() > 0){
                     if (oy[i][j] == enKucuk.get(0)) {
-                        ilkBolum[j] = oy[i + 1][j];
+                        ilkBolum[j] = oy[i + t][j];
                     }else {
                         ilkBolum[j] = oy[i][j];
                     }
@@ -49,6 +50,7 @@ public class AustralianVoting {
                     }
                 }
             }
+            t++;
         }
     }
     public static void main(String[]args){
