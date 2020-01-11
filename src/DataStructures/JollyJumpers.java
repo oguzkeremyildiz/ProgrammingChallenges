@@ -1,5 +1,7 @@
 package DataStructures;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -44,14 +46,22 @@ public class JollyJumpers {
         int number;
         ArrayList<Integer> numbers = new ArrayList<>();
         ArrayList<Integer> count = new ArrayList<>();
-        Scanner scan = new Scanner(System.in);
-        int times = scan.nextInt();
-        for (int i = 0; i < times; i++){
-            number = scan.nextInt();
-            numbers.add(number);
+        try {
+            Scanner scan = new Scanner(new File("Jolly.txt"));
+            while (scan.hasNext()){
+                int times = scan.nextInt();
+                for (int i = 0; i < times; i++){
+                    number = scan.nextInt();
+                    numbers.add(number);
+                }
+                jollyCount(numbers, count);
+                sortCount(count);
+                isJolly(numbers, count);
+                numbers.clear();
+                count.clear();
+            }
+        } catch (FileNotFoundException e){
+            e.printStackTrace();
         }
-        jollyCount(numbers, count);
-        sortCount(count);
-        isJolly(numbers, count);
     }
 }
