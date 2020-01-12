@@ -11,16 +11,20 @@ public class JollyJumpers {
         HashSet<Integer> count = new HashSet<>();
         for (int i = 0; i < numbers.size() - 1; i++){
             if (numbers.get(i) < numbers.get(i + 1)){
-                if (!count.contains(numbers.get(i + 1) - numbers.get(i))){
-                    count.add(numbers.get(i + 1) - numbers.get(i));
-                } else {
-                    return false;
+                if (numbers.get(i + 1) - numbers.get(i) < numbers.size() && numbers.get(i + 1) - numbers.get(i) != 0){
+                    if (!count.contains(numbers.get(i + 1) - numbers.get(i))){
+                        count.add(numbers.get(i + 1) - numbers.get(i));
+                    } else {
+                        return false;
+                    }
                 }
             } else {
-                if (!count.contains(numbers.get(i) - numbers.get(i + 1))){
-                    count.add(numbers.get(i) - numbers.get(i + 1));
-                } else {
-                    return false;
+                if (numbers.get(i) - numbers.get(i + 1) < numbers.size() && numbers.get(i) - numbers.get(i + 1) != 0){
+                    if (!count.contains(numbers.get(i) - numbers.get(i + 1))){
+                        count.add(numbers.get(i) - numbers.get(i + 1));
+                    } else {
+                        return false;
+                    }
                 }
             }
         }
