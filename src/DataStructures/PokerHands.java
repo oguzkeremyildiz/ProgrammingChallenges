@@ -74,7 +74,7 @@ public class PokerHands {
             }
         }
     }
-    public static int straightFlush(ArrayList<Integer> cardsFirstInt, ArrayList<Character> cardsSecond){ //it works
+    public static int straightFlush(ArrayList<Integer> cardsFirstInt, ArrayList<Character> cardsSecond){
         int sum = 1;
         sort(cardsFirstInt);
         for (int i = 0; i < cardsSecond.size(); i++){
@@ -87,7 +87,7 @@ public class PokerHands {
         }
         return sum;
     }
-    public static int fourOfAKind(ArrayList<Integer> cardsFirstInt){ //it works
+    public static int fourOfAKind(ArrayList<Integer> cardsFirstInt){
         int sum = 0;
         int number = 0;
         int current = cardsFirstInt.get(0);
@@ -110,7 +110,7 @@ public class PokerHands {
         }
         return sum;
     }
-    public static int fullHouse(ArrayList<Integer> cardsFirstInt){ // it works
+    public static int fullHouse(ArrayList<Integer> cardsFirstInt){
         ArrayList<Integer> cards = new ArrayList<>(cardsFirstInt);
         ArrayList<Integer> cards1 = new ArrayList<>();
         int sum = 0;
@@ -188,7 +188,7 @@ public class PokerHands {
             highCards(cards1,cards2);
         }
     }
-    public static int flush(ArrayList<Character> cardsSecond){ //it works
+    public static int flush(ArrayList<Character> cardsSecond){
         int sum = 1;
         for (int i = 0; i < cardsSecond.size(); i++){
             if (i < cardsSecond.size() - 1){
@@ -200,7 +200,7 @@ public class PokerHands {
         }
         return sum;
     }
-    public static int straight(ArrayList<Integer> cardsFirstInt){ //it works
+    public static int straight(ArrayList<Integer> cardsFirstInt){
         int sum = 1;
         for (int t = 0; t < cardsFirstInt.size(); t++){
             if (cardsFirstInt.get(t) == 14){
@@ -223,7 +223,7 @@ public class PokerHands {
         }
         return sum;
     }
-    public static int pair(ArrayList<Integer> cardsFirstInt){ //it works
+    public static int pair(ArrayList<Integer> cardsFirstInt){
         int sum = 0;
         int number = 0;
         int current = cardsFirstInt.get(0);
@@ -246,7 +246,7 @@ public class PokerHands {
         }
         return sum;
     }
-    public static int threeOfAKind(ArrayList<Integer> cardsFirstInt){ //it works
+    public static int threeOfAKind(ArrayList<Integer> cardsFirstInt){
         int sum = 0;
         int number = 0;
         int current = cardsFirstInt.get(0);
