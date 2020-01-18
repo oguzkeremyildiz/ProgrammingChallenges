@@ -14,7 +14,7 @@ public class Hartals {
                         if (i % number.get(t) == 0){
                             h++;
                         }
-                    } else if (t > 0){
+                    } else {
                         for (int z = 0; z < t; z++){
                             if (i % number.get(z) == 0){
                                     break;
