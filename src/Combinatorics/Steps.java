@@ -1,3 +1,5 @@
+package Combinatorics;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
