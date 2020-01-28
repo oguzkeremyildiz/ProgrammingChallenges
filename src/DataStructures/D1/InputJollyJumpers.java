@@ -1,4 +1,4 @@
-package DataStructures;
+package DataStructures.D1;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;

@@ -1,4 +1,4 @@
-package DataStructures;/* Created by oguzkeremyildiz on 18.01.2020 */
+package DataStructures.D3;/* Created by oguzkeremyildiz on 18.01.2020 */
 
 import java.io.File;
 import java.util.ArrayList;

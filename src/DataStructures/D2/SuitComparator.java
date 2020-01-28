@@ -1,4 +1,6 @@
-package DataStructures;/* Created by oguzkeremyildiz on 17.01.2020 */
+package DataStructures.D2;/* Created by oguzkeremyildiz on 17.01.2020 */
+
+import DataStructures.D2.Card;
 
 import java.util.Comparator;
 

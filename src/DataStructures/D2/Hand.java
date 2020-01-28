@@ -1,4 +1,4 @@
-package DataStructures;/* Created by oguzkeremyildiz on 17.01.2020 */
+package DataStructures.D2;/* Created by oguzkeremyildiz on 17.01.2020 */
 
 import java.util.ArrayList;
 import java.util.Collections;

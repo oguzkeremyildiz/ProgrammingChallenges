@@ -1,4 +1,4 @@
-package DataStructures;
+package DataStructures.D2;
 
 public enum SuitType {
     CLUBS,

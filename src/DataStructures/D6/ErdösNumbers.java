@@ -1,4 +1,4 @@
-package DataStructures;/* Created by oguzkeremyildiz on 23.01.2020 */
+package DataStructures.D6;/* Created by oguzkeremyildiz on 23.01.2020 */
 
 import java.io.File;
 import java.util.*;

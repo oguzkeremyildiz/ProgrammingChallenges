@@ -1,4 +1,4 @@
-package GettingStarted;
+package GettingStarted.G5;
 
 import java.util.Scanner;
 

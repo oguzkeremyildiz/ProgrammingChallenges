@@ -1,4 +1,4 @@
-package DataStructures;/* Created by oguzkeremyildiz on 19.01.2020 */
+package DataStructures.D4;/* Created by oguzkeremyildiz on 19.01.2020 */
 
 import javafx.util.Pair;
 

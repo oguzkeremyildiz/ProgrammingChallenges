@@ -1,4 +1,4 @@
-package DataStructures;/* Created by oguzkeremyildiz on 17.01.2020 */
+package DataStructures.D2;/* Created by oguzkeremyildiz on 17.01.2020 */
 
 public class Card implements Comparable{
     SuitType suit;

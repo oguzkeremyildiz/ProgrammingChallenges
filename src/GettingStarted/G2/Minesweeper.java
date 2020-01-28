@@ -1,4 +1,4 @@
-package GettingStarted;
+package GettingStarted.G2;
 
 import java.io.File;
 import java.io.FileNotFoundException;
