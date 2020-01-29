@@ -13,9 +13,10 @@ public class ContestScoreboard {
             person = (int) totalMinutes.keySet().toArray()[i];
             minute = (int) totalMinutes.values().toArray()[i];
             value = (int) questions.values().toArray()[i];
-            System.out.println(person);
-            System.out.println(value);
-            System.out.println(minute);
+            System.out.print(person + " ");
+            System.out.print(value + " ");
+            System.out.print(minute + " ");
+            System.out.println();
         }
     }
     private static void score(int person, int question, int minute, String type, HashMap<Integer, Integer> totalMinutes,  HashMap<Integer, Integer> questions){
