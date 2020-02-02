@@ -13,9 +13,9 @@ public class WERTYU {
             while (source.hasNext()){
                 strings = source.next();
                 characters = strings.toCharArray();
-                for (int i = 0; i < characters.length; i++){
-                    for (int j = 0; j < keyboard.length; j++){
-                        if (characters[i] == keyboard[j]) {
+                for (char character : characters) {
+                    for (int j = 0; j < keyboard.length; j++) {
+                        if (character == keyboard[j]) {
                             System.out.print(keyboard[j - 1]);
                         }
                     }
