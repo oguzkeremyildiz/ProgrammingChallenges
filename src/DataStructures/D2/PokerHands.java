@@ -44,8 +44,8 @@ public class PokerHands {
                         whiteHand.addCard(new Card(line));
                     }
                     if (j == 9){
-                        blackHand.sort();
-                        whiteHand.sort();
+                        blackHand.quickSort(blackHand.cards, 0, blackHand.cards.size() - 1);
+                        whiteHand.quickSort(whiteHand.cards, 0, whiteHand.cards.size() - 1);
                         if (blackHand.straightFlush()){
                             pointBlack = 9;
                         } else if (blackHand.fourOfAKind()){
