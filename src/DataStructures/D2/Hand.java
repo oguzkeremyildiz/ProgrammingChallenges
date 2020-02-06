@@ -17,6 +17,32 @@ public class Hand implements Comparable{
         Collections.sort(cards);
     }
 
+    public void quickSort(ArrayList<Card> cards, int head, int end){
+        int pivot;
+        if (head < end){
+            pivot = partition(cards, head, end);
+            quickSort(cards, head, pivot - 1);
+            quickSort(cards, pivot + 1, end);
+        }
+    }
+
+    public void changePlace(ArrayList<Card> cards, int i, int j){
+        Collections.swap(cards, i, j);
+    }
+
+    public int partition(ArrayList<Card> cards, int head, int end){
+        int x = cards.get(end).getValue(), tmp;
+        int i = head - 1, j;
+        for (j = head; j < end; j++){
+            if (cards.get(j).getValue() <= x){
+                i++;
+                changePlace(cards, head, end);
+            }
+        }
+        changePlace(cards, i + 1, end);
+        return i + 1;
+    }
+
     public boolean straightFlush(){
         sort();
         for (int i = 0; i < cards.size() - 1; i++){
