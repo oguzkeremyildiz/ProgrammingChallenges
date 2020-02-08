@@ -1,4 +1,4 @@
-package Strings;/* Created by oguzkeremyildiz on 2.02.2020 */
+package Strings.S1;/* Created by oguzkeremyildiz on 2.02.2020 */
 
 import java.io.File;
 import java.util.Scanner;
