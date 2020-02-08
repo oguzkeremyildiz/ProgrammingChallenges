@@ -6,20 +6,21 @@ import java.util.Collections;
 public class Round {
     ArrayList<Integer> dices;
 
-    public Round(ArrayList<Integer> dices){
-        this.dices = dices;
+    public Round(String readNext){
+        String[] split = readNext.split(" ");
+        dices = new ArrayList<>();
+        for (int t = 0; t < split.length; t++){
+            int splitInt = Integer.parseInt(split[t]);
+            dices.add(splitInt);
+        }
         sort();
     }
 
-    public int getDice(int index){
-        return dices.get(index);
-    }
-
-    public void sort(){
+    private void sort(){
         Collections.sort(dices);
     }
 
-    public int sum(){
+    private int sum(){
         int sum = 0;
         for (Integer dice : dices){
             sum += dice;
@@ -34,7 +35,7 @@ public class Round {
         System.out.println(head);
     }
 
-    public int basicCategories(int dice){
+    private int basicCategories(int dice){
         int sum = 0;
         for (int i = 0; i < dices.size(); i++){
             if (dices.get(i) == dice){
@@ -44,7 +45,7 @@ public class Round {
         return sum;
     }
 
-    public int maxOfAKind(){
+    private int maxOfAKind(){
         int count = 1;
         int max = 0;
         int previous = dices.get(0);
@@ -65,7 +66,7 @@ public class Round {
         return max;
     }
 
-    public int fiveOfAKind(){
+    private int fiveOfAKind(){
         if (maxOfAKind() == 5){
             return 50;
         } else {
@@ -73,7 +74,7 @@ public class Round {
         }
     }
 
-    public int fourOfAKind(){
+    private int fourOfAKind(){
         if (maxOfAKind() >= 4){
             return sum();
         } else {
@@ -81,7 +82,7 @@ public class Round {
         }
     }
 
-    public int threeOfAKind(){
+    private int threeOfAKind(){
         if (maxOfAKind() >= 3){
             return sum();
         } else {
@@ -89,7 +90,7 @@ public class Round {
         }
     }
 
-    public int longStraight(){
+    private int longStraight(){
         for (int i = 0; i < dices.size() - 1; i++){
             if (dices.get(i) + 1 != dices.get(i + 1)){
                 return 0;
@@ -98,7 +99,7 @@ public class Round {
         return 35;
     }
 
-    public int shortStraight(){
+    private int shortStraight(){
         boolean flag = true;
         for (int i = 0; i < dices.size() - 2; i++){
             if (dices.get(i) + 1 != dices.get(i + 1)){
@@ -117,7 +118,7 @@ public class Round {
         return 25;
     }
 
-    public int fullHouse(){
+    private int fullHouse(){
         if (dices.get(0).equals(dices.get(1)) && dices.get(3).equals(dices.get(4))){
             if (dices.get(1).equals(dices.get(2)) && !dices.get(2).equals(dices.get(3))){
                 return 40;
@@ -125,6 +126,38 @@ public class Round {
             if (!dices.get(1).equals(dices.get(2)) && dices.get(2).equals(dices.get(3))){
                 return 40;
             }
+        }
+        return 0;
+    }
+
+    public int calculate(int type){
+        switch (type){
+            case 0:
+                return basicCategories(1);
+            case 1:
+                return basicCategories(2);
+            case 2:
+                return basicCategories(3);
+            case 3:
+                 return basicCategories(4);
+            case 4:
+                return basicCategories(5);
+            case 5:
+                return basicCategories(6);
+            case 6:
+                return sum();
+            case 7:
+                return threeOfAKind();
+            case 8:
+                return fourOfAKind();
+            case 9:
+                return fiveOfAKind();
+            case 10:
+                return shortStraight();
+            case 11:
+                return longStraight();
+            case 12:
+                return fullHouse();
         }
         return 0;
     }
