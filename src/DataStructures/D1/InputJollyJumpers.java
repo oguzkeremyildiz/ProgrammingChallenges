@@ -4,12 +4,13 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 
 public class InputJollyJumpers {
     public static void saveAsXml(String fileName) {
         BufferedWriter outfile;
         try {
-            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(fileName), "UTF-8");
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8);
             outfile = new BufferedWriter(writer);
                 outfile.write("4 \n");
                 outfile.write("1 \n");
