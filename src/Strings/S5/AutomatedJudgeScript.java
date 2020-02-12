@@ -15,6 +15,20 @@ public class AutomatedJudgeScript {
             System.out.println("Run #" + current + ": Accepted");
         }
     }
+    private static boolean controlString(String correct, String answer){
+        boolean bool = true;
+        if (correct.length() != answer.length()){
+            bool = false;
+        } else {
+            for (int i = 0; i < answer.length(); i++){
+                if (answer.charAt(i) != correct.charAt(i)){
+                    bool = false;
+                    break;
+                }
+            }
+        }
+        return bool;
+    }
     private static boolean controlIntegers(ArrayList<Integer> integersCorrect, ArrayList<Integer> integersAnswers){
         boolean bool = true;
         if (integersAnswers.size() == integersCorrect.size()){
@@ -32,18 +46,13 @@ public class AutomatedJudgeScript {
     private static void control(ArrayList<Integer> integersCorrect, ArrayList<Integer> integersAnswers, String correct, String answer, HashSet<Integer> outputs){
         if (integersAnswers.size() != 0 && integersCorrect.size() != 0){
             if (controlIntegers(integersCorrect, integersAnswers)){
-                if (correct.length() == answer.length()){
+                if (controlString(correct, answer)){
                     outputs.add(1);
                 }
             }
         }
-        if (integersAnswers.size() == 0 && integersCorrect.size() == 0){
-            if (correct.length() == answer.length()){
-                outputs.add(2);
-            }
-        }
         if (controlIntegers(integersCorrect, integersAnswers)){
-            if (correct.length() != answer.length()){
+            if (!controlString(correct, answer)){
                 outputs.add(2);
             }
         }
