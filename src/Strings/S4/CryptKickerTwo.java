@@ -18,15 +18,45 @@ public class CryptKickerTwo {
     private static boolean isSuitable(ArrayList<String> currentCodes, ArrayList<String> words){
         boolean bool = false;
         HashSet<Character> codesHash = new HashSet<>();
+        HashSet<Integer> codesNumber = new HashSet<>();
         HashSet<Character> wordsHash = new HashSet<>();
+        HashSet<Integer> wordsNumber = new HashSet<>();
+        ArrayList<Integer> codesList = new ArrayList<>();
+        ArrayList<Integer> wordsList = new ArrayList<>();
+        HashSet<Character> codesTemporary = new HashSet<>();
+        HashSet<Character> wordsTemporary = new HashSet<>();
         for (int i = 0; i < currentCodes.size(); i++){
             for (int j = 0; j < currentCodes.get(i).length(); j++){
+                if (!wordsTemporary.contains(words.get(i).charAt(j))){
+                    wordsNumber.add(j);
+                }
+                if (!codesTemporary.contains(currentCodes.get(i).charAt(j))){
+                    codesNumber.add(j);
+                }
                 wordsHash.add(words.get(i).charAt(j));
                 codesHash.add(currentCodes.get(i).charAt(j));
+                codesTemporary.add(currentCodes.get(i).charAt(j));
+                wordsTemporary.add(words.get(i).charAt(j));
             }
+            codesTemporary.clear();
+            wordsTemporary.clear();
+            codesList.addAll(codesNumber);
+            wordsList.addAll(wordsNumber);
+            codesNumber.clear();
+            wordsNumber.clear();
         }
         if (wordsHash.size() == codesHash.size()){
             bool = true;
+            if (codesList.size() == wordsList.size()){
+                for (int t = 0; t < codesList.size(); t++){
+                    if (codesList.get(t) != wordsList.get(t)){
+                        bool = false;
+                        break;
+                    }
+                }
+            } else {
+                bool = false;
+            }
         }
         return bool;
     }
@@ -61,7 +91,7 @@ public class CryptKickerTwo {
                 }
             }
         }
-        for (int t = start; t < codes.size() + start; t++){
+        for (int t = start; t < codes.size(); t++){
             if (m == 9){
                 break;
             }
