@@ -3,32 +3,34 @@ package Strings.S6;/* Created by oguzkeremyildiz on 13.02.2020 */
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Scanner;
 
 public class FileFragmentation {
-    private static void find(ArrayList<String> allElements){
-        int count;
-        int tmp = 0;
-        String element = "";
-        for (int i = 0; i < allElements.size(); i++){
-            count = 1;
-            for (int j = 0; j < allElements.size(); j++){
-                if (i != j){
-                    if (allElements.get(i).equals(allElements.get(j))){
-                        count++;
+    private static void find(ArrayList<String> allElements, ArrayList<String> numbers){
+        int times = 0;
+        HashSet<String> isHave = new HashSet<>();
+        for (String allElement : allElements) {
+            for (int j = 0; j < numbers.size(); j++) {
+                for (int t = 0; t < numbers.size(); t++) {
+                    if (t != j) {
+                        if (!isHave.contains(numbers.get(j)) && !isHave.contains(numbers.get(t)))
+                            if (allElement.equals(numbers.get(j) + numbers.get(t))) {
+                                isHave.add(numbers.get(j));
+                                isHave.add(numbers.get(t));
+                                times += 2;
+                            }
                     }
                 }
             }
-            if (tmp == 0){
-                tmp = count;
-                element = allElements.get(i);
+            if (times == numbers.size()) {
+                System.out.println(allElement);
+                break;
+            } else {
+                times = 0;
             }
-            if (count > tmp){
-                tmp = count;
-                element = allElements.get(i);
-            }
+            isHave.clear();
         }
-        System.out.println(element);
     }
     private static void addAllElement(ArrayList<String> allElements, HashMap<String, ArrayList<String>> match, ArrayList<String> numbers){
         for (String number : numbers) {
@@ -62,7 +64,7 @@ public class FileFragmentation {
             }
             graphAdd(match, numbers);
             addAllElement(allElements, match, numbers);
-            find(allElements);
+            find(allElements, numbers);
         }catch (Exception e){
             e.printStackTrace();
         }
