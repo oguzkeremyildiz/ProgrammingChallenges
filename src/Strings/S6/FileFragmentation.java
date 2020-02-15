@@ -3,23 +3,48 @@ package Strings.S6;/* Created by oguzkeremyildiz on 13.02.2020 */
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Scanner;
 
 public class FileFragmentation {
     private static void find(ArrayList<String> allElements, ArrayList<String> numbers){
         int times = 0;
-        HashSet<String> isHave = new HashSet<>();
+        int count;
+        int count1;
+        int count2;
+        int count3;
+        ArrayList<String> isHave = new ArrayList<>();
         for (String allElement : allElements) {
             for (int j = 0; j < numbers.size(); j++) {
+                count = 0;
+                count1 = 0;
+                count2 = 0;
+                count3 = 0;
                 for (int t = 0; t < numbers.size(); t++) {
                     if (t != j) {
-                        if (!isHave.contains(numbers.get(j)) && !isHave.contains(numbers.get(t)))
+                        for (String s : isHave) {
+                            if (s.equals(numbers.get(j))) {
+                                count++;
+                            }
+                            if (s.equals(numbers.get(t))) {
+                                count2++;
+                            }
+                        }
+                        for (String number : numbers) {
+                            if (number.equals(numbers.get(j))) {
+                                count1++;
+                            }
+                            if (number.equals(numbers.get(t))) {
+                                count3++;
+                            }
+                        }
+                        if (count != count1 && count2 != count3){
                             if (allElement.equals(numbers.get(j) + numbers.get(t))) {
                                 isHave.add(numbers.get(j));
                                 isHave.add(numbers.get(t));
                                 times += 2;
+                                break;
                             }
+                        }
                     }
                 }
             }
