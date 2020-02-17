@@ -61,7 +61,7 @@ public class Doublets {
             }
         }
     }
-    private static void print(HashMap<Integer, ArrayList<String>> matches, List<String> words, int check){
+    private static void addList(HashMap<Integer, ArrayList<String>> matches, List<String> words, int check, ArrayList<String> outputs){
         String current = "";
         ArrayList<String> removed = new ArrayList<>();
         if (check == 0){
@@ -75,16 +75,21 @@ public class Doublets {
             for (String s : removed) {
                 matches.get(matches.size() - 2).remove(s);
             }
-            System.out.println(current);
+            outputs.add(current);
             for (int i = 0; i < matches.size() - 1; i++){
                 for (int j = 0; j < matches.get(matches.size() - 2 - i).size(); j++){
                     if (difference(matches.get(matches.size() - 2 - i).get(j), current) == 1){
-                        System.out.println(matches.get(matches.size() - 2 - i).get(j));
+                        outputs.add(matches.get(matches.size() - 2 - i).get(j));
                         current = matches.get(matches.size() - 2 - i).get(j);
                     }
                 }
             }
-            System.out.println(words.get(0));
+            outputs.add(words.get(0));
+        }
+    }
+    private static void print(ArrayList<String> outputs){
+        for (int i = 0; i < outputs.size(); i++){
+            System.out.println(outputs.get(outputs.size() - 1 - i));
         }
     }
     public static void main(String[]args){
@@ -94,6 +99,7 @@ public class Doublets {
             int i = 0;
             String current;
             HashMap<Integer, ArrayList<String>> matches = new HashMap<>();
+            ArrayList<String> outputs = new ArrayList<>();
             ArrayList<String> dictionary = new ArrayList<>();
             ArrayList<String> listInfinities;
             List<String> words = new ArrayList<>();
@@ -110,6 +116,7 @@ public class Doublets {
                     }
                 if (i > 0){
                     words.clear();
+                    outputs.clear();
                     index = 0;
                     check = 0;
                     current = source.nextLine();
@@ -127,7 +134,8 @@ public class Doublets {
                         setList(matches, index, listInfinities, words.get(0), words, dictionary);
                     }
                     matches.get(10000).removeAll(matches.get(10000));
-                    print(matches, words, check);
+                    addList(matches, words, check, outputs);
+                    print(outputs);
                 }
             }
         }catch (Exception e){
