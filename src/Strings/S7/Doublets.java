@@ -33,7 +33,7 @@ public class Doublets {
             }
         }
     }
-    private static void setList(HashMap<Integer, ArrayList<String>> matches, int index, ArrayList<String> listInfinities, String word, ArrayList<String> dictionary){
+    private static void setList(HashMap<Integer, ArrayList<String>> matches, int index, ArrayList<String> listInfinities, String word, List<String> words, ArrayList<String> dictionary){
         int current;
         matches.put(index, new ArrayList<>());
         ArrayList<String> listOnes = new ArrayList<>(matches.get(index - 1));
@@ -44,6 +44,9 @@ public class Doublets {
                     listInfinities.remove(listInfinities.get(j));
                 }
             }
+        }
+        if (matches.get(index).contains(words.get(1))){
+            listInfinities.clear();
         }
         if (matches.containsKey(dictionary.size() + 2)){
             System.out.println("No solution.");
@@ -59,9 +62,19 @@ public class Doublets {
         }
     }
     private static void print(HashMap<Integer, ArrayList<String>> matches, List<String> words, int check){
-        if (check == 0)
-        if (matches.get(matches.size() - 2).get(0).equals(words.get(1))){
-            String current = matches.get(matches.size() - 2).get(0);
+        String current = "";
+        ArrayList<String> removed = new ArrayList<>();
+        if (check == 0){
+            for (int t = 0; t < matches.get(matches.size() - 2).size(); t++){
+                if (matches.get(matches.size() - 2).get(t).equals(words.get(1))){
+                    current  = matches.get(matches.size() - 2).get(t);
+                } else {
+                    removed.add(matches.get(matches.size() - 2).get(t));
+                }
+            }
+            for (String s : removed) {
+                matches.get(matches.size() - 2).remove(s);
+            }
             System.out.println(current);
             for (int i = 0; i < matches.size() - 1; i++){
                 for (int j = 0; j < matches.get(matches.size() - 2 - i).size(); j++){
@@ -111,7 +124,7 @@ public class Doublets {
                            check = 1;
                         }
                         index++;
-                        setList(matches, index, listInfinities, words.get(0), dictionary);
+                        setList(matches, index, listInfinities, words.get(0), words, dictionary);
                     }
                     matches.get(10000).removeAll(matches.get(10000));
                     print(matches, words, check);
