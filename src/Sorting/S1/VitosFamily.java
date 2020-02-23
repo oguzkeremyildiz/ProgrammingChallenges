@@ -1,4 +1,4 @@
-package Sorting;/* Created by oguzkeremyildiz on 21.02.2020 */
+package Sorting.S1;/* Created by oguzkeremyildiz on 21.02.2020 */
 
 import java.io.File;
 import java.util.ArrayList;
