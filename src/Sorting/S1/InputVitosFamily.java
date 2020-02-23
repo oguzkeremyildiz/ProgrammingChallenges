@@ -12,14 +12,9 @@ public class InputVitosFamily {
         try {
             OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(fileName), StandardCharsets.UTF_8);
             outfile = new BufferedWriter(writer);
-            outfile.write("500\n");
-            for (int j = 1; j <= 500; j++){
-                outfile.write("30000 ");
-                for (int i = 1; i <= 30000; i++){
-                    outfile.write(i + " ");
-                }
-                outfile.write("\n");
-            }
+            outfile.write("2\n");
+            outfile.write("2 2 4\n");
+            outfile.write("3 2 4 6");
             outfile.close();
         } catch (IOException ioException) {
             System.out.println("Output file can not be opened");
