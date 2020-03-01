@@ -5,30 +5,30 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Bridge {
-    private static void swap(LinkedList<Integer> pancakes, int i, int j){
+    private static void swap(LinkedList<Integer> list, int i, int j){
         int tmp;
-        tmp = pancakes.get(i);
-        pancakes.set(i, pancakes.get(j));
-        pancakes.set(j, tmp);
+        tmp = list.get(i);
+        list.set(i, list.get(j));
+        list.set(j, tmp);
     }
-    private static int partition(LinkedList<Integer> pancakes, int first, int last){
-        int x = pancakes.get(last);
+    private static int partition(LinkedList<Integer> list, int first, int last){
+        int x = list.get(last);
         int i = first - 1, j;
         for (j = first; j < last; j++){
-            if (pancakes.get(j) <= x){
+            if (list.get(j) <= x){
                 i++;
-                swap(pancakes, i, j);
+                swap(list, i, j);
             }
         }
-        swap(pancakes, i + 1, last);
+        swap(list, i + 1, last);
         return i + 1;
     }
-    private static void quickSort(LinkedList<Integer> pancakes, int first, int last){
+    private static void quickSort(LinkedList<Integer> list, int first, int last){
         int pivot;
         if (first < last){
-            pivot = partition(pancakes, first, last);
-            quickSort(pancakes, first, pivot - 1);
-            quickSort(pancakes, pivot + 1, last);
+            pivot = partition(list, first, last);
+            quickSort(list, first, pivot - 1);
+            quickSort(list, pivot + 1, last);
         }
     }
     private static int bridge(LinkedList<Integer> start, LinkedList<Integer> finish){
