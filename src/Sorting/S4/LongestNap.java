@@ -2,9 +2,13 @@ package Sorting.S4;/* Created by oguzkeremyildiz on 1.03.2020 */
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class LongestNap {
+    private static void sort(ArrayList<Integer> list){
+        Collections.sort(list);
+    }
     private static void convert(String line, ArrayList<Integer> first, ArrayList<Integer> last){
         String firstString = "";
         int firstInt;
@@ -105,6 +109,8 @@ public class LongestNap {
         int longestNap = 0;
         final int timeFirst = 1000;
         final int timeLast = 1800;
+        sort(first);
+        sort(last);
         for (int i = 0; i < last.size(); i++) {
             if (i + 1 < first.size()){
                 if (i == 0){
