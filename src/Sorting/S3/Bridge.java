@@ -1,16 +1,38 @@
 package Sorting.S3;/* Created by oguzkeremyildiz on 26.02.2020 */
 
 import java.io.File;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Bridge {
-    private static void sort(LinkedList<Integer> list){
-        Collections.sort(list);
+    private static void swap(LinkedList<Integer> pancakes, int i, int j){
+        int tmp;
+        tmp = pancakes.get(i);
+        pancakes.set(i, pancakes.get(j));
+        pancakes.set(j, tmp);
+    }
+    private static int partition(LinkedList<Integer> pancakes, int first, int last){
+        int x = pancakes.get(last);
+        int i = first - 1, j;
+        for (j = first; j < last; j++){
+            if (pancakes.get(j) <= x){
+                i++;
+                swap(pancakes, i, j);
+            }
+        }
+        swap(pancakes, i + 1, last);
+        return i + 1;
+    }
+    private static void quickSort(LinkedList<Integer> pancakes, int first, int last){
+        int pivot;
+        if (first < last){
+            pivot = partition(pancakes, first, last);
+            quickSort(pancakes, first, pivot - 1);
+            quickSort(pancakes, pivot + 1, last);
+        }
     }
     private static int bridge(LinkedList<Integer> start, LinkedList<Integer> finish){
-        sort(start);
+        quickSort(start, 0, start.size() - 1);
         int index = 0;
         int sum = 0;
         if (start.size() % 2 == 0){
@@ -50,7 +72,7 @@ public class Bridge {
             sum += finish.getFirst();
             finish.add(start.getFirst());
             index += 2;
-            sort(finish);
+            quickSort(finish, 0, finish.size() - 1);
         }
         System.out.println();
         return sum;
