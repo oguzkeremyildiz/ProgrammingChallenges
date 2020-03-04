@@ -2,12 +2,34 @@ package Sorting.S4;/* Created by oguzkeremyildiz on 1.03.2020 */
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 public class LongestNap {
-    private static void sort(ArrayList<Integer> list){
-        Collections.sort(list);
+    private static void swap(ArrayList<Integer> list, int i, int j){
+        int tmp;
+        tmp = list.get(i);
+        list.set(i, list.get(j));
+        list.set(j, tmp);
+    }
+    private static int partition(ArrayList<Integer> list, int first, int last){
+        int x = list.get(last);
+        int i = first - 1, j;
+        for (j = first; j < last; j++){
+            if (list.get(j) <= x){
+                i++;
+                swap(list, i, j);
+            }
+        }
+        swap(list, i + 1, last);
+        return i + 1;
+    }
+    private static void quickSort(ArrayList<Integer> list, int first, int last){
+        int pivot;
+        if (first < last){
+            pivot = partition(list, first, last);
+            quickSort(list, first, pivot - 1);
+            quickSort(list, pivot + 1, last);
+        }
     }
     private static void convert(String line, ArrayList<Integer> first, ArrayList<Integer> last){
         String firstString = "";
@@ -109,8 +131,8 @@ public class LongestNap {
         int longestNap = 0;
         final int timeFirst = 1000;
         final int timeLast = 1800;
-        sort(first);
-        sort(last);
+        quickSort(first, 0, first.size() - 1);
+        quickSort(last, 0, last.size() - 1);
         for (int i = 0; i < last.size(); i++) {
             if (i + 1 < first.size()){
                 if (i == 0){
