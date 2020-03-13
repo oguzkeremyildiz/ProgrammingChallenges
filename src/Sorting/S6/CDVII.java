@@ -4,11 +4,38 @@ import java.io.File;
 import java.util.*;
 
 public class CDVII {
+    private static void swap(ArrayList<Integer> list, int i, int j){
+        int tmp;
+        tmp = list.get(i);
+        list.set(i, list.get(j));
+        list.set(j, tmp);
+    }
+    private static int partition(ArrayList<Integer> list, int first, int last){
+        int x = list.get(last);
+        int i = first - 1, j;
+        for (j = first; j < last; j++){
+            if (list.get(j) <= x){
+                i++;
+                swap(list, i, j);
+            }
+        }
+        swap(list, i + 1, last);
+        return i + 1;
+    }
+    private static void quickSort(ArrayList<Integer> list, int first, int last){
+        int pivot;
+        if (first < last){
+            pivot = partition(list, first, last);
+            quickSort(list, first, pivot - 1);
+            quickSort(list, pivot + 1, last);
+        }
+    }
     private static void sort(HashMap<Integer, Integer> map, Car car, ArrayList<Integer> numbers, ArrayList<Integer> hours){
         car.setMoney(car.getMoney() + (map.size() / 2) * 100);
         ArrayList<Integer> keys = new ArrayList<>();
         keys.addAll(map.keySet());
-        Collections.sort(keys);
+        quickSort(keys, 0, keys.size() - 1);
+        quickSort(hours, 0, hours.size() - 1);
         int t = -1;
         for (int i = 0; i < map.size(); i++) {
             if (i % 2 == 0){
