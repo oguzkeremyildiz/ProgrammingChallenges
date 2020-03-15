@@ -47,11 +47,10 @@ public class ShellSort {
                 String turtlesString = source.nextLine();
                 int turtles = Integer.parseInt(turtlesString);
                 for (int j = 0; j < turtles * 2; j++) {
+                    line = source.nextLine();
                     if (j > turtles - 1){
-                        line = source.nextLine();
                         sortedTurtle.add(line);
                     } else {
-                        line = source.nextLine();
                         turtle.add(line);
                     }
                 }
