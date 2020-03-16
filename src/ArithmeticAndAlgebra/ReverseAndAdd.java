@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ReverseAndAdd {
-    public static int us(int x, int y){
+    public static int power(int x, int y){
         int result = 1;
         if (y == 0){
             return 1;
@@ -16,23 +16,23 @@ public class ReverseAndAdd {
         return result;
     }
 
-    public static void main (String[]args){
-        Scanner girdi = new Scanner(System.in);
-        int sayi = girdi.nextInt();
-        int sayiT = sayi;
-        int gecici;
-        ArrayList<Integer> basamakTers = new ArrayList<>();
-        while (sayi != 0){
-            gecici = sayi % 10;
-            sayi = (sayi - gecici) / 10;
-            basamakTers.add(gecici);
+    public static void main(String[]args){
+        Scanner input = new Scanner(System.in);
+        int number = input.nextInt();
+        int numberT = number;
+        int temporary;
+        ArrayList<Integer> digitReverse = new ArrayList<>();
+        while (number != 0){
+            temporary = number % 10;
+            number = (number - temporary) / 10;
+            digitReverse.add(temporary);
         }
-        int sayiTTers = 0;
+        int numberTReverse = 0;
 
-        for (int i = 0; i < basamakTers.size(); i++){
-            sayiTTers += basamakTers.get(basamakTers.size() - i - 1) * us(10,i);
+        for (int i = 0; i < digitReverse.size(); i++){
+            numberTReverse += digitReverse.get(digitReverse.size() - i - 1) * power(10,i);
         }
-        int sonuc = sayiT + sayiTTers;
-        System.out.println("toplam: " + sonuc);
+        int output = numberT + numberTReverse;
+        System.out.println("total: " + output);
     }
 }
