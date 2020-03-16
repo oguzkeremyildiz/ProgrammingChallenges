@@ -6,42 +6,42 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class The3nPlus1 {
-    private static int kural(int sayi1, int sayi2){
-        int enBuyuk = 0;
+    private static int rule(int number1, int number2){
+        int biggest = 0;
         int count = 0;
-        if (sayi2 > sayi1){
-            for (int i = sayi1; i <= sayi2; i++){
-                int gecici = i;
+        if (number2 > number1){
+            for (int i = number1; i <= number2; i++){
+                int temporary = i;
                 count++;
-                while (gecici != 1){
-                    if (gecici % 2 == 0){
-                        gecici /= 2;
+                while (temporary != 1){
+                    if (temporary % 2 == 0){
+                        temporary /= 2;
                         count++;
                     } else{
-                        gecici *= 3;
-                        gecici += 1;
+                        temporary *= 3;
+                        temporary += 1;
                         count++;
                     }
                 }
-                if (count > enBuyuk){
-                    enBuyuk = count;
+                if (count > biggest){
+                    biggest = count;
                 }
                 count = 0;
             }
         }
-        return enBuyuk;
+        return biggest;
     }
 
     public static void main(String[]args){
         int i = 0;
-        ArrayList<Integer> sayi = new ArrayList<>();
+        ArrayList<Integer> number = new ArrayList<>();
         try {
-            Scanner kaynak = new Scanner(new File("Numbers.txt"));
-            while (kaynak.hasNext()){
+            Scanner source = new Scanner(new File("Numbers.txt"));
+            while (source.hasNext()){
                 i++;
-                sayi.add(kaynak.nextInt());
+                number.add(source.nextInt());
                 if (i % 2 == 0){
-                    System.out.println(sayi.get(i - 2) + " " + sayi.get(i - 1) + " " + kural(sayi.get(i - 2), sayi.get(i - 1)));
+                    System.out.println(number.get(i - 2) + " " + number.get(i - 1) + " " + rule(number.get(i - 2), number.get(i - 1)));
                 }
             }
         } catch (FileNotFoundException e) {
