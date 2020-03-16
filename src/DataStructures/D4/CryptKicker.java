@@ -25,12 +25,12 @@ public class CryptKicker {
     }
 
     private static void print(ArrayList<String> codes, HashMap<Character, Character> codesExplain){
-        for (int y = 0; y < codes.size(); y++){
-            for (int m = 0; m < codes.get(y).length(); m++){
-                if (codesExplain.get(codes.get(y).charAt(m)) == null){
+        for (String code : codes) {
+            for (int m = 0; m < code.length(); m++) {
+                if (codesExplain.get(code.charAt(m)) == null) {
                     System.out.print("*");
                 } else {
-                    System.out.print(codesExplain.get(codes.get(y).charAt(m)));
+                    System.out.print(codesExplain.get(code.charAt(m)));
                 }
             }
             System.out.print("  ");
@@ -132,9 +132,7 @@ public class CryptKicker {
                 String codeLine = source.nextLine();
                 codes = new ArrayList<>();
                 String[] codeArray = codeLine.split(" ");
-                for (String code : codeArray){
-                    codes.add(code);
-                }
+                codes.addAll(Arrays.asList(codeArray));
                 HashMap<Integer, ArrayList<String>> wordList = createWordLists(words);
                 HashMap<Integer, ArrayList<String>> codeList = createWordLists(codes);
                 HashMap<Character, Character> codesExplain = new HashMap<>();
