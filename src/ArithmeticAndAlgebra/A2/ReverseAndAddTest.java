@@ -1,4 +1,6 @@
-package ArithmeticAndAlgebra;
+package ArithmeticAndAlgebra.A2;
+
+import ArithmeticAndAlgebra.A2.ReverseAndAdd;
 
 import static org.junit.jupiter.api.Assertions.*;
 

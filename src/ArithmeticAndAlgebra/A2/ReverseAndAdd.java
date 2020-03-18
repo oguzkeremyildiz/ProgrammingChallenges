@@ -1,4 +1,4 @@
-package ArithmeticAndAlgebra;
+package ArithmeticAndAlgebra.A2;
 
 import java.util.ArrayList;
 import java.util.Scanner;
