@@ -5,98 +5,97 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Minesweeper {
-    private static void solTaraf(int sayi1, int sayi2, int[][] carpi){
-        if (sayi2 - 1 > -1){
-            carpi[sayi1][sayi2 - 1]++;
+    private static void leftSide(int number1, int number2, int[][] mine){
+        if (number2 - 1 > -1){
+            mine[number1][number2 - 1]++;
         }
     }
 
-    private static void ustTaraf(int sayi1, int sayi2, int[][] carpi){
-        if (sayi1 - 1 > -1){
-            carpi[sayi1 - 1][sayi2]++;
+    private static void upSide(int number1, int number2, int[][] mine){
+        if (number1 - 1 > -1){
+            mine[number1 - 1][number2]++;
         }
     }
 
-    private static void solUstTaraf(int sayi1, int sayi2, int[][] carpi){
-        if (sayi1 - 1 > -1 && sayi2 - 1 > -1){
-            carpi[sayi1 - 1][sayi2 - 1]++;
+    private static void leftUpSide(int number1, int number2, int[][] mine){
+        if (number1 - 1 > -1 && number2 - 1 > -1){
+            mine[number1 - 1][number2 - 1]++;
         }
     }
 
-    private static void altTaraf(int sayi1, int sayi2, int[][] carpi, int[][] bolge){
-        if (sayi1 + 1 < bolge.length){
-            carpi[sayi1 + 1][sayi2]++;
+    private static void underSide(int number1, int number2, int[][] mine, int[][] area){
+        if (number1 + 1 < area.length){
+            mine[number1 + 1][number2]++;
         }
     }
 
-    private static void sagTaraf(int sayi1, int sayi2, int[][] carpi, int[][] bolge){
-        if (sayi2 + 1 < bolge[0].length){
-            carpi[sayi1][sayi2 + 1]++;
+    private static void rightSide(int number1, int number2, int[][] mine, int[][] area){
+        if (number2 + 1 < area[0].length){
+            mine[number1][number2 + 1]++;
         }
     }
 
-    private static void sagUstTaraf(int sayi1, int sayi2, int[][] carpi, int[][] bolge){
-        if (sayi1 - 1 > -1 && sayi2 + 1 < bolge[0].length){
-            carpi[sayi1 - 1][sayi2 + 1]++;
+    private static void rightUpSide(int sayi1, int sayi2, int[][] mine, int[][] area){
+        if (sayi1 - 1 > -1 && sayi2 + 1 < area[0].length){
+            mine[sayi1 - 1][sayi2 + 1]++;
         }
     }
 
-    private static void sagAltTaraf(int sayi1, int sayi2, int[][] carpi, int[][] bolge){
-        if (sayi1 + 1 < bolge.length && sayi2 + 1 < bolge[0].length){
-            carpi[sayi1 + 1][sayi2 + 1]++;
+    private static void rightUnderSide(int number1, int number2, int[][] mine, int[][] area){
+        if (number1 + 1 < area.length && number2 + 1 < area[0].length){
+            mine[number1 + 1][number2 + 1]++;
         }
     }
 
-    private static void solAltTaraf(int sayi1, int sayi2, int[][] carpi, int[][] bolge){
-        if (sayi1 + 1 < bolge.length && sayi2 - 1 > -1){
-            carpi[sayi1 + 1][sayi2 - 1]++;
+    private static void leftUnderSide(int number1, int number2, int[][] mine, int[][] area){
+        if (number1 + 1 < area.length && number2 - 1 > -1){
+            mine[number1 + 1][number2 - 1]++;
         }
     }
 
     public static void main(String[]args){
         int count = 0;
         try {
-            Scanner kaynak = new Scanner(new File("Minesweeper.txt"));
-
+            Scanner source = new Scanner(new File("Minesweeper.txt"));
             while (true){
-                int bolge1 = kaynak.nextInt();
-                int bolge2 = kaynak.nextInt();
-                if (bolge1 == 0 && bolge2 == 0){
+                int area1 = source.nextInt();
+                int area2 = source.nextInt();
+                if (area1 == 0 && area2 == 0){
                     break;
                 }
-                int[][] bolge = new int[bolge1][bolge2];
-                int[][] carpi = new int[bolge1][bolge2];
+                int[][] area = new int[area1][area2];
+                int[][] mine = new int[area1][area2];
                 count += 1;
                 System.out.println(count);
-                String satir;
-                for (int t = 0; t < bolge.length; t++){
-                    satir = kaynak.next();
-                    for (int j = 0; j < bolge[0].length; j++){
-                            if (satir.charAt(j) == '*'){
-                                bolge[t][j] = 1;
+                String line;
+                for (int t = 0; t < area.length; t++){
+                    line = source.next();
+                    for (int j = 0; j < area[0].length; j++){
+                            if (line.charAt(j) == '*'){
+                                area[t][j] = 1;
                             }
                     }
                 }
-                for (int z = 0; z < bolge.length; z++){
-                    for (int k = 0; k < bolge[0].length; k++){
-                        if (bolge[z][k] == 1){
-                            solTaraf(z ,k, carpi);
-                            sagTaraf(z, k, carpi, bolge);
-                            sagUstTaraf(z,k,carpi,bolge);
-                            solUstTaraf(z,k,carpi);
-                            ustTaraf(z, k, carpi);
-                            altTaraf(z,k,carpi,bolge);
-                            sagAltTaraf(z,k,carpi,bolge);
-                            solAltTaraf(z,k,carpi,bolge);
+                for (int z = 0; z < area.length; z++){
+                    for (int k = 0; k < area[0].length; k++){
+                        if (area[z][k] == 1){
+                            leftSide(z ,k, mine);
+                            rightSide(z, k, mine, area);
+                            rightUpSide(z,k,mine,area);
+                            leftUpSide(z,k,mine);
+                            upSide(z, k, mine);
+                            underSide(z,k,mine,area);
+                            rightUnderSide(z,k,mine,area);
+                            leftUnderSide(z,k,mine,area);
                         }
                     }
                 }
-                for (int t = 0; t < bolge.length; t++){
-                    for (int j = 0; j < bolge[0].length; j++){
-                        if (bolge[t][j] == 1) {
+                for (int t = 0; t < area.length; t++){
+                    for (int j = 0; j < area[0].length; j++){
+                        if (area[t][j] == 1) {
                             System.out.print("*");
-                        }else {
-                            System.out.print(carpi[t][j]);
+                        } else {
+                            System.out.print(mine[t][j]);
                         }
                     }
                     System.out.println();
