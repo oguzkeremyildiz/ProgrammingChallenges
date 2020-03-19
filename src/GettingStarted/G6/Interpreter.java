@@ -8,43 +8,43 @@ import java.util.Scanner;
 public class Interpreter {
     static int t = 0;
 
-    public static void ram(int basamak1, int basamak2, int basamak3, int[] register, int[] ram){
-            switch (basamak1){
+    public static void ram(int digit1, int digit2, int digit3, int[] register, int[] ram){
+            switch (digit1){
                 case 2:
-                    register[basamak2] = basamak3;
+                    register[digit2] = digit3;
                     t++;
                     break;
                 case 3:
-                    register[basamak2] = (register[basamak2] + basamak3) % 1000;
+                    register[digit2] = (register[digit2] + digit3) % 1000;
                     t++;
                     break;
                 case 4:
-                    register[basamak2] = (register[basamak2] * basamak3) % 1000;
+                    register[digit2] = (register[digit2] * digit3) % 1000;
                     t++;
                     break;
                 case 5:
-                    register[basamak2] = register[basamak3];
+                    register[digit2] = register[digit3];
                     t++;
                     break;
                 case 6:
-                    register[basamak2] = (register[basamak2] + register[basamak3]) % 1000;
+                    register[digit2] = (register[digit2] + register[digit3]) % 1000;
                     t++;
                     break;
                 case 7:
-                    register[basamak2] = (register[basamak2] * register[basamak3]) % 1000;
+                    register[digit2] = (register[digit2] * register[digit3]) % 1000;
                     t++;
                     break;
                 case 8:
-                    register[basamak2] = ram[register[basamak3]];
+                    register[digit2] = ram[register[digit3]];
                     t++;
                     break;
                 case 9:
-                    ram[register[basamak3]] = register[basamak2];
+                    ram[register[digit3]] = register[digit2];
                     t++;
                     break;
                 case 0:
-                    if (register[basamak3] != 0){
-                        t = register[basamak2];
+                    if (register[digit3] != 0){
+                        t = register[digit2];
                     } else {
                         t++;
                     }
@@ -55,33 +55,33 @@ public class Interpreter {
         try {
             int [] register = new int[10];
             int count = 1;
-            Scanner kaynak = new Scanner(new File("Interpreter.txt"));
-            int ilkSatir = Integer.parseInt(kaynak.nextLine());
-            int sayi;
-            String line = kaynak.nextLine();
+            Scanner source = new Scanner(new File("Interpreter.txt"));
+            int firstLine = Integer.parseInt(source.nextLine());
+            int number;
+            String line = source.nextLine();
             int j = 0;
-            for (int i = 0; i < ilkSatir; i++){
+            for (int i = 0; i < firstLine; i++){
                 int [] ram = new int[1000];
-                while (kaynak.hasNext()){
-                    line = kaynak.nextLine();
+                while (source.hasNext()){
+                    line = source.nextLine();
                     if (line.length() == 0){
                         break;
                     }
-                    sayi = Integer.parseInt(line);
-                    ram[j] = sayi;
+                    number = Integer.parseInt(line);
+                    ram[j] = number;
                     j++;
                 }
                 t = 0;
                 while (ram[t] != 100){
-                    int gecici;
-                    ArrayList<Integer> basamak = new ArrayList<>();
-                    gecici = ram[t] / 100;
-                    basamak.add(gecici);
-                    gecici = (ram[t] / 10) % 10;
-                    basamak.add(gecici);
-                    gecici = ram[t] % 10;
-                    basamak.add(gecici);
-                    ram(basamak.get(basamak.size() - 3), basamak.get(basamak.size() - 2), basamak.get(basamak.size() - 1), register, ram);
+                    int temporary;
+                    ArrayList<Integer> digit = new ArrayList<>();
+                    temporary = ram[t] / 100;
+                    digit.add(temporary);
+                    temporary = (ram[t] / 10) % 10;
+                    digit.add(temporary);
+                    temporary = ram[t] % 10;
+                    digit.add(temporary);
+                    ram(digit.get(digit.size() - 3), digit.get(digit.size() - 2), digit.get(digit.size() - 1), register, ram);
                     count++;
                 }
             }
