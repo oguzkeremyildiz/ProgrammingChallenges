@@ -5,176 +5,163 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class CheckTheCheck {
-    private  static void blackKnight(char[][] tahta, int sayi1, int sayi2){
-        if (tahta[sayi1][sayi2] == 'n'){
-            if (sayi1 - 2 >= 0 && sayi2 + 1 < tahta[0].length) {
-                if (tahta[sayi1 - 2][sayi2 + 1] == 'K'){ // sağ üst
+    private  static void blackKnight(char[][] board, int number1, int number2){
+        if (board[number1][number2] == 'n'){
+            if (number1 - 2 >= 0 && number2 + 1 < board[0].length) {
+                if (board[number1 - 2][number2 + 1] == 'K'){
                     System.out.println("white king is in check");
                 }
             }
-            if (sayi1 - 2 >= 0 && sayi2 - 1 >= 0) {
-                if (tahta[sayi1 - 2][sayi2 - 1] == 'K'){ // sol üst
+            if (number1 - 2 >= 0 && number2 - 1 >= 0) {
+                if (board[number1 - 2][number2 - 1] == 'K'){
                     System.out.println("white king is in check");
                 }
             }
-            if (sayi1 - 1 >= 0 && sayi2 - 2 >= 0) {
-                if (tahta[sayi1 - 1][sayi2 - 2] == 'K'){ // sol üst alt
+            if (number1 - 1 >= 0 && number2 - 2 >= 0) {
+                if (board[number1 - 1][number2 - 2] == 'K'){
                     System.out.println("white king is in check");
                 }
             }
-            if (sayi1 - 1 >= 0 && sayi2 + 2 < tahta[0].length) {
-                if (tahta[sayi1 - 1][sayi2 + 2] == 'K'){ // sağ üst alt
+            if (number1 - 1 >= 0 && number2 + 2 < board[0].length) {
+                if (board[number1 - 1][number2 + 2] == 'K'){ 
                     System.out.println("white king is in check");
                 }
             }
-            if (sayi1 + 1 < tahta.length && sayi2 + 2 < tahta[0].length) {
-                if (tahta[sayi1 + 1][sayi2 + 2] == 'K'){
+            if (number1 + 1 < board.length && number2 + 2 < board[0].length) {
+                if (board[number1 + 1][number2 + 2] == 'K'){
                     System.out.println("white king is in check");
                 }
             }
-            if (sayi1 + 1 < tahta.length && sayi2 + 2 < tahta[0].length) {
-                if (tahta[sayi1 + 1][sayi2 + 2] == 'K'){
+            if (number1 + 1 < board.length && number2 + 2 < board[0].length) {
+                if (board[number1 + 1][number2 + 2] == 'K'){
                     System.out.println("white king is in check");
                 }
             }
-            if (sayi1 + 2 < tahta.length && sayi2 - 1 >= 0) {
-                if (tahta[sayi1 + 2][sayi2 - 1] == 'K'){
+            if (number1 + 2 < board.length && number2 - 1 >= 0) {
+                if (board[number1 + 2][number2 - 1] == 'K'){
                     System.out.println("white king is in check");
                 }
             }
-            if (sayi1 + 1 < tahta.length && sayi2 - 2 >= 0) {
-                if (tahta[sayi1 + 1][sayi2 - 2] == 'K'){
-                    System.out.println("white king is in check");
-                }
-            }
-        }
-    }
-    private  static void whiteKnight(char[][] tahta, int sayi1, int sayi2){
-        if (tahta[sayi1][sayi2] == 'N'){
-            if (sayi1 - 2 >= 0 && sayi2 + 1 < tahta[0].length) {
-                if (tahta[sayi1 - 2][sayi2 + 1] == 'k'){ // sağ üst
-                    System.out.println("black king is in check");
-                }
-            }
-            if (sayi1 - 2 >= 0 && sayi2 - 1 >= 0) {
-                if (tahta[sayi1 - 2][sayi2 - 1] == 'k'){ // sol üst
-                    System.out.println("black king is in check");
-                }
-            }
-            if (sayi1 - 1 >= 0 && sayi2 - 2 >= 0) {
-                if (tahta[sayi1 - 1][sayi2 - 2] == 'k'){ // sol üst alt
-                    System.out.println("black king is in check");
-                }
-            }
-            if (sayi1 - 1 >= 0 && sayi2 + 2 < tahta[0].length) {
-                if (tahta[sayi1 - 1][sayi2 + 2] == 'k'){ // sağ üst alt
-                    System.out.println("black king is in check");
-                }
-            }
-            if (sayi1 + 1 < tahta.length && sayi2 + 2 < tahta[0].length) {
-                if (tahta[sayi1 + 1][sayi2 + 2] == 'k'){
-                    System.out.println("black king is in check");
-                }
-            }
-            if (sayi1 + 1 < tahta.length && sayi2 + 2 < tahta[0].length) {
-                if (tahta[sayi1 + 1][sayi2 + 2] == 'k'){
-                    System.out.println("black king is in check");
-                }
-            }
-            if (sayi1 + 2 < tahta.length && sayi2 - 1 >= 0) {
-                if (tahta[sayi1 + 2][sayi2 - 1] == 'k'){
-                    System.out.println("black king is in check");
-                }
-            }
-            if (sayi1 + 1 < tahta.length && sayi2 - 2 >= 0) {
-                if (tahta[sayi1 + 1][sayi2 - 2] == 'k'){
-                    System.out.println("black king is in check");
-                }
-            }
-        }
-    }
-    private  static void blackPawn(char[][] tahta, int sayi1, int sayi2){
-        if (tahta[sayi1][sayi2] == 'p'){
-            if (sayi1 - 1 > 0 && sayi2 - 1 > 0) {
-                if (tahta[sayi1 - 1][sayi2 - 1] == 'K'){
-                    System.out.println("white king is in check");
-                }
-            }
-            if (sayi1 - 1 > 0 && sayi2 + 1 < tahta[0].length) {
-                if (tahta[sayi1 - 1][sayi2 + 1] == 'K'){
+            if (number1 + 1 < board.length && number2 - 2 >= 0) {
+                if (board[number1 + 1][number2 - 2] == 'K'){
                     System.out.println("white king is in check");
                 }
             }
         }
     }
-    private  static void whitePawn(char[][] tahta, int sayi1, int sayi2){
-        if (tahta[sayi1][sayi2] == 'P'){
-            if (sayi1 - 1 > 0 && sayi2 - 1 > 0) {
-                if (tahta[sayi1 - 1][sayi2 - 1] == 'k'){
+    private  static void whiteKnight(char[][] board, int number1, int number2){
+        if (board[number1][number2] == 'N'){
+            if (number1 - 2 >= 0 && number2 + 1 < board[0].length) {
+                if (board[number1 - 2][number2 + 1] == 'k'){
                     System.out.println("black king is in check");
                 }
             }
-            if (sayi1 - 1 > 0 && sayi2 + 1 < tahta[0].length) {
-                if (tahta[sayi1 - 1][sayi2 + 1] == 'k'){
+            if (number1 - 2 >= 0 && number2 - 1 >= 0) {
+                if (board[number1 - 2][number2 - 1] == 'k'){
+                    System.out.println("black king is in check");
+                }
+            }
+            if (number1 - 1 >= 0 && number2 - 2 >= 0) {
+                if (board[number1 - 1][number2 - 2] == 'k'){
+                    System.out.println("black king is in check");
+                }
+            }
+            if (number1 - 1 >= 0 && number2 + 2 < board[0].length) {
+                if (board[number1 - 1][number2 + 2] == 'k'){
+                    System.out.println("black king is in check");
+                }
+            }
+            if (number1 + 1 < board.length && number2 + 2 < board[0].length) {
+                if (board[number1 + 1][number2 + 2] == 'k'){
+                    System.out.println("black king is in check");
+                }
+            }
+            if (number1 + 1 < board.length && number2 + 2 < board[0].length) {
+                if (board[number1 + 1][number2 + 2] == 'k'){
+                    System.out.println("black king is in check");
+                }
+            }
+            if (number1 + 2 < board.length && number2 - 1 >= 0) {
+                if (board[number1 + 2][number2 - 1] == 'k'){
+                    System.out.println("black king is in check");
+                }
+            }
+            if (number1 + 1 < board.length && number2 - 2 >= 0) {
+                if (board[number1 + 1][number2 - 2] == 'k'){
                     System.out.println("black king is in check");
                 }
             }
         }
     }
-    private static void blackQueen(char[][] tahta, int sayi1, int sayi2){
-        if (tahta[sayi1][sayi2] == 'q'){
+    private  static void blackPawn(char[][] board, int number1, int number2){
+        if (board[number1][number2] == 'p'){
+            if (number1 - 1 > 0 && number2 - 1 > 0) {
+                if (board[number1 - 1][number2 - 1] == 'K'){
+                    System.out.println("white king is in check");
+                }
+            }
+            if (number1 - 1 > 0 && number2 + 1 < board[0].length) {
+                if (board[number1 - 1][number2 + 1] == 'K'){
+                    System.out.println("white king is in check");
+                }
+            }
+        }
+    }
+    private  static void whitePawn(char[][] board, int number1, int number2){
+        if (board[number1][number2] == 'P'){
+            if (number1 - 1 > 0 && number2 - 1 > 0) {
+                if (board[number1 - 1][number2 - 1] == 'k'){
+                    System.out.println("black king is in check");
+                }
+            }
+            if (number1 - 1 > 0 && number2 + 1 < board[0].length) {
+                if (board[number1 - 1][number2 + 1] == 'k'){
+                    System.out.println("black king is in check");
+                }
+            }
+        }
+    }
+    private static void blackQueen(char[][] board, int number1, int number2){
+        if (board[number1][number2] == 'q'){
             int k = 1;
-            while (sayi2 + k < tahta[0].length){
-                if (tahta[sayi1][sayi2 + k] == '.'){
+            while (number2 + k < board[0].length){
+                if (board[number1][number2 + k] == '.'){
                     k++;
                 } else {
-                    if (tahta[sayi1][sayi2 + k] == 'K'){
+                    if (board[number1][number2 + k] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
                 }
             }
             int t = 1;
-            while (sayi1 + t < tahta.length){
-                if (tahta[sayi1 + t][sayi2] == '.'){
+            while (number1 + t < board.length){
+                if (board[number1 + t][number2] == '.'){
                     t++;
                 } else {
-                    if (tahta[sayi1 + t][sayi2] == 'K'){
+                    if (board[number1 + t][number2] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
                 }
             }
             k = 1;
-            while (sayi2 - k >= 0){
-                if (tahta[sayi1][sayi2 - k] == '.'){
+            while (number2 - k >= 0){
+                if (board[number1][number2 - k] == '.'){
                     k++;
                 } else {
-                    if (tahta[sayi1][sayi2 - k] == 'K'){
+                    if (board[number1][number2 - k] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
                 }
             }
             t = 1;
-            while (sayi1 - t >= 0){
-                if (tahta[sayi1 - t][sayi2] == '.'){
+            while (number1 - t >= 0){
+                if (board[number1 - t][number2] == '.'){
                     t++;
                 } else {
-                    if (tahta[sayi1 - t][sayi2] == 'K'){
-                        System.out.println("white king is in check");
-                    }
-                    break;
-                }
-            }
-            t = 1;
-            k = 1;
-            while (sayi1 + t < tahta.length && sayi2 + k < tahta[0].length){
-                if (tahta[sayi1 + t][sayi2 + k] == '.'){
-                    t++;
-                    k++;
-                } else {
-                    if (tahta[sayi1 + t][sayi2 + k] == 'K'){
+                    if (board[number1 - t][number2] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
@@ -182,12 +169,12 @@ public class CheckTheCheck {
             }
             t = 1;
             k = 1;
-            while (sayi1 - t >= 0 && sayi2 + k < tahta[0].length){
-                if (tahta[sayi1 - t][sayi2 + k] == '.'){
+            while (number1 + t < board.length && number2 + k < board[0].length){
+                if (board[number1 + t][number2 + k] == '.'){
                     t++;
                     k++;
                 } else {
-                    if (tahta[sayi1 - t][sayi2 + k] == 'K'){
+                    if (board[number1 + t][number2 + k] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
@@ -195,12 +182,12 @@ public class CheckTheCheck {
             }
             t = 1;
             k = 1;
-            while (sayi1 - t >= 0 && sayi2 - k >= 0){
-                if (tahta[sayi1 - t][sayi2 - k] == '.'){
+            while (number1 - t >= 0 && number2 + k < board[0].length){
+                if (board[number1 - t][number2 + k] == '.'){
                     t++;
                     k++;
                 } else {
-                    if (tahta[sayi1 - t][sayi2 - k] == 'K'){
+                    if (board[number1 - t][number2 + k] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
@@ -208,12 +195,25 @@ public class CheckTheCheck {
             }
             t = 1;
             k = 1;
-            while (sayi1 + t < tahta.length && sayi2 - k >= 0){
-                if (tahta[sayi1 + t][sayi2 - k] == '.'){
+            while (number1 - t >= 0 && number2 - k >= 0){
+                if (board[number1 - t][number2 - k] == '.'){
                     t++;
                     k++;
                 } else {
-                    if (tahta[sayi1 + t][sayi2 - k] == 'K'){
+                    if (board[number1 - t][number2 - k] == 'K'){
+                        System.out.println("white king is in check");
+                    }
+                    break;
+                }
+            }
+            t = 1;
+            k = 1;
+            while (number1 + t < board.length && number2 - k >= 0){
+                if (board[number1 + t][number2 - k] == '.'){
+                    t++;
+                    k++;
+                } else {
+                    if (board[number1 + t][number2 - k] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
@@ -221,60 +221,47 @@ public class CheckTheCheck {
             }
         }
     }
-    private static void whiteQueen(char[][] tahta, int sayi1, int sayi2){
-        if (tahta[sayi1][sayi2] == 'Q'){
+    private static void whiteQueen(char[][] board, int number1, int number2){
+        if (board[number1][number2] == 'Q'){
             int k = 1;
-            while (sayi2 + k < tahta[0].length){
-                if (tahta[sayi1][sayi2 + k] == '.'){
+            while (number2 + k < board[0].length){
+                if (board[number1][number2 + k] == '.'){
                     k++;
                 } else {
-                    if (tahta[sayi1][sayi2 + k] == 'k'){
+                    if (board[number1][number2 + k] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
                 }
             }
             int t = 1;
-            while (sayi1 + t < tahta.length){
-                if (tahta[sayi1 + t][sayi2] == '.'){
+            while (number1 + t < board.length){
+                if (board[number1 + t][number2] == '.'){
                     t++;
                 } else {
-                    if (tahta[sayi1 + t][sayi2] == 'k'){
+                    if (board[number1 + t][number2] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
                 }
             }
             k = 1;
-            while (sayi2 - k >= 0){
-                if (tahta[sayi1][sayi2 - k] == '.'){
+            while (number2 - k >= 0){
+                if (board[number1][number2 - k] == '.'){
                     k++;
                 } else {
-                    if (tahta[sayi1][sayi2 - k] == 'k'){
+                    if (board[number1][number2 - k] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
                 }
             }
             t = 1;
-            while (sayi1 - t >= 0){
-                if (tahta[sayi1 - t][sayi2] == '.'){
+            while (number1 - t >= 0){
+                if (board[number1 - t][number2] == '.'){
                     t++;
                 } else {
-                    if (tahta[sayi1 - t][sayi2] == 'k'){
-                        System.out.println("black king is in check");
-                    }
-                    break;
-                }
-            }
-            t = 1;
-            k = 1;
-            while (sayi1 + t < tahta.length && sayi2 + k < tahta[0].length){
-                if (tahta[sayi1 + t][sayi2 + k] == '.'){
-                    t++;
-                    k++;
-                } else {
-                    if (tahta[sayi1 + t][sayi2 + k] == 'k'){
+                    if (board[number1 - t][number2] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
@@ -282,12 +269,12 @@ public class CheckTheCheck {
             }
             t = 1;
             k = 1;
-            while (sayi1 - t >= 0 && sayi2 + k < tahta[0].length){
-                if (tahta[sayi1 - t][sayi2 + k] == '.'){
+            while (number1 + t < board.length && number2 + k < board[0].length){
+                if (board[number1 + t][number2 + k] == '.'){
                     t++;
                     k++;
                 } else {
-                    if (tahta[sayi1 - t][sayi2 + k] == 'k'){
+                    if (board[number1 + t][number2 + k] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
@@ -295,12 +282,12 @@ public class CheckTheCheck {
             }
             t = 1;
             k = 1;
-            while (sayi1 - t >= 0 && sayi2 - k >= 0){
-                if (tahta[sayi1 - t][sayi2 - k] == '.'){
+            while (number1 - t >= 0 && number2 + k < board[0].length){
+                if (board[number1 - t][number2 + k] == '.'){
                     t++;
                     k++;
                 } else {
-                    if (tahta[sayi1 - t][sayi2 - k] == 'k'){
+                    if (board[number1 - t][number2 + k] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
@@ -308,12 +295,25 @@ public class CheckTheCheck {
             }
             t = 1;
             k = 1;
-            while (sayi1 + t < tahta.length && sayi2 - k >= 0){
-                if (tahta[sayi1 + t][sayi2 - k] == '.'){
+            while (number1 - t >= 0 && number2 - k >= 0){
+                if (board[number1 - t][number2 - k] == '.'){
                     t++;
                     k++;
                 } else {
-                    if (tahta[sayi1 + t][sayi2 - k] == 'k'){
+                    if (board[number1 - t][number2 - k] == 'k'){
+                        System.out.println("black king is in check");
+                    }
+                    break;
+                }
+            }
+            t = 1;
+            k = 1;
+            while (number1 + t < board.length && number2 - k >= 0){
+                if (board[number1 + t][number2 - k] == '.'){
+                    t++;
+                    k++;
+                } else {
+                    if (board[number1 + t][number2 - k] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
@@ -321,53 +321,53 @@ public class CheckTheCheck {
             }
         }
     }
-    private static void blackRook(char[][] tahta, int sayi1, int sayi2){
-        if (tahta[sayi1][sayi2] == 'r'){
+    private static void blackRook(char[][] board, int number1, int number2){
+        if (board[number1][number2] == 'r'){
             int x = 1;
-            while (sayi2 + x < tahta[0].length){
-                if (tahta[sayi1][sayi2 + x] == '.'){
+            while (number2 + x < board[0].length){
+                if (board[number1][number2 + x] == '.'){
                     x++;
                 } else {
-                    if (tahta[sayi1][sayi2 + x] == 'K'){
+                    if (board[number1][number2 + x] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
                 }
             }
         }
-        if (tahta[sayi1][sayi2] == 'r'){
+        if (board[number1][number2] == 'r'){
             int y = 1;
-            while (sayi1 + y < tahta.length){
-                if (tahta[sayi1 + y][sayi2] == '.'){
+            while (number1 + y < board.length){
+                if (board[number1 + y][number2] == '.'){
                     y++;
                 } else {
-                    if (tahta[sayi1 + y][sayi2] == 'K'){
+                    if (board[number1 + y][number2] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
                 }
             }
         }
-        if (tahta[sayi1][sayi2] == 'r'){
+        if (board[number1][number2] == 'r'){
             int k = 1;
-            while (sayi2 - k >= 0){
-                if (tahta[sayi1][sayi2 - k] == '.'){
+            while (number2 - k >= 0){
+                if (board[number1][number2 - k] == '.'){
                     k++;
                 } else {
-                    if (tahta[sayi1][sayi2 - k] == 'K'){
+                    if (board[number1][number2 - k] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
                 }
             }
         }
-        if (tahta[sayi1][sayi2] == 'r'){
+        if (board[number1][number2] == 'r'){
             int t = 1;
-            while (sayi1 - t >= 0){
-                if (tahta[sayi1 - t][sayi2] == '.'){
+            while (number1 - t >= 0){
+                if (board[number1 - t][number2] == '.'){
                     t++;
                 } else {
-                    if (tahta[sayi1 - t][sayi2] == 'K'){
+                    if (board[number1 - t][number2] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
@@ -375,53 +375,53 @@ public class CheckTheCheck {
             }
         }
     }
-    private static void whiteRook(char[][] tahta, int sayi1, int sayi2){
-        if (tahta[sayi1][sayi2] == 'R'){
+    private static void whiteRook(char[][] board, int number1, int number2){
+        if (board[number1][number2] == 'R'){
             int k = 1;
-            while (sayi2 + k < tahta[0].length){
-                if (tahta[sayi1][sayi2 + k] == '.'){
+            while (number2 + k < board[0].length){
+                if (board[number1][number2 + k] == '.'){
                     k++;
                 } else {
-                    if (tahta[sayi1][sayi2 + k] == 'k'){
+                    if (board[number1][number2 + k] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
                 }
             }
         }
-        if (tahta[sayi1][sayi2] == 'R'){
+        if (board[number1][number2] == 'R'){
             int t = 1;
-            while (sayi1 + t < tahta.length){
-                if (tahta[sayi1 + t][sayi2] == '.'){
+            while (number1 + t < board.length){
+                if (board[number1 + t][number2] == '.'){
                     t++;
                 } else {
-                    if (tahta[sayi1 + t][sayi2] == 'k'){
+                    if (board[number1 + t][number2] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
                 }
             }
         }
-        if (tahta[sayi1][sayi2] == 'R'){
+        if (board[number1][number2] == 'R'){
             int k = 1;
-            while (sayi2 - k >= 0){
-                if (tahta[sayi1][sayi2 - k] == '.'){
+            while (number2 - k >= 0){
+                if (board[number1][number2 - k] == '.'){
                     k++;
                 } else {
-                    if (tahta[sayi1][sayi2 - k] == 'k'){
+                    if (board[number1][number2 - k] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
                 }
             }
         }
-        if (tahta[sayi1][sayi2] == 'R'){
+        if (board[number1][number2] == 'R'){
             int t = 1;
-            while (sayi1 - t >= 0){
-                if (tahta[sayi1 - t][sayi2] == '.'){
+            while (number1 - t >= 0){
+                if (board[number1 - t][number2] == '.'){
                     t++;
                 } else {
-                    if (tahta[sayi1 - t][sayi2] == 'k'){
+                    if (board[number1 - t][number2] == 'k'){
                         System.out.println("black king is in check");
                     }
                     break;
@@ -429,16 +429,16 @@ public class CheckTheCheck {
             }
         }
     }
-    private static void whiteBishop(char[][] tahta, int sayi1, int sayi2){
-                if (tahta[sayi1][sayi2] == 'B'){
+    private static void whiteBishop(char[][] board, int number1, int number2){
+                if (board[number1][number2] == 'B'){
                     int t = 1;
                     int k = 1;
-                    while (sayi1 + t < tahta.length && sayi2 + k < tahta[0].length){
-                        if (tahta[sayi1 + t][sayi2 + k] == '.'){
+                    while (number1 + t < board.length && number2 + k < board[0].length){
+                        if (board[number1 + t][number2 + k] == '.'){
                             t++;
                             k++;
                         } else {
-                            if (tahta[sayi1 + t][sayi2 + k] == 'k'){
+                            if (board[number1 + t][number2 + k] == 'k'){
                                 System.out.println("black king is in check");
                             }
                             break;
@@ -446,12 +446,12 @@ public class CheckTheCheck {
                     }
                     t = 1;
                     k = 1;
-                    while (sayi1 - t >= 0 && sayi2 + k < tahta[0].length){
-                        if (tahta[sayi1 - t][sayi2 + k] == '.'){
+                    while (number1 - t >= 0 && number2 + k < board[0].length){
+                        if (board[number1 - t][number2 + k] == '.'){
                             t++;
                             k++;
                         } else {
-                            if (tahta[sayi1 - t][sayi2 + k] == 'k'){
+                            if (board[number1 - t][number2 + k] == 'k'){
                                 System.out.println("black king is in check");
                             }
                             break;
@@ -459,12 +459,12 @@ public class CheckTheCheck {
                     }
                     t = 1;
                     k = 1;
-                    while (sayi1 - t >= 0 && sayi2 - k >= 0){
-                        if (tahta[sayi1 - t][sayi2 - k] == '.'){
+                    while (number1 - t >= 0 && number2 - k >= 0){
+                        if (board[number1 - t][number2 - k] == '.'){
                             t++;
                             k++;
                         } else {
-                            if (tahta[sayi1 - t][sayi2 - k] == 'k'){
+                            if (board[number1 - t][number2 - k] == 'k'){
                                 System.out.println("black king is in check");
                             }
                             break;
@@ -472,12 +472,12 @@ public class CheckTheCheck {
                     }
                     t = 1;
                     k = 1;
-                    while (sayi1 + t < tahta.length && sayi2 - k >= 0){
-                        if (tahta[sayi1 + t][sayi2 - k] == '.'){
+                    while (number1 + t < board.length && number2 - k >= 0){
+                        if (board[number1 + t][number2 - k] == '.'){
                             t++;
                             k++;
                         } else {
-                            if (tahta[sayi1 + t][sayi2 - k] == 'k'){
+                            if (board[number1 + t][number2 - k] == 'k'){
                                 System.out.println("black king is in check");
                             }
                             break;
@@ -486,16 +486,16 @@ public class CheckTheCheck {
                 }
 
     }
-    private static void blackBishop(char[][] tahta, int sayi1, int sayi2){
-        if (tahta[sayi1][sayi2] == 'b'){
+    private static void blackBishop(char[][] board, int number1, int number2){
+        if (board[number1][number2] == 'b'){
             int t = 1;
             int k = 1;
-            while (sayi1 + t < tahta.length && sayi2 + k < tahta[0].length){
-                if (tahta[sayi1 + t][sayi2 + k] == '.'){
+            while (number1 + t < board.length && number2 + k < board[0].length){
+                if (board[number1 + t][number2 + k] == '.'){
                     t++;
                     k++;
                 } else {
-                    if (tahta[sayi1 + t][sayi2 + k] == 'K'){
+                    if (board[number1 + t][number2 + k] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
@@ -503,12 +503,12 @@ public class CheckTheCheck {
             }
             t = 1;
             k = 1;
-            while (sayi1 - t >= 0 && sayi2 + k < tahta[0].length){
-                if (tahta[sayi1 - t][sayi2 + k] == '.'){
+            while (number1 - t >= 0 && number2 + k < board[0].length){
+                if (board[number1 - t][number2 + k] == '.'){
                     t++;
                     k++;
                 } else {
-                    if (tahta[sayi1 - t][sayi2 + k] == 'K'){
+                    if (board[number1 - t][number2 + k] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
@@ -516,12 +516,12 @@ public class CheckTheCheck {
             }
             t = 1;
             k = 1;
-            while (sayi1 - t >= 0 && sayi2 - k >= 0){
-                if (tahta[sayi1 - t][sayi2 - k] == '.'){
+            while (number1 - t >= 0 && number2 - k >= 0){
+                if (board[number1 - t][number2 - k] == '.'){
                     t++;
                     k++;
                 } else {
-                    if (tahta[sayi1 - t][sayi2 - k] == 'K'){
+                    if (board[number1 - t][number2 - k] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
@@ -529,12 +529,12 @@ public class CheckTheCheck {
             }
             t = 1;
             k = 1;
-            while (sayi1 + t < tahta.length && sayi2 - k >= 0){
-                if (tahta[sayi1 + t][sayi2 - k] == '.'){
+            while (number1 + t < board.length && number2 - k >= 0){
+                if (board[number1 + t][number2 - k] == '.'){
                     t++;
                     k++;
                 } else {
-                    if (tahta[sayi1 + t][sayi2 - k] == 'K'){
+                    if (board[number1 + t][number2 - k] == 'K'){
                         System.out.println("white king is in check");
                     }
                     break;
@@ -546,33 +546,33 @@ public class CheckTheCheck {
     public static void main(String[]args){
         int count = 0;
         try {
-            Scanner kaynak = new Scanner(new File("Chess.txt"));
+            Scanner source = new Scanner(new File("Chess.txt"));
             while (true){
-                int tahta1 = kaynak.nextInt();
-                int tahta2 = kaynak.nextInt();
-                if (tahta1 == 0 && tahta2 == 0){
+                int board1 = source.nextInt();
+                int board2 = source.nextInt();
+                if (board1 == 0 && board2 == 0){
                     break;
                 }
-                char[][] tahta = new char[tahta1][tahta2];
-                for (int i = 0; i < tahta.length; i++){
-                    String satir = kaynak.next();
-                    for (int j = 0; j < tahta[0].length; j++){
-                        tahta[i][j] = satir.charAt(j);
+                char[][] board = new char[board1][board2];
+                for (int i = 0; i < board.length; i++){
+                    String line = source.next();
+                    for (int j = 0; j < board[0].length; j++){
+                        board[i][j] = line.charAt(j);
                     }
                 }
 
-                for (int z = 0; z < tahta.length; z++){
-                    for (int t = 0; t < tahta[0].length; t++){
-                        whiteBishop(tahta, z, t);
-                        blackBishop(tahta, z, t);
-                        whiteRook(tahta, z, t);
-                        blackRook(tahta, z, t);
-                        whiteQueen(tahta, z, t);
-                        blackQueen(tahta, z, t);
-                        whitePawn(tahta, z, t);
-                        blackPawn(tahta, z, t);
-                        whiteKnight(tahta, z, t);
-                        blackKnight(tahta, z, t);
+                for (int z = 0; z < board.length; z++){
+                    for (int t = 0; t < board[0].length; t++){
+                        whiteBishop(board, z, t);
+                        blackBishop(board, z, t);
+                        whiteRook(board, z, t);
+                        blackRook(board, z, t);
+                        whiteQueen(board, z, t);
+                        blackQueen(board, z, t);
+                        whitePawn(board, z, t);
+                        blackPawn(board, z, t);
+                        whiteKnight(board, z, t);
+                        blackKnight(board, z, t);
                     }
                 }
                 count++;
