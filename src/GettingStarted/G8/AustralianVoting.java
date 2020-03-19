@@ -6,46 +6,46 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AustralianVoting {
-    private static void secilen(int[][] oy){
-        double[] ilkBolum = new double[oy[0].length];
-        ArrayList<Double> enKucuk = new ArrayList<>();
+    private static void selected(int[][] vote){
+        double[] firstSection = new double[vote[0].length];
+        ArrayList<Double> smallest = new ArrayList<>();
         int i = 0;
         int t = 0;
-        ArrayList<Double> simdiki = new ArrayList<>();
-        while (simdiki.size() < ilkBolum.length / 2){
-            for (int j = 0; j < oy[0].length; j++){
-                if (enKucuk.size() > 0){
-                    if (oy[i][j] == enKucuk.get(0)) {
-                        ilkBolum[j] = oy[i + t][j];
+        ArrayList<Double> current = new ArrayList<>();
+        while (current.size() < firstSection.length / 2){
+            for (int j = 0; j < vote[0].length; j++){
+                if (smallest.size() > 0){
+                    if (vote[i][j] == smallest.get(0)) {
+                        firstSection[j] = vote[i + t][j];
                     }else {
-                        ilkBolum[j] = oy[i][j];
+                        firstSection[j] = vote[i][j];
                     }
                 }else {
-                    ilkBolum[j] = oy[i][j];
+                    firstSection[j] = vote[i][j];
                 }
             }
-            for (int k = 0; k < ilkBolum.length; k++){
-                simdiki.add(ilkBolum[k]);
-                for (int z = 0; z < ilkBolum.length; z++){
+            for (int k = 0; k < firstSection.length; k++){
+                current.add(firstSection[k]);
+                for (int z = 0; z < firstSection.length; z++){
                     if (k != z){
-                        if (ilkBolum[k] == ilkBolum[z]){
-                            simdiki.add(ilkBolum[z]);
+                        if (firstSection[k] == firstSection[z]){
+                            current.add(firstSection[z]);
                         }
                     }
-                    if (z == ilkBolum.length - 1){
-                        if (simdiki.size() >= ilkBolum.length / 2.0){
-                            System.out.println(simdiki.get(0) + " Aday kazandı");
+                    if (z == firstSection.length - 1){
+                        if (current.size() >= firstSection.length / 2.0){
+                            System.out.println(current.get(0) + " candidate won.");
                             return;
                         }else {
                             if (k == 0){
-                                enKucuk.addAll(simdiki);
+                                smallest.addAll(current);
                             } else {
-                                if (simdiki.size() < enKucuk.size()){
-                                    enKucuk.clear();
-                                    enKucuk.addAll(simdiki);
+                                if (current.size() < smallest.size()){
+                                    smallest.clear();
+                                    smallest.addAll(current);
                                 }
                             }
-                            simdiki.clear();
+                            current.clear();
                         }
                     }
                 }
@@ -55,20 +55,20 @@ public class AustralianVoting {
     }
     public static void main(String[]args){
         try {
-            Scanner kaynak = new Scanner(new File("Voting.txt"));
+            Scanner source = new Scanner(new File("Voting.txt"));
             while (true){
-                int ilkSatir = kaynak.nextInt();
-                int ikinciSatir = kaynak.nextInt();
-                if (ilkSatir == 0 && ikinciSatir == 0){
+                int firstSection = source.nextInt();
+                int secondSection = source.nextInt();
+                if (firstSection == 0 && secondSection == 0){
                     break;
                 }
-                int[][] oy = new int[ilkSatir][ikinciSatir];
-                for (int j = 0; j < oy[0].length; j++){
-                    for (int i = 0; i < oy.length; i++){
-                        oy[i][j] = kaynak.nextInt();
+                int[][] vote = new int[firstSection][secondSection];
+                for (int j = 0; j < vote[0].length; j++){
+                    for (int i = 0; i < vote.length; i++){
+                        vote[i][j] = source.nextInt();
                     }
                 }
-                secilen(oy);
+                selected(vote);
             }
         }catch (FileNotFoundException e){
             e.printStackTrace();
