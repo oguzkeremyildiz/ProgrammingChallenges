@@ -3,146 +3,146 @@ package GettingStarted.G5;
 import java.util.Scanner;
 
 public class GraphicalEditor {
-    public static void print(String[][] bolge){
-        for (String[] strings : bolge) {
-            for (int j = 0; j < bolge[0].length; j++) {
+    public static void print(String[][] region){
+        for (String[] strings : region) {
+            for (int j = 0; j < region[0].length; j++) {
                 System.out.print(strings[j]);
             }
             System.out.println();
         }
     }
 
-    public static void charL(String [][] bolge){
-        Scanner girdi = new Scanner(System.in);
-        int sayi1 = girdi.nextInt();
-        int sayi2 = girdi.nextInt();
-        String harf = girdi.next();
-        bolge[sayi2 - 1][sayi1 - 1] = harf;
+    public static void charL(String [][] region){
+        Scanner input = new Scanner(System.in);
+        int number1 = input.nextInt();
+        int number2 = input.nextInt();
+        String character = input.next();
+        region[number2 - 1][number1 - 1] = character;
 
     }
 
-    public static void charS(String [][] bolge){
-        Scanner girdi = new Scanner(System.in);
-        String cumle = girdi.next();
-        System.out.println(cumle);
-        print(bolge);
-        for (int i = 0; i < bolge.length; i++){
-            for (int j = 0; j < bolge[0].length; j++){
-                bolge[i][j] = "O";
+    public static void charS(String [][] region){
+        Scanner input = new Scanner(System.in);
+        String sentence = input.next();
+        System.out.println(sentence);
+        print(region);
+        for (int i = 0; i < region.length; i++){
+            for (int j = 0; j < region[0].length; j++){
+                region[i][j] = "O";
             }
         }
     }
 
-    public static void charFRecursive(String[][] bolge, int sayi1, int sayi2, String harf1, String harf2){
-        if (bolge[sayi1][sayi2].equals(harf1)){
-            bolge[sayi1][sayi2] = harf2;
-            if (sayi1 > 0){
-                charFRecursive(bolge, sayi1 - 1, sayi2, harf1, harf2);
+    public static void charFRecursive(String[][] region, int number1, int number2, String character1, String character2){
+        if (region[number1][number2].equals(character1)){
+            region[number1][number2] = character2;
+            if (number1 > 0){
+                charFRecursive(region, number1 - 1, number2, character1, character2);
             }
-            if (sayi1 < bolge.length - 1){
-                charFRecursive(bolge, sayi1 + 1, sayi2, harf1, harf2);
+            if (number1 < region.length - 1){
+                charFRecursive(region, number1 + 1, number2, character1, character2);
             }
-            if (sayi2 > 0){
-                charFRecursive(bolge, sayi1, sayi2 - 1, harf1, harf2);
+            if (number2 > 0){
+                charFRecursive(region, number1, number2 - 1, character1, character2);
             }
-            if (sayi2 < bolge[0].length - 1){
-                charFRecursive(bolge, sayi1, sayi2 + 1, harf1, harf2);
-            }
-        }
-    }
-
-    public static void charF(String[][] bolge){
-        Scanner girdi = new Scanner(System.in);
-        int sayi1 = girdi.nextInt();
-        int sayi2 = girdi.nextInt();
-        String harf = girdi.next();
-        charFRecursive(bolge, sayi2 - 1, sayi1 - 1, bolge[sayi2 - 1][sayi1 - 1], harf);
-    }
-
-    public static void charV(String[][] bolge){
-        Scanner girdi = new Scanner(System.in);
-        int sayi1 = girdi.nextInt();
-        int sayi2 = girdi.nextInt();
-        int sayi3 = girdi.nextInt();
-        String harf = girdi.next();
-        for (int i = sayi2; i <= sayi3; i++){
-            bolge[i - 1][sayi1 - 1] = harf;
-        }
-    }
-
-    public static void charC(String[][] bolge){
-        for (int i = 0; i < bolge.length; i++){
-            for (int j = 0; j < bolge[0].length; j++){
-                bolge[i][j] = "O";
+            if (number2 < region[0].length - 1){
+                charFRecursive(region, number1, number2 + 1, character1, character2);
             }
         }
     }
 
-    public static void charH(String[][] bolge){
-        Scanner girdi = new Scanner(System.in);
-        int sayi1 = girdi.nextInt();
-        int sayi2 = girdi.nextInt();
-        int sayi3 = girdi.nextInt();
-        String harf = girdi.next();
-        for (int i = sayi1; i <= sayi2; i++){
-            bolge[sayi3 - 1][i - 1] = harf;
+    public static void charF(String[][] region){
+        Scanner input = new Scanner(System.in);
+        int number1 = input.nextInt();
+        int number2 = input.nextInt();
+        String character = input.next();
+        charFRecursive(region, number2 - 1, number1 - 1, region[number2 - 1][number1 - 1], character);
+    }
+
+    public static void charV(String[][] region){
+        Scanner input = new Scanner(System.in);
+        int number1 = input.nextInt();
+        int number2 = input.nextInt();
+        int number3 = input.nextInt();
+        String character = input.next();
+        for (int i = number2; i <= number3; i++){
+            region[i - 1][number1 - 1] = character;
         }
     }
 
-    public static void charK(String[][] bolge){
-        Scanner girdi = new Scanner(System.in);
-        int X1 = girdi.nextInt();
-        int Y1 = girdi.nextInt();
-        int X2 = girdi.nextInt();
-        int Y2 = girdi.nextInt();
-        String harf = girdi.next();
+    public static void charC(String[][] region){
+        for (int i = 0; i < region.length; i++){
+            for (int j = 0; j < region[0].length; j++){
+                region[i][j] = "O";
+            }
+        }
+    }
+
+    public static void charH(String[][] region){
+        Scanner input = new Scanner(System.in);
+        int number1 = input.nextInt();
+        int number2 = input.nextInt();
+        int number3 = input.nextInt();
+        String character = input.next();
+        for (int i = number1; i <= number2; i++){
+            region[number3 - 1][i - 1] = character;
+        }
+    }
+
+    public static void charK(String[][] region){
+        Scanner input = new Scanner(System.in);
+        int X1 = input.nextInt();
+        int Y1 = input.nextInt();
+        int X2 = input.nextInt();
+        int Y2 = input.nextInt();
+        String character = input.next();
         for (int i = X1; i <= X2; i++){
             for (int j = Y1; j <= Y2; j++){
-                bolge[j - 1][i - 1] = harf;
+                region[j - 1][i - 1] = character;
             }
         }
     }
     public static void main(String []args){
-        Scanner girdi = new Scanner(System.in);
-        String[][] bolge = new String[0][0];
-        String karakter = girdi.next();
-        while (!karakter.equals("X")){
-            switch (karakter) {
+        Scanner input = new Scanner(System.in);
+        String[][] region = new String[0][0];
+        String character = input.next();
+        while (!character.equals("X")){
+            switch (character) {
                 case "I":
-                    int bolge1 = girdi.nextInt();
-                    int bolge2 = girdi.nextInt();
-                    bolge = new String[bolge2][bolge1];
-                    for (int i = 0; i < bolge.length; i++) {
-                        for (int j = 0; j < bolge[0].length; j++) {
-                            bolge[i][j] = "O";
+                    int region1 = input.nextInt();
+                    int region2 = input.nextInt();
+                    region = new String[region2][region1];
+                    for (int i = 0; i < region.length; i++) {
+                        for (int j = 0; j < region[0].length; j++) {
+                            region[i][j] = "O";
                         }
                     }
                     break;
                 case "L":
-                    charL(bolge);
+                    charL(region);
                     break;
                 case "S":
-                    charS(bolge);
+                    charS(region);
                     break;
                 case "F":
-                    charF(bolge);
+                    charF(region);
                     break;
                 case "V":
-                    charV(bolge);
+                    charV(region);
                     break;
                 case "C":
-                    charC(bolge);
+                    charC(region);
                     break;
                 case "H":
-                    charH(bolge);
+                    charH(region);
                     break;
                 case "K":
-                    charK(bolge);
+                    charK(region);
                     break;
                 default:
                     break;
             }
-            karakter = girdi.next();
+            character = input.next();
         }
     }
 }
