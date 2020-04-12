@@ -1,36 +1,13 @@
 package Sorting.S2;/* Created by oguzkeremyildiz on 23.02.2020 */
 
+import Sort.QuickSort;
+
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class StacksOfFlapjacks {
-    private static void swap(ArrayList<Integer> pancakes, int i, int j){
-        int tmp;
-        tmp = pancakes.get(i);
-        pancakes.set(i, pancakes.get(j));
-        pancakes.set(j, tmp);
-    }
-    private static int partition(ArrayList<Integer> pancakes, int first, int last){
-        int x = pancakes.get(last);
-        int i = first - 1, j;
-        for (j = first; j < last; j++){
-            if (pancakes.get(j) <= x){
-                i++;
-                swap(pancakes, i, j);
-            }
-        }
-        swap(pancakes, i + 1, last);
-        return i + 1;
-    }
-    private static void quickSort(ArrayList<Integer> pancakes, int first, int last){
-        int pivot;
-        if (first < last){
-            pivot = partition(pancakes, first, last);
-            quickSort(pancakes, first, pivot - 1);
-            quickSort(pancakes, pivot + 1, last);
-        }
-    }
     private static void flip(ArrayList<Integer> pancakes, int index){
         int tmp;
         int checkFirst;
@@ -53,7 +30,13 @@ public class StacksOfFlapjacks {
         int tmp = 0;
         int element;
         ArrayList<Integer> realPancakes = new ArrayList<>(pancakes);
-        quickSort(realPancakes, 0, realPancakes.size() - 1);
+        Comparator<Integer> comparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o1 - o2;
+            }
+        };
+        QuickSort<Integer> quickSort = new QuickSort<>(realPancakes, comparator);
         if (!pancakes.get(0).equals(realPancakes.get(realPancakes.size() - 1 - i))){
             element = realPancakes.get(realPancakes.size() - 1 - i);
         } else {
