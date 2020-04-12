@@ -12,7 +12,6 @@ public class TugOfWar {
     private static int smallest, bestDifference;
     private static Pair<LinkedList<Integer>, LinkedList<Integer>> pair = new Pair<>(new LinkedList<>(), new LinkedList<>());
     private static void constructCandidates(LinkedList<Integer> persons, LinkedList<Integer> sequence, LinkedList<Integer> subsets) {
-        Pair<LinkedList<Integer>, LinkedList<Integer>> returning = new Pair<>(new LinkedList<>(), new LinkedList<>());
         int sum1 = 0, sum2 = 0, sumRemaining = 0;
         for (int i = 0; i < sequence.size(); i++) {
             if (sequence.get(i) == 0) {
@@ -76,7 +75,6 @@ public class TugOfWar {
         if (!bool) {
             if (difference(returning) < bestDifference) {
                 bestDifference = difference(returning);
-                System.out.println(bestDifference);
                 bool = true;
             }
         }
