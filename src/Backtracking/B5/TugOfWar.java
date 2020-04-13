@@ -4,7 +4,6 @@ import Sort.QuickSort;
 import javafx.util.Pair;
 
 import java.io.File;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
