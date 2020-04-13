@@ -1,9 +1,11 @@
 package Backtracking.B5;/* Created by oguzkeremyildiz on 11.04.2020 */
 
+import Sort.QuickSort;
 import javafx.util.Pair;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -104,7 +106,13 @@ public class TugOfWar {
                     next = source.nextInt();
                     persons.add(next);
                 }
-                Collections.sort(persons);
+                Comparator<Integer> comparator = new Comparator<Integer>() {
+                    @Override
+                    public int compare(Integer o1, Integer o2) {
+                        return o1 - o2;
+                    }
+                };
+                QuickSort<Integer> quickSort = new QuickSort<>(persons, comparator);
                 smallestDifference(persons);
                 bestDifference = 1000;
                 backtrack(persons, new LinkedList<>());
