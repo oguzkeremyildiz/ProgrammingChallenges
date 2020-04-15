@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class ColorHash {
-    private static boolean finished;
+    private static LinkedList<Integer> found;
     private static LinkedList<Integer> solution = new LinkedList<>();
     private static void addSolution() {
         solution.add(0);
@@ -33,28 +33,54 @@ public class ColorHash {
         solution.add(2);
         solution.add(1);
     }
+    protected static int remaining(LinkedList<Integer> sequence) {
+        int returning = -1;
+        int remaining = 1;
+        for (int i = 0; i < sequence.size(); i++) {
+            if (i + 1 < sequence.size()) {
+                if (sequence.get(i).equals(sequence.get(i + 1))) {
+                    remaining++;
+                } else {
+                    remaining = 1;
+                }
+                if (remaining == 5 && i + 1 == sequence.size() - 1) {
+                    returning = sequence.get(i);
+                    break;
+                }
+            }
+        }
+        return returning;
+    }
     private static void constructCandidates(LinkedList<Integer> subsets, LinkedList<Integer> sequence) {
         if (sequence.size() > 0) {
             switch (sequence.getLast()) {
                 case 1:
-                    subsets.add(1);
+                    if (remaining(sequence) != 1) {
+                        subsets.add(1);
+                    }
                     subsets.add(2);
                     subsets.add(4);
                     break;
                 case 2:
+                    if (remaining(sequence) != 2) {
+                        subsets.add(2);
+                    }
                     subsets.add(1);
-                    subsets.add(2);
                     subsets.add(3);
                     break;
                 case 3:
+                    if (remaining(sequence) != 3) {
+                        subsets.add(3);
+                    }
                     subsets.add(2);
-                    subsets.add(3);
                     subsets.add(4);
                     break;
                 default:
+                    if (remaining(sequence) != 4) {
+                        subsets.add(4);
+                    }
                     subsets.add(1);
                     subsets.add(3);
-                    subsets.add(4);
                     break;
             }
         } else {
@@ -65,36 +91,41 @@ public class ColorHash {
         }
     }
     private static void backtrack(LinkedList<Integer> table, LinkedList<Integer> sequence) {
+        if (found.size() == 16) {
+            return;
+        }
+        if (found.size() > 0) {
+            if (sequence.size() >= found.size()) {
+                return;
+            }
+        }
         LinkedList<Integer> subsets = new LinkedList<>();
         LinkedList<Integer> tableClone;
         if (isASolution(table)) {
             if (sequence.size() > 0) {
-                System.out.println(sequence);
+                found.clear();
+                found.addAll(sequence);
             } else {
                 System.out.println("PUZZLE ALREADY SOLVED");
             }
-            finished = true;
         } else {
-            if (!finished) {
-                constructCandidates(subsets, sequence);
-                for (Integer subset : subsets) {
-                    sequence.add(subset);
-                    tableClone = new LinkedList<>();
-                    tableClone.addAll(table);
-                    rotate(table, subset);
-                    if (sequence.size() != 16) {
-                        backtrack(table, sequence);
-                    } else {
-                        if (isASolution(table)) {
-                            System.out.println(sequence);
-                            finished = true;
-                            break;
-                        }
+            constructCandidates(subsets, sequence);
+            for (Integer subset : subsets) {
+                sequence.add(subset);
+                tableClone = new LinkedList<>();
+                tableClone.addAll(table);
+                rotate(table, subset);
+                if (sequence.size() != 16) {
+                    backtrack(table, sequence);
+                } else {
+                    if (isASolution(table)) {
+                        found.clear();
+                        found.addAll(sequence);
                     }
-                    sequence.removeLast();
-                    table.clear();
-                    table.addAll(tableClone);
                 }
+                sequence.removeLast();
+                table.clear();
+                table.addAll(tableClone);
             }
         }
     }
@@ -176,7 +207,7 @@ public class ColorHash {
     }
     public static void main(String[]args) {
         try {
-            finished = false;
+            found = new LinkedList<>();
             addSolution();
             Scanner source = new Scanner(new File("ColorHash.txt"));
             LinkedList<Integer> table = new LinkedList<>();
@@ -188,8 +219,15 @@ public class ColorHash {
                     table.add(hash);
                 }
                 backtrack(table, new LinkedList<>());
+                if (found.size() > 0 || isASolution(table)) {
+                    if (found.size() > 0) {
+                        System.out.println(found);
+                    }
+                } else {
+                    System.out.println("NO SOLUTION WAS FOUND IN 16 STEPS");
+                }
+                found.clear();
                 table.clear();
-                finished = false;
             }
         }catch (Exception e) {
             e.printStackTrace();
