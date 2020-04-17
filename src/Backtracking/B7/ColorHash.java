@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class ColorHash {
     private static LinkedList<Integer> found;
-    private static LinkedList<Integer> solution = new LinkedList<>();
+    private static final LinkedList<Integer> solution = new LinkedList<>();
     private static void addSolution() {
         solution.add(0);
         solution.add(3);
@@ -112,8 +112,7 @@ public class ColorHash {
             constructCandidates(subsets, sequence);
             for (Integer subset : subsets) {
                 sequence.add(subset);
-                tableClone = new LinkedList<>();
-                tableClone.addAll(table);
+                tableClone = new LinkedList<>(table);
                 rotate(table, subset);
                 if (sequence.size() != 16) {
                     backtrack(table, sequence);
