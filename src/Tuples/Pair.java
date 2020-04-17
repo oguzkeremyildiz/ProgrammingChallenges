@@ -13,4 +13,12 @@ public class Pair<K, V> {
     public V getValue() {
         return value;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Pair)) {
+            return false;
+        }
+        Pair<K, V> pair = (Pair<K, V>) o;
+        return this.key.equals(pair.getKey()) && this.value.equals(pair.getValue());
+    }
 }
