@@ -19,6 +19,10 @@ public class Triplet<A, B, C> {
         return c;
     }
     @Override
+    public int hashCode() {
+        return a.hashCode() ^ b.hashCode() ^ c.hashCode();
+    }
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof Pair)) {
             return false;
