@@ -9,6 +9,10 @@ public class Unit<A> {
         return a;
     }
     @Override
+    public int hashCode() {
+        return a.hashCode();
+    }
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof Pair)) {
             return false;
