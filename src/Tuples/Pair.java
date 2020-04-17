@@ -14,6 +14,10 @@ public class Pair<K, V> {
         return value;
     }
     @Override
+    public int hashCode() {
+        return key.hashCode() ^ value.hashCode();
+    }
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof Pair)) {
             return false;
