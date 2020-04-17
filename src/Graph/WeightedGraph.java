@@ -1,6 +1,6 @@
 package Graph;/* Created by oguzkeremyildiz on 11.04.2020 */
 
-import javafx.util.Pair;
+import Tuples.Pair;
 
 import java.util.HashMap;
 import java.util.HashSet;
