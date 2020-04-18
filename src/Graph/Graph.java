@@ -24,6 +24,10 @@ public class Graph<Symbol> {
         return edgeList.containsValue(list);
     }
 
+    public boolean isEmpty() {
+        return edgeList.isEmpty();
+    }
+
     public int size() {
         return edgeList.size();
     }
