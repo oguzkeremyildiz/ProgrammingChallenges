@@ -21,6 +21,10 @@ public class WeightedGraph<Symbol> {
         vertexList.clear();
     }
 
+    public boolean isEmpty() {
+        return edgeList.isEmpty();
+    }
+
     public boolean containsKey(Symbol element) {
         return edgeList.containsKey(element);
     }
