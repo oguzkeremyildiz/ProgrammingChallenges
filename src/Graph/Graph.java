@@ -16,6 +16,14 @@ public class Graph<Symbol> {
         this.vertexList = vertexList;
     }
 
+    public boolean containsKey(Symbol element) {
+        return edgeList.containsKey(element);
+    }
+
+    public boolean containsValue(LinkedList<Symbol> list) {
+        return edgeList.containsValue(list);
+    }
+
     public int size() {
         return edgeList.size();
     }
