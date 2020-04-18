@@ -21,6 +21,14 @@ public class WeightedGraph<Symbol> {
         vertexList.clear();
     }
 
+    public boolean containsKey(Symbol element) {
+        return edgeList.containsKey(element);
+    }
+
+    public boolean containsValue(LinkedList<Pair<Symbol, Integer>> list) {
+        return edgeList.containsValue(list);
+    }
+
     public void addDirectedEdge(Symbol from, Symbol to, int length) {
         vertexList.add(from);
         vertexList.add(to);
