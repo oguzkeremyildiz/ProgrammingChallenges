@@ -1,24 +1,26 @@
 package DataStructures.D6;/* Created by oguzkeremyildiz on 23.01.2020 */
 
+import Graph.Graph;
+
 import java.io.File;
 import java.util.*;
 
 public class ErdösNumbers {
     private static void print(ArrayList<String> outputs, HashMap<Integer, HashSet<String>> listOfNames, int scenario){
         System.out.println("Scenario " + scenario);
-        for (int i = 0; i < outputs.size(); i++){
-            if (listOfNames.get(100000).contains(outputs.get(i))){
-                System.out.println(outputs.get(i) + " infinity");
+        for (String output : outputs) {
+            if (listOfNames.get(100000).contains(output)) {
+                System.out.println(output + " infinity");
             } else {
-                for (Integer key : listOfNames.keySet()){
-                    if (listOfNames.get(key).contains(outputs.get(i))){
-                        System.out.println(outputs.get(i) + " " + key);
+                for (Integer key : listOfNames.keySet()) {
+                    if (listOfNames.get(key).contains(output)) {
+                        System.out.println(output + " " + key);
                     }
                 }
             }
         }
     }
-    private static void setListForOnes(HashMap<Integer,HashSet<String>> listOfNames, List<String> persons, HashSet<String> allPersons, HashMap<String, ArrayList<String>> graphEdges){
+    private static void setListForOnes(HashMap<Integer,HashSet<String>> listOfNames, List<String> persons, HashSet<String> allPersons, Graph<String> graphEdges){
         HashSet<String> personsHash = new HashSet<>(persons);
         allPersons.addAll(personsHash);
         if (personsHash.contains("Erdos")){
@@ -33,14 +35,14 @@ public class ErdösNumbers {
     }
     private static void setListsForInfinities(HashSet<String> allPersons, HashMap<Integer,HashSet<String>> listOfNames){
         ArrayList<String> persons = new ArrayList<>(allPersons);
-        for (int i = 0; i < persons.size(); i++){
-            if (!listOfNames.get(1).contains(persons.get(i)) && !persons.get(i).equals("Erdos")){
-                listOfNames.get(100000).add(persons.get(i));
+        for (String person : persons) {
+            if (!listOfNames.get(1).contains(person) && !person.equals("Erdos")) {
+                listOfNames.get(100000).add(person);
             }
         }
     }
-    private static void addEdges(List<String> persons, HashMap<String, ArrayList<String>> graphEdges){
-        ArrayList<String> connectedList;
+    private static void addEdges(List<String> persons, Graph<String> graphEdges){
+        LinkedList<String> connectedList;
         for (int j = 0; j < persons.size(); j++){
             String fromPerson = persons.get(j);
             for (int i = 0; i < persons.size(); i++){
@@ -49,7 +51,7 @@ public class ErdösNumbers {
                     if (graphEdges.containsKey(fromPerson)) {
                         connectedList = graphEdges.get(fromPerson);
                     } else {
-                        connectedList = new ArrayList<>();
+                        connectedList = new LinkedList<>();
                     }
                     connectedList.add(toPerson);
                     graphEdges.put(fromPerson, connectedList);
@@ -57,7 +59,7 @@ public class ErdösNumbers {
             }
         }
     }
-    private static boolean listOfNamesForOne(HashMap<String, ArrayList<String>> graphEdges, HashMap<Integer,HashSet<String>> listOfNames){
+    private static boolean listOfNamesForOne(Graph<String> graphEdges, HashMap<Integer,HashSet<String>> listOfNames){
         ArrayList<String> listOne = new ArrayList<>(listOfNames.get(1));
         for (String onePerson : listOne){
             if (graphEdges.containsKey(onePerson)){
@@ -69,7 +71,7 @@ public class ErdösNumbers {
         }
         return false;
     }
-    private static boolean setList(int index, HashMap<String, ArrayList<String>> graphEdges,  HashMap<Integer,HashSet<String>> listOfNames){
+    private static boolean setList(int index, Graph<String> graphEdges,  HashMap<Integer,HashSet<String>> listOfNames){
         boolean added = false;
         listOfNames.put(index + 1, new HashSet<>());
         ArrayList<String> listOne = new ArrayList<>(listOfNames.get(index));
@@ -120,7 +122,7 @@ public class ErdösNumbers {
                 HashMap<Integer, HashSet<String>> listOfNames = new HashMap<>();
                 listOfNames.put(1, new HashSet<>());
                 listOfNames.put(100000, new HashSet<>());
-                HashMap<String, ArrayList<String>> graphEdges = new HashMap<>();
+                Graph<String> graphEdges = new Graph<String>();
                 for (int i = 0; i < worksNumber; i++){
                     readNext = source.nextLine();
                     split = readNext.split(" ");
