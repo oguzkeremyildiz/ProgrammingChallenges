@@ -33,7 +33,13 @@ public class Graph<Symbol> {
     }
 
     public void put(Symbol index, LinkedList<Symbol> list) {
+        vertexList.add(index);
         edgeList.put(index, list);
+        if (list.size() > 0) {
+            for (Symbol element : list) {
+                vertexList.add(element);
+            }
+        }
     }
 
     public LinkedList<Symbol> get(Symbol index) {
