@@ -112,6 +112,7 @@ public class TugOfWar {
                     }
                 };
                 QuickSort<Integer> quickSort = new QuickSort<>(comparator);
+                quickSort.sort(persons, 0, persons.size() - 1);
                 smallestDifference(persons);
                 bestDifference = 1000;
                 backtrack(persons, new LinkedList<>());
