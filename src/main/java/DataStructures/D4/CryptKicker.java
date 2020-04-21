@@ -8,13 +8,13 @@ import java.util.*;
 public class CryptKicker {
 
     private static HashMap<Integer, ArrayList<String>> createWordLists(ArrayList<String> words){
-        HashMap<Integer, ArrayList<String>> list = new HashMap<>();
+        HashMap<Integer, ArrayList<String>> list = new HashMap<Integer, ArrayList<String>>();
         for (String word : words){
             ArrayList<String> wordList;
             if (list.containsKey(word.length())){
                 wordList = list.get(word.length());
             } else {
-                wordList = new ArrayList<>();
+                wordList = new ArrayList<String>();
             }
             if (!wordList.contains(word)){
                 wordList.add(word);
@@ -38,7 +38,7 @@ public class CryptKicker {
     }
 
     private static void solveForSingleWords(HashMap<Integer, ArrayList<String>> wordList, HashMap<Integer, ArrayList<String>> codeList, HashMap<Character, Character> codesExplain){
-        HashSet<Integer> keySet = new HashSet<>();
+        HashSet<Integer> keySet = new HashSet<Integer>();
         for (Integer value : wordList.keySet()){
             keySet.add(value);
         }
@@ -56,11 +56,11 @@ public class CryptKicker {
     }
 
     private static ArrayList<Pair<Integer, Integer>> containsRepeatingLetters(String word){
-        ArrayList<Pair<Integer, Integer>> repeating = new ArrayList<>();
+        ArrayList<Pair<Integer, Integer>> repeating = new ArrayList<Pair<Integer, Integer>>();
         for (int i = 0; i < word.length(); i++){
             for (int j = i + 1; j < word.length(); j++){
                 if (word.charAt(i) == word.charAt(j)){
-                    repeating.add(new Pair<>(i, j));
+                    repeating.add(new Pair<Integer, Integer>(i, j));
                 }
             }
         }
@@ -88,7 +88,7 @@ public class CryptKicker {
     }
 
     private static void removeFromCandidateList(ArrayList<String> candidateList, int index, Character ch){
-        ArrayList<String> removed = new ArrayList<>();
+        ArrayList<String> removed = new ArrayList<String>();
         for (String word : candidateList){
             if (word.charAt(index) != ch){
                 removed.add(word);
@@ -119,7 +119,7 @@ public class CryptKicker {
     public static void main(String[]args){
         int wordCount;
         String word;
-        ArrayList<String> words = new ArrayList<>();
+        ArrayList<String> words = new ArrayList<String>();
         ArrayList<String> codes;
         try {
             Scanner source = new Scanner(new File("Crypt.txt"));
@@ -130,12 +130,12 @@ public class CryptKicker {
             }
             while (source.hasNextLine()){
                 String codeLine = source.nextLine();
-                codes = new ArrayList<>();
+                codes = new ArrayList<String>();
                 String[] codeArray = codeLine.split(" ");
                 codes.addAll(Arrays.asList(codeArray));
                 HashMap<Integer, ArrayList<String>> wordList = createWordLists(words);
                 HashMap<Integer, ArrayList<String>> codeList = createWordLists(codes);
-                HashMap<Character, Character> codesExplain = new HashMap<>();
+                HashMap<Character, Character> codesExplain = new HashMap<Character, Character>();
                 solveForSingleWords(wordList, codeList, codesExplain);
                 solveForRepeatingLetters(wordList, codeList, codesExplain);
                 solveForRemaining(wordList, codeList, codesExplain);

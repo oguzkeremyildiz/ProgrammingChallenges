@@ -36,7 +36,8 @@ public class StacksOfFlapjacks {
                 return o1 - o2;
             }
         };
-        QuickSort<Integer> quickSort = new QuickSort<>(realPancakes, comparator);
+        QuickSort<Integer> quickSort = new QuickSort<>(comparator);
+        quickSort.sort(realPancakes, 0, realPancakes.size() - 1);
         if (!pancakes.get(0).equals(realPancakes.get(realPancakes.size() - 1 - i))){
             element = realPancakes.get(realPancakes.size() - 1 - i);
         } else {

@@ -1,6 +1,6 @@
 package DataStructures.D6;/* Created by oguzkeremyildiz on 23.01.2020 */
 
-import Graph.Graph;
+import Graph.*;
 
 import java.io.File;
 import java.util.*;

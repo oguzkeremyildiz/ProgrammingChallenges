@@ -111,7 +111,7 @@ public class TugOfWar {
                         return o1 - o2;
                     }
                 };
-                QuickSort<Integer> quickSort = new QuickSort<>(persons, comparator);
+                QuickSort<Integer> quickSort = new QuickSort<>(comparator);
                 smallestDifference(persons);
                 bestDifference = 1000;
                 backtrack(persons, new LinkedList<>());
