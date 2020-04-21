@@ -72,15 +72,21 @@ public class BiggerSquarePlease {
         Collections.reverse(subsets);
     }
     private static void backtrack(int[][] board, LinkedList<Integer> sequence) {
-        if (totalSquare == 5) {
-            return;
+        if (board.length % 3 == 0) {
+            if (totalSquare == 6) {
+                return;
+            }
+        } else {
+            if (totalSquare == 8) {
+                return;
+            }
         }
         if (totalSquare < sequence.size()) {
             return;
         }
         int[][] boardClone;
         LinkedList<Integer> subsets = new LinkedList<>();
-        if (isASolution(board)) {
+        if (sequence.size() > 5 && isASolution(board)) {
             if (sequence.size() < totalSquare) {
                 totalSquare = sequence.size();
                 bestBoard = board;
@@ -120,17 +126,16 @@ public class BiggerSquarePlease {
         }
     }
     private static boolean isASolution(int[][] board) {
-        boolean bool = true;
         for (int[] ints : board) {
             for (int j = 0; j < board[0].length; j++) {
                 if (ints[j] == 0) {
-                    bool = false;
-                    break;
+                    return false;
                 }
             }
         }
-        return bool;
+        return true;
     }
+
     private static void print() {
         for (int[] ints : bestBoard) {
             for (int j = 0; j < bestBoard[0].length; j++) {
