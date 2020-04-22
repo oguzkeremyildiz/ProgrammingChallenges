@@ -1,12 +1,10 @@
 package Backtracking.B8;/* Created by oguzkeremyildiz on 17.04.2020 */
 
 import Tuples.Pair;
+import Tuples.Triplet;
 
 import java.io.File;
-import java.util.Collections;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.Scanner;
+import java.util.*;
 
 public class BiggerSquarePlease {
     private static int totalSquare;
@@ -39,35 +37,63 @@ public class BiggerSquarePlease {
         }
         return length;
     }
-    private static Pair<Integer, Integer> lengthForPossibilities(int[][] board, int i) {
+    private static LinkedList<Pair<Integer, Triplet<Integer, Integer, Integer>>> lengthForPossibilities(int[][] board, int i) {
+        LinkedList<Pair<Integer, Triplet<Integer, Integer, Integer>>> list = new LinkedList<>();
         int length = 0;
-        int current = -2;
+        int start = 0;
+        int finish;
         for (int k = 0; k < board[0].length; k++) {
             if (board[i][k] == 0) {
                 length++;
                 if (k + 1 >= board[0].length) {
-                    current = board[0].length - 1;
+                    finish = board[0].length - 1;
+                    list.add(new Pair<>(i, new Triplet<>(length, start, finish)));
                 }
             } else {
-                current = k - 1;
+                if (length > 0) {
+                    finish = k - 1;
+                    list.add(new Pair<>(i, new Triplet<>(length, start, finish)));
+                }
                 length = 0;
+                start = k + 1;
             }
         }
-        return new Pair<>(length, current);
+        return list;
     }
     protected static int possibleSquareSize(int[][] board) {
-        LinkedList<Pair<Integer, Integer>> lengthList = new LinkedList<>();
+        LinkedList<Pair<Integer, Triplet<Integer, Integer, Integer>>> lengthList = new LinkedList<>();
+        HashSet<Pair<Integer, Triplet<Integer, Integer, Integer>>> lengthSet = new HashSet<>();
+        boolean check;
+        int currentLine;
+        int times;
         int square = 0;
         for (int i = 0; i < board.length; i++) {
-            lengthList.add(lengthForPossibilities(board, i));
+            lengthList.addAll(lengthForPossibilities(board, i));
         }
         for (int j = 0; j < lengthList.size(); j++) {
-            if (lengthList.get(j).getKey() > 0) {
-                if (j > 1) {
-                    if (!lengthList.get(j).equals(lengthList.get(j - 1))) {
-                        square++;
+            if (!lengthSet.contains(lengthList.get(j))) {
+                check = false;
+                times = 1;
+                currentLine = lengthList.get(j).getKey();
+                for (int i = 0; i < lengthList.size(); i++) {
+                    if (!lengthSet.contains(lengthList.get(i))) {
+                        if (i != j && times != lengthList.get(j).getValue().getA()) {
+                            if (lengthList.get(i).getValue().equals(lengthList.get(j).getValue())) {
+                                if (currentLine + 1 == lengthList.get(i).getKey()) {
+                                    times++;
+                                    if (!check) {
+                                        square++;
+                                    }
+                                    check = true;
+                                    lengthSet.add(lengthList.get(i));
+                                    currentLine = lengthList.get(i).getKey();
+                                }
+                            }
+                        }
                     }
-                } else {
+                }
+                lengthSet.add(lengthList.get(j));
+                if (!check) {
                     square++;
                 }
             }

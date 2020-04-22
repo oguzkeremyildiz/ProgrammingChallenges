@@ -10,13 +10,17 @@ class BiggerSquarePleaseTest {
     void testPossibleSquareSize(){
         int[][] board = new int[][]
                 {
-                        {2, 2, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0},
+                        {2, 2, 1, 0, 0, 0, 2, 2, 1, 1, 0, 0},
+                        {2, 2, 1, 1, 0, 0, 2, 2, 1, 1, 0, 0},
                         {2, 2, 1, 0, 0, 0, 2, 2, 1, 1, 0, 0},
                         {2, 2, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0},
                         {2, 2, 1, 0, 0, 0, 2, 2, 1, 1, 0, 0},
                         {2, 2, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0},
+                        {2, 2, 1, 0, 0, 0, 2, 2, 1, 1, 0, 0},
+                        {2, 2, 1, 0, 0, 0, 2, 2, 1, 0, 0, 0},
+                        {2, 2, 1, 1, 0, 0, 0, 2, 1, 0, 0, 0},
                 };
-        assertEquals(7, BiggerSquarePlease.possibleSquareSize(board));
+        assertEquals(12, BiggerSquarePlease.possibleSquareSize(board));
     }
 
 }
