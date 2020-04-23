@@ -9,6 +9,9 @@ import java.util.*;
 public class BiggerSquarePlease {
     private static int totalSquare;
     private static int[][] bestBoard;
+    private static int[] minimumSquares;
+    private static int numberOfPossibilities;
+
     private static boolean check(int[][] board, int i, int j, int length) {
         boolean bool = true;
         for (int k = 0; k < length; k++) {
@@ -100,7 +103,23 @@ public class BiggerSquarePlease {
         }
         return square;
     }
+    private static int allSquareOfTheNumber(LinkedList<Integer> sequence) {
+        int sum = 0;
+        for (Integer element : sequence) {
+            sum += element * element;
+        }
+        return sum;
+    }
     private static void constructCandidates(int[][] board, LinkedList<Integer> subsets, LinkedList<Integer> sequence) {
+        numberOfPossibilities++;
+        int sum = 0;
+        for (Integer integer : sequence) {
+            sum += integer * integer;
+        }
+        int difference = board.length * board.length - sum;
+        if (sequence.size() + minimumSquares[difference] >= totalSquare){
+            return;
+        }
         if (sequence.size() + possibleSquareSize(board) >= totalSquare) {
             if (totalSquare > 0) {
                 return;
@@ -115,7 +134,9 @@ public class BiggerSquarePlease {
                         length = length(board, i , j);
                         for (int k = 0; k < length; k++) {
                             if (check(board, i , j, k + 1)) {
-                                subsets.add(k + 1);
+                                if (allSquareOfTheNumber(sequence) + ((k + 1) * (k + 1)) <= board.length * board[0].length) {
+                                    subsets.add(k + 1);
+                                }
                             }
                         }
                         check = true;
@@ -155,7 +176,7 @@ public class BiggerSquarePlease {
         }
         int[][] boardClone;
         LinkedList<Integer> subsets = new LinkedList<>();
-        if (sequence.size() > 5 && isASolution(board)) {
+        if (sequence.size() > 5 && allSquareOfTheNumber(sequence) == (board.length * board[0].length) && isASolution(board)) {
             if (sequence.size() < totalSquare) {
                 totalSquare = sequence.size();
                 bestBoard = board;
@@ -221,13 +242,41 @@ public class BiggerSquarePlease {
             }
         }
     }
+
+    private static void findMinimumSquares(){
+        minimumSquares = new int[2500];
+        minimumSquares[0] = 0;
+        minimumSquares[1] = 1;
+        minimumSquares[2] = 2;
+        minimumSquares[3] = 3;
+        minimumSquares[4] = 1;
+        int min;
+        for (int i = 5; i < 2500; i++){
+            if (i == ((int) Math.sqrt(i)) * ((int) Math.sqrt(i))){
+                min = 1;
+            } else {
+                min = minimumSquares[i - 1] + 1;
+            }
+            int j = 2;
+            while (i - j * j > 1){
+                if (minimumSquares[i - j * j] + 1 < min){
+                    min = minimumSquares[i - j * j] + 1;
+                }
+                j++;
+            }
+            minimumSquares[i] = min;
+        }
+    }
+
     public static void main(String[]args) {
         try {
+            findMinimumSquares();
             Scanner source = new Scanner(new File("Square.txt"));
             int times = source.nextInt();
             int size;
             for (int i = 0; i < times; i++) {
                 totalSquare = 10000;
+                numberOfPossibilities = 0;
                 Date currentDate = new Date();
                 size = source.nextInt();
                 int[][] board = new int[size][size];
@@ -239,7 +288,8 @@ public class BiggerSquarePlease {
                     fillForTwo(size);
                 }
                 Date finishDate = new Date();
-                System.out.println(finishDate.getTime() - currentDate.getTime());
+//                System.out.println(finishDate.getTime() - currentDate.getTime());
+                System.out.println(numberOfPossibilities);
                 System.out.println(totalSquare);
                 print();
             }
