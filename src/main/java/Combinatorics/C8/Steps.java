@@ -1,4 +1,4 @@
-package Combinatorics;
+package Combinatorics.C8;
 
 import java.util.ArrayList;
 import java.util.Scanner;
