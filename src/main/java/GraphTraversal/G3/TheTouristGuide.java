@@ -12,8 +12,6 @@ import java.util.Scanner;
 public class TheTouristGuide {
     private static LinkedList<Triplet<Integer, Integer, Integer>> outputs;
     private static HashSet<Integer> visited;
-    private static boolean isFirst;
-    private static HashSet<Integer> stableVisited;
     private static LinkedList<Triplet<Integer, Integer, Integer>> addOutput(LinkedList<Triplet<Integer, Integer, Integer>> sequence, int finish) {
         LinkedList<Triplet<Integer, Integer, Integer>> outputs = new LinkedList<>();
         for (Triplet<Integer, Integer, Integer> integerIntegerIntegerTriplet : sequence) {
@@ -47,15 +45,7 @@ public class TheTouristGuide {
         if (sequence.size() > 0 || visited.size() != graph.size()) {
             for (Triplet<Integer, Integer, Integer> element : sequence) {
                 visited.add(element.getA());
-                if (isFirst) {
-                    stableVisited.add(element.getA());
-                    isFirst = false;
-                }
                 next(graph, graph.get(element.getA()), index + 1, finish, max, element.getB());
-                visited.clear();
-                visited.add(1);
-                visited.addAll(stableVisited);
-                isFirst = true;
             }
         }
     }
@@ -88,8 +78,6 @@ public class TheTouristGuide {
             int from, to, length, start, finish, max, scenario = 0;
             LinkedWeightedGraph<Integer> graph = new LinkedWeightedGraph<>();
             outputs = new LinkedList<>();
-            stableVisited = new HashSet<>();
-            isFirst = false;
             while (vertexSize != 0 || times != 0) {
                 scenario++;
                 vertexSize = source.nextInt();
@@ -110,9 +98,7 @@ public class TheTouristGuide {
                     System.out.println("Scenario #" + scenario);
                     breadthFirstSearch(graph, start, finish, max);
                     outputs.clear();
-                    stableVisited.clear();
                     graph.clear();
-                    isFirst = false;
                 }
             }
         }catch (Exception e) {
