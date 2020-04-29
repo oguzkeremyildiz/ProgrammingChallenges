@@ -11,18 +11,6 @@ public class PlayingWithWheels {
     private static HashSet<Integer> edgeList;
     private static boolean find;
     private static int iterate;
-    private static int power(int y) {
-        int result = 1;
-        if (y == 0) {
-            return 1;
-        } else {
-            for (int i = 1; i <= y; i++) {
-                result *= 10;
-            }
-        }
-        return result;
-    }
-
     private static int incrementDigit(int digit, int number) {
         int currentDigit = digit(digit, number);
         switch (digit) {
