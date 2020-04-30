@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Scanner;
 
 public class JollyJumpers {
-    public static boolean jollyCount(ArrayList<Integer> numbers){
+    protected static boolean jollyCount(ArrayList<Integer> numbers){
         HashSet<Integer> count = new HashSet<>();
         for (int i = 0; i < numbers.size() - 1; i++){
             if (numbers.get(i) < numbers.get(i + 1)){

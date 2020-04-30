@@ -1,5 +1,4 @@
-package Backtracking.B7;
-
+import Backtracking.B7.ColorHash;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;

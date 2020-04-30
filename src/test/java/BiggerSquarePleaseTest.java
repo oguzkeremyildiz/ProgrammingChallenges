@@ -1,10 +1,10 @@
-package Backtracking.B8;
-
+import Backtracking.B8.BiggerSquarePlease;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BiggerSquarePleaseTest {
+class BiggerSquarePleaseTest extends BiggerSquarePlease {
 
     @Test
     void testPossibleSquareSize(){
@@ -18,7 +18,7 @@ class BiggerSquarePleaseTest {
                         {0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0},
                 };
-        assertEquals(12, BiggerSquarePlease.possibleSquareSize(board));
+        Assertions.assertEquals(12, BiggerSquarePlease.possibleSquareSize(board));
     }
 
 }

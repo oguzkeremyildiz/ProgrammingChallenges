@@ -1,12 +1,11 @@
-package DataStructures.D1;
-
+import DataStructures.D1.JollyJumpers;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class JollyJumpersTest {
+class JollyJumpersTest extends JollyJumpers {
 
     @Test
     void testJollyCount() {

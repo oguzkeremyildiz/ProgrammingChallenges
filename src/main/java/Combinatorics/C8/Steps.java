@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Steps {
-    public static int numberTotal(int number){
+    protected static int numberTotal(int number){
         int total = 0;
         if (number == 0){
             return 0;

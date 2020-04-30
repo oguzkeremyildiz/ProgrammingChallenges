@@ -1,9 +1,8 @@
-package Combinatorics.C8;
-
+import Combinatorics.C8.Steps;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class StepsTest {
+class StepsTest extends Steps {
 
     @Test
     void testNumberTotal() {
