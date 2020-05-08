@@ -149,7 +149,7 @@ public class StackemUp {
             LinkedHashMap<Integer, ArrayList<Integer>> deckList = new LinkedHashMap<>();
             ArrayList<Integer> decks = new ArrayList<>();
             ArrayList<Integer> current = new ArrayList<>();
-            Scanner source = new Scanner(new File("deck.txt"));
+            Scanner source = new Scanner(new File("Deck.txt"));
             numberOfDeck = source.nextInt();
             cards = source.nextInt();
             deckNumber = 0;

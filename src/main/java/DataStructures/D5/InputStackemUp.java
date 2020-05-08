@@ -126,6 +126,6 @@ public class InputStackemUp {
         }
     }
     public static void main(String[]args){
-        saveAsXml("deck.txt");
+        saveAsXml("Deck.txt");
     }
 }
