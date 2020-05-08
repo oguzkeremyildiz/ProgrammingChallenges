@@ -3,13 +3,11 @@ package GraphTraversal.G5;/* Created by oguzkeremyildiz on 8.05.2020 */
 import Graph.Graph;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class EditStepLadders {
-    private static int iterate;
+    private static int number;
     private static boolean isSuitable(String current, String compared) {
         int size;
         if (current.length() == compared.length()) {
@@ -21,35 +19,41 @@ public class EditStepLadders {
             }
             return size == current.length() - 1;
         } else if (current.length() == compared.length() + 1) {
+            size = 0;
             if (current.charAt(0) != compared.charAt(0)) {
                 for (int i = 0; i < compared.length(); i++) {
-                    if (compared.charAt(i) != current.charAt(1 + i)) {
-                        return false;
+                    if (compared.charAt(i) == current.charAt(1 + i)) {
+                        size++;
                     }
                 }
+                return compared.length() == size;
             } else if (current.charAt(current.length() - 1) != compared.charAt(compared.length() - 1)) {
                 for (int i = 0; i < compared.length(); i++) {
-                    if (compared.charAt(i) != current.charAt(i)) {
-                        return false;
+                    if (compared.charAt(i) == current.charAt(i)) {
+                        size++;
                     }
                 }
+                return compared.length() == size;
             }
         } else if (current.length() + 1 == compared.length()) {
+            size = 0;
             if (current.charAt(0) != compared.charAt(0)) {
                 for (int i = 0; i < current.length(); i++) {
-                    if (compared.charAt(1 + i) != current.charAt(i)) {
-                        return false;
+                    if (compared.charAt(1 + i) == current.charAt(i)) {
+                        size++;
                     }
                 }
+                return current.length() == size;
             } else if (current.charAt(current.length() - 1) != compared.charAt(compared.length() - 1)) {
                 for (int i = 0; i < current.length(); i++) {
-                    if (compared.charAt(i) != current.charAt(i)) {
-                        return false;
+                    if (compared.charAt(i) == current.charAt(i)) {
+                        size++;
                     }
                 }
+                return current.length() == size;
             }
         }
-        return true;
+        return false;
     }
     private static Graph<String> addEdge(LinkedList<String> list) {
         Graph<String> graph = new Graph<String>();
@@ -68,26 +72,23 @@ public class EditStepLadders {
         }
         return graph;
     }
-    private static int breadthFirstSearch(Graph<String> graph, HashMap<Integer, LinkedList<String>> map, HashSet<String> visited) {
-        iterate++;
-        map.put(iterate, new LinkedList<>());
-        for (int i = 0; i < map.get(iterate - 1).size(); i++) {
-            for (int j = 0; j < graph.get(map.get(iterate - 1).get(i)).size(); j++) {
-                if (!visited.contains(graph.get(map.get(iterate - 1).get(i)).get(j))) {
-                    map.get(iterate).add(graph.get(map.get(iterate - 1).get(i)).get(j));
-                    visited.add(graph.get(map.get(iterate - 1).get(i)).get(j));
+    private static int depthFirstSearch(Graph<String> graph, String current, LinkedList<String> visited) {
+        visited.add(current);
+        for (int i = 0; i < graph.get(current).size(); i++) {
+            if (!visited.contains(graph.get(current).get(i))) {
+                depthFirstSearch(graph, graph.get(current).get(i), visited);
+                if (number < visited.size()) {
+                    number = visited.size();
                 }
+                visited.removeLast();
             }
         }
-        if (map.get(iterate).size() > 0) {
-            breadthFirstSearch(graph, map, visited);
-        }
-        return map.size() - 1;
+        return number;
     }
     public static void main(String[]args) {
         try {
             LinkedList<String> list = new LinkedList<>();
-            HashMap<Integer, LinkedList<String>> map = new HashMap<>();
+            LinkedList<String> visited = new LinkedList<>();
             int best = 0;
             Graph<String> graph;
             Scanner source = new Scanner(new File("Ladders.txt"));
@@ -96,11 +97,12 @@ public class EditStepLadders {
             }
             graph = addEdge(list);
             for (String key : graph.getKeySet()) {
-                iterate = 0;
-                map.put(iterate, graph.get(key));
-                if (breadthFirstSearch(graph, map, new HashSet<>()) > best) {
-                    best = breadthFirstSearch(graph, map, new HashSet<>());
+                number = 0;
+                int current = depthFirstSearch(graph, key, visited);
+                if (current > best) {
+                    best = current;
                 }
+                visited.clear();
             }
             System.out.println(best);
         } catch (Exception e) {
