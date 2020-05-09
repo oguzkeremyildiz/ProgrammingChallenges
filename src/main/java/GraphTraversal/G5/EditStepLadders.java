@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class EditStepLadders {
-    private static int number;
+    private static LinkedList<String> ladder;
     private static boolean isSuitable(String current, String compared) {
         int size;
         if (current.length() == compared.length()) {
@@ -72,18 +72,58 @@ public class EditStepLadders {
         }
         return graph;
     }
-    private static int depthFirstSearch(Graph<String> graph, String current, LinkedList<String> visited) {
-        visited.add(current);
-        for (int i = 0; i < graph.get(current).size(); i++) {
-            if (!visited.contains(graph.get(current).get(i))) {
-                depthFirstSearch(graph, graph.get(current).get(i), visited);
-                if (number < visited.size()) {
-                    number = visited.size();
+    private static boolean suitable(LinkedList<Integer> list, String current, String visited) {
+        if (list.size() == 0) {
+            if (visited.length() == current.length()) {
+                for (int i = 0; i < visited.length(); i++) {
+                    if (visited.charAt(i) != current.charAt(i)) {
+                        list.add(i);
+                        return true;
+                    }
                 }
-                visited.removeLast();
+            }
+            return true;
+        } else {
+            if (visited.length() == current.length()) {
+                for (int i = 0; i < visited.length(); i++) {
+                    if (visited.charAt(i) != current.charAt(i)) {
+                        if (!list.getLast().equals(i)) {
+                            list.add(i);
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                }
             }
         }
-        return number;
+        return true;
+    }
+    private static int depthFirstSearch(Graph<String> graph, String current, LinkedList<String> visited, LinkedList<Integer> list) {
+        for (int i = 0; i < graph.get(current).size(); i++) {
+            if (!visited.contains(graph.get(current, i))) {
+                if (visited.size() > 0) {
+                    if (suitable(list, graph.get(current, i), visited.getLast())) {
+                        visited.add(current);
+                        depthFirstSearch(graph, graph.get(current).get(i), visited, list);
+                        if (ladder.size() < visited.size()) {
+                            ladder.clear();
+                            ladder.addAll(visited);
+                        }
+                        visited.removeLast();
+                    }
+                } else {
+                    visited.add(current);
+                    depthFirstSearch(graph, graph.get(current).get(i), visited, list);
+                    if (ladder.size() < visited.size()) {
+                        ladder.clear();
+                        ladder.addAll(visited);
+                    }
+                    visited.removeLast();
+                }
+            }
+        }
+        return ladder.size();
     }
     public static void main(String[]args) {
         try {
@@ -97,8 +137,8 @@ public class EditStepLadders {
             }
             graph = addEdge(list);
             for (String key : graph.getKeySet()) {
-                number = 0;
-                int current = depthFirstSearch(graph, key, visited);
+                ladder = new LinkedList<>();
+                int current = depthFirstSearch(graph, key, visited, new LinkedList<>());
                 if (current > best) {
                     best = current;
                 }
