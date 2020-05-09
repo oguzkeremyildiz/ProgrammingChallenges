@@ -77,13 +77,13 @@ public class EditStepLadders {
         }
         return graph;
     }
-    private static int depthFirstSearch(Graph<String> graph, String current, LinkedList<String> visited, LinkedList<Integer> list) {
+    private static int depthFirstSearch(Graph<String> graph, String current, LinkedList<String> visited) {
         for (int i = 0; i < graph.get(current).size(); i++) {
             if (!visited.contains(current)) {
                 visited.add(current);
             }
             if (!visited.contains(graph.get(current, i))) {
-                depthFirstSearch(graph, graph.get(current, i), visited, list);
+                depthFirstSearch(graph, graph.get(current, i), visited);
                 if (ladder.size() < visited.size()) {
                     ladder.clear();
                     ladder.addAll(visited);
@@ -112,7 +112,7 @@ public class EditStepLadders {
             graph = addEdge(list, comparator);
             for (String key : graph.getKeySet()) {
                 ladder = new LinkedList<>();
-                int current = depthFirstSearch(graph, key, visited, new LinkedList<>());
+                int current = depthFirstSearch(graph, key, visited);
                 if (current > best) {
                     best = current;
                 }
