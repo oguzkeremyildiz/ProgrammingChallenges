@@ -3,6 +3,7 @@ package GraphTraversal.G5;/* Created by oguzkeremyildiz on 8.05.2020 */
 import Graph.Graph;
 
 import java.io.File;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -55,7 +56,7 @@ public class EditStepLadders {
         }
         return false;
     }
-    private static Graph<String> addEdge(LinkedList<String> list) {
+    private static Graph<String> addEdge(LinkedList<String> list, Comparator<String> comparator) {
         Graph<String> graph = new Graph<String>();
         for (int i = 0; i < list.size(); i++) {
             for (int j = i; j < list.size(); j++) {
@@ -66,76 +67,49 @@ public class EditStepLadders {
                     if (!graph.containsKey(list.get(i))) {
                         graph.put(list.get(i), new LinkedList<>());
                     }
-                    graph.addUndirectedEdge(list.get(i), list.get(j));
+                    if (comparator.compare(list.get(i), list.get(j)) < 0) {
+                        graph.addDirectedEdge(list.get(i), list.get(j));
+                    } else {
+                        graph.addDirectedEdge(list.get(j), list.get(i));
+                    }
                 }
             }
         }
         return graph;
     }
-    private static boolean suitable(LinkedList<Integer> list, String current, String visited) {
-        if (list.size() == 0) {
-            if (visited.length() == current.length()) {
-                for (int i = 0; i < visited.length(); i++) {
-                    if (visited.charAt(i) != current.charAt(i)) {
-                        list.add(i);
-                        return true;
-                    }
-                }
-            }
-            return true;
-        } else {
-            if (visited.length() == current.length()) {
-                for (int i = 0; i < visited.length(); i++) {
-                    if (visited.charAt(i) != current.charAt(i)) {
-                        if (!list.getLast().equals(i)) {
-                            list.add(i);
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-                }
-            }
-        }
-        return true;
-    }
     private static int depthFirstSearch(Graph<String> graph, String current, LinkedList<String> visited, LinkedList<Integer> list) {
         for (int i = 0; i < graph.get(current).size(); i++) {
+            if (!visited.contains(current)) {
+                visited.add(current);
+            }
             if (!visited.contains(graph.get(current, i))) {
-                if (visited.size() > 0) {
-                    if (suitable(list, graph.get(current, i), visited.getLast())) {
-                        visited.add(current);
-                        depthFirstSearch(graph, graph.get(current).get(i), visited, list);
-                        if (ladder.size() < visited.size()) {
-                            ladder.clear();
-                            ladder.addAll(visited);
-                        }
-                        visited.removeLast();
-                    }
-                } else {
-                    visited.add(current);
-                    depthFirstSearch(graph, graph.get(current).get(i), visited, list);
-                    if (ladder.size() < visited.size()) {
-                        ladder.clear();
-                        ladder.addAll(visited);
-                    }
-                    visited.removeLast();
+                depthFirstSearch(graph, graph.get(current, i), visited, list);
+                if (ladder.size() < visited.size()) {
+                    ladder.clear();
+                    ladder.addAll(visited);
                 }
+                visited.removeLast();
             }
         }
-        return ladder.size();
+        return ladder.size() + 1;
     }
     public static void main(String[]args) {
         try {
             LinkedList<String> list = new LinkedList<>();
             LinkedList<String> visited = new LinkedList<>();
+            Comparator<String> comparator = new Comparator<String>() {
+                @Override
+                public int compare(String o1, String o2) {
+                    return o1.compareTo(o2);
+                }
+            };
             int best = 0;
             Graph<String> graph;
             Scanner source = new Scanner(new File("Ladders.txt"));
             while (source.hasNext()) {
                 list.add(source.next());
             }
-            graph = addEdge(list);
+            graph = addEdge(list, comparator);
             for (String key : graph.getKeySet()) {
                 ladder = new LinkedList<>();
                 int current = depthFirstSearch(graph, key, visited, new LinkedList<>());
