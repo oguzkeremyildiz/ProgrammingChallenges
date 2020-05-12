@@ -1,6 +1,6 @@
 package Sorting.S5;/* Created by oguzkeremyildiz on 7.03.2020 */
 
-import Util.Permutation;
+import Cookies.Util.Permutation;
 
 import java.io.File;
 import java.util.ArrayList;

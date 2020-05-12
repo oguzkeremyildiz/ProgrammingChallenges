@@ -1,6 +1,6 @@
 package NumberTheory;/* Created by oguzkeremyildiz on 30.04.2020 */
 
-import Tuples.Pair;
+import Cookies.Tuple.Pair;
 
 import java.io.File;
 import java.util.*;

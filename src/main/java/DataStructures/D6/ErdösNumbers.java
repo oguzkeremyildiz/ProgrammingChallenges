@@ -1,6 +1,6 @@
 package DataStructures.D6;/* Created by oguzkeremyildiz on 23.01.2020 */
 
-import Graph.*;
+import Cookies.Graph.*;
 
 import java.io.File;
 import java.util.*;

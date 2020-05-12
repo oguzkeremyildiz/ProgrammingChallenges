@@ -1,6 +1,6 @@
 package Sorting.S2;/* Created by oguzkeremyildiz on 23.02.2020 */
 
-import Sort.QuickSort;
+import Cookies.Sort.QuickSort;
 
 import java.io.File;
 import java.util.ArrayList;

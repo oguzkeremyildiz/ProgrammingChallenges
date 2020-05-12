@@ -1,6 +1,6 @@
 package DataStructures.D4;/* Created by oguzkeremyildiz on 19.01.2020 */
 
-import Tuples.Pair;
+import Cookies.Tuple.Pair;
 
 import java.io.File;
 import java.util.*;

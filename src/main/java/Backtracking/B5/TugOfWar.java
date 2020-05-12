@@ -1,7 +1,7 @@
 package Backtracking.B5;/* Created by oguzkeremyildiz on 11.04.2020 */
 
-import Sort.QuickSort;
-import Tuples.Pair;
+import Cookies.Sort.QuickSort;
+import Cookies.Tuple.Pair;
 
 import java.io.File;
 import java.util.Comparator;

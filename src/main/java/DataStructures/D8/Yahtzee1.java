@@ -1,6 +1,6 @@
 package DataStructures.D8;/* Created by oguzkeremyildiz on 30.01.2020 */
 
-import Util.Permutation;
+import Cookies.Util.Permutation;
 
 import java.io.File;
 import java.util.ArrayList;

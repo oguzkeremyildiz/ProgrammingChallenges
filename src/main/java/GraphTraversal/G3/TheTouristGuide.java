@@ -1,8 +1,8 @@
 package GraphTraversal.G3;/* Created by oguzkeremyildiz on 27.04.2020 */
 
-import Graph.LinkedWeightedGraph;
-import Tuples.Pair;
-import Tuples.Triplet;
+import Cookies.Graph.LinkedWeightedGraph;
+import Cookies.Tuple.Pair;
+import Cookies.Tuple.Triplet;
 
 import java.io.File;
 import java.util.HashSet;

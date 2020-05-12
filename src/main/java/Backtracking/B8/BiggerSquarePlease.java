@@ -1,7 +1,7 @@
 package Backtracking.B8;/* Created by oguzkeremyildiz on 17.04.2020 */
 
-import Tuples.Pair;
-import Tuples.Triplet;
+import Cookies.Tuple.Pair;
+import Cookies.Tuple.Triplet;
 
 import java.io.File;
 import java.util.*;

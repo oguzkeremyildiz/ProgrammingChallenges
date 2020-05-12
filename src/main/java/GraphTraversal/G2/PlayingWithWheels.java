@@ -1,6 +1,6 @@
 package GraphTraversal.G2;/* Created by oguzkeremyildiz on 25.04.2020 */
 
-import Graph.Graph;
+import Cookies.Graph.Graph;
 
 import java.io.File;
 import java.util.HashSet;
