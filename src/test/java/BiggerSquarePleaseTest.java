@@ -18,7 +18,7 @@ class BiggerSquarePleaseTest extends BiggerSquarePlease {
                         {0, 0, 0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0, 0, 0},
                 };
-        Assertions.assertEquals(12, BiggerSquarePlease.possibleSquareSize(board));
+        Assertions.assertEquals(10, BiggerSquarePlease.possibleSquareSize(board));
     }
 
 }
