@@ -9,8 +9,11 @@
         <module name="ProgrammingChallenges" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="ProgrammingChallenges" target="14" />
+    <bytecodeTargetLevel target="13">
+      <module name="ProgrammingChallenges" target="13" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="PREFER_TARGET_JDK_COMPILER" value="false" />
   </component>
 </project>
