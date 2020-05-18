@@ -1,5 +1,6 @@
 package GraphTraversal.G3;/* Created by oguzkeremyildiz on 27.04.2020 */
 
+import Cookies.Graph.IntegerLength;
 import Cookies.Graph.LinkedWeightedGraph;
 import Cookies.Tuple.Pair;
 import Cookies.Tuple.Triplet;
@@ -22,7 +23,7 @@ public class TheTouristGuide {
         sequence.removeAll(outputs);
         return outputs;
     }
-    private static void next(LinkedWeightedGraph<Integer> graph, LinkedList<Pair<Integer, Integer>> currentEdge, int index, int finish, int max, int length) {
+    private static void next(LinkedWeightedGraph<Integer, Integer> graph, LinkedList<Pair<Integer, Integer>> currentEdge, int index, int finish, int max, int length) {
         LinkedList<Triplet<Integer, Integer, Integer>> sequence = new LinkedList<>();
         for (Pair<Integer, Integer> nextEdge : currentEdge) {
             if (!visited.contains(nextEdge.getKey())) {
@@ -49,7 +50,7 @@ public class TheTouristGuide {
             }
         }
     }
-    private static void breadthFirstSearch(LinkedWeightedGraph<Integer> graph, int start, int finish, int max) {
+    private static void breadthFirstSearch(LinkedWeightedGraph<Integer, Integer> graph, int start, int finish, int max) {
         outputs = new LinkedList<>();
         visited = new HashSet<>();
         visited.add(1);
@@ -76,7 +77,7 @@ public class TheTouristGuide {
             int vertexSize = 1000;
             int times = 1000;
             int from, to, length, start, finish, max, scenario = 0;
-            LinkedWeightedGraph<Integer> graph = new LinkedWeightedGraph<>();
+            LinkedWeightedGraph<Integer, Integer> graph = new LinkedWeightedGraph<>(new IntegerLength());
             outputs = new LinkedList<>();
             while (vertexSize != 0 || times != 0) {
                 scenario++;
