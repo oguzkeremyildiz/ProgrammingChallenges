@@ -1,4 +1,4 @@
-package GraphAlgorithms;/* Created by oguzkeremyildiz on 17.05.2020 */
+package GraphAlgorithms.G1;/* Created by oguzkeremyildiz on 17.05.2020 */
 
 import Cookies.Graph.DoubleLength;
 import Cookies.Graph.WeightedGraph;
