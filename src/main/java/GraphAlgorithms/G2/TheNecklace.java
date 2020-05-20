@@ -14,7 +14,7 @@ public class TheNecklace {
             if (graph.containsKey(sequence.getLast())) {
                 for (int i = 0; i < graph.get(sequence.getLast()).size(); i++) {
                     Pair<Integer, Integer> current = graph.get(sequence.getLast()).get(i);
-                    if (!sequence.contains(current) && !sequence.contains(new Pair<>(current.getValue(), current.getKey()))) {
+                    if (!sequence.contains(current)) {
                         if (sequence.getLast().getValue().equals(current.getKey())) {
                             subsets.add(current);
                         } else if (sequence.getLast().getValue().equals(current.getValue())) {
@@ -25,7 +25,7 @@ public class TheNecklace {
             } else {
                 for (int i = 0; i < graph.get(new Pair<>(sequence.getLast().getValue(), sequence.getLast().getKey())).size(); i++) {
                     Pair<Integer, Integer> current = graph.get(new Pair<>(sequence.getLast().getValue(), sequence.getLast().getKey())).get(i);
-                    if (!sequence.contains(current) && !sequence.contains(new Pair<>(current.getValue(), current.getKey()))) {
+                    if (!sequence.contains(current)) {
                         if (sequence.getLast().getValue().equals(current.getKey())) {
                             subsets.add(current);
                         } else if (sequence.getLast().getValue().equals(current.getValue())) {
