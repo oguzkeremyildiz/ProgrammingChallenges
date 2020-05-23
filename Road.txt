@@ -1,5 +1,9 @@
 2
 3
+Hamburg
+Frankfurt
+Darmstadt
+3
 2
 0949 Hamburg
 1006 Frankfurt
@@ -12,6 +16,9 @@
 0800
 Hamburg
 Darmstadt
+2
+Paris
+Tokyo
 1
 2
 0100 Paris
