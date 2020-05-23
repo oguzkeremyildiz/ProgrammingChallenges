@@ -9,11 +9,7 @@ import java.util.*;
 
 public class Railroads {
     private static Set<Road> addSet(Set<Road> keySet) {
-        Set<Road> current = new HashSet<>();
-        for (Road key : keySet) {
-            current.add(key);
-        }
-        return current;
+        return new HashSet<>(keySet);
     }
     private static void addEdge(WeightedGraph<Road, Integer> graph, Roads list) {
         if (graph.size() > 0) {
@@ -82,6 +78,10 @@ public class Railroads {
             WeightedGraph<Road, Integer> graph = new WeightedGraph<>(new IntegerLength());
             String times = source.next();
             for (int i = 0; i < Integer.parseInt(times); i++) {
+                String edges = source.next();
+                for (int j = 0; j < Integer.parseInt(edges); j++) {
+                    source.next();
+                }
                 String stations = source.next();
                 for (int j = 0; j < Integer.parseInt(stations); j++) {
                     String size = source.next();
