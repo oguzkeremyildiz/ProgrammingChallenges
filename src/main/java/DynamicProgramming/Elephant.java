@@ -1,7 +1,5 @@
 package DynamicProgramming;/* Created by oguzkeremyildiz on 12.06.2020 */
 
-import Cookies.Tuple.Pair;
-
 public class Elephant {
 
     private int weight;

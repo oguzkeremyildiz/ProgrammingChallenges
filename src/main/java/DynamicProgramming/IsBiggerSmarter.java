@@ -1,21 +1,12 @@
 package DynamicProgramming;/* Created by oguzkeremyildiz on 11.06.2020 */
 
-import Cookies.Graph.Graph;
-import Cookies.Tuple.Pair;
-
 import java.io.File;
-import java.util.HashSet;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class IsBiggerSmarter {
-    private static LinkedList<Elephant> currentBest;
-    private static void print(LinkedList<Elephant> longest) {
-        System.out.println(longest.size());
-        for (Elephant elephant : longest) {
-            System.out.println(elephant.getNo());
-        }
-    }
     private static void sort(LinkedList<Elephant> elephantList) {
         LinkedList<Elephant> removeList = new LinkedList<>();
         for (int i = 0; i < elephantList.size(); i++) {
@@ -38,69 +29,63 @@ public class IsBiggerSmarter {
         }
         elephantList.removeAll(removeList);
     }
-    private static void depthFirstSearch(Graph<Elephant> graph, HashSet<Elephant> traveled, Elephant current, LinkedList<Elephant> sequence) {
-        for (int i = 0; i < graph.get(current).size(); i++) {
-            if (!traveled.contains(graph.get(current, i)) && graph.containsKey(graph.get(current, i))) {
-                LinkedList<Elephant> oldSequence = (LinkedList<Elephant>) sequence.clone();
-                HashSet<Elephant> oldTraveled = (HashSet<Elephant>) traveled.clone();
-                traveled.add(graph.get(current, i));
-                sequence.add(graph.get(current, i));
-                depthFirstSearch(graph, traveled, graph.get(current, i), sequence);
-                if (currentBest.size() < sequence.size()) {
-                    currentBest = (LinkedList<Elephant>) sequence.clone();
-                }
-                sequence = oldSequence;
-                traveled = oldTraveled;
-            } else if (!traveled.contains(graph.get(current, i)) && !graph.containsKey(graph.get(current, i))) {
-                sequence.add(graph.get(current, i));
-                if (currentBest.size() < sequence.size()) {
-                    currentBest = (LinkedList<Elephant>) sequence.clone();
-                }
-                sequence.removeLast();
-            }
-        }
-    }
-    private static Graph<Elephant> setGraph(LinkedList<Elephant> list) {
-        Graph<Elephant> graph = new Graph<>();
-        for (int i = 0; i < list.size(); i++) {
-            if (i + 1 < list.size()) {
-                for (int j = i + 1; j < list.size(); j++) {
-                    if (list.get(j).getIq() < list.get(i).getIq()) {
-                        graph.addDirectedEdge(list.get(i), list.get(j));
-                    }
+    private static LinkedList<Integer> longestDecreasingSequence(LinkedList<Integer> list) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int[] array = new int[list.size()];
+        LinkedList<Integer> longest;
+        Arrays.fill(array, 1);
+        for (int i = 1; i < array.length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (list.get(j) > list.get(i) && array[i] <= array[j]) {
+                    map.put(list.get(i), list.get(j));
+                    array[i] = array[j] + 1;
                 }
             }
         }
-        return graph;
-    }
-    private static LinkedList<Elephant> longestDecreasingSequence(LinkedList<Elephant> list) {
-        LinkedList<Elephant> longest = new LinkedList<>();
-        Graph<Elephant> graph = setGraph(list);
-        for (Elephant node : graph.getKeySet()) {
-            HashSet<Elephant> traveled = new HashSet<>();
-            traveled.add(node);
-            LinkedList<Elephant> sequence = new LinkedList<>();
-            sequence.add(node);
-            currentBest = new LinkedList<>();
-            depthFirstSearch(graph, traveled, node, sequence);
-            if (longest.size() < currentBest.size()) {
-                longest = currentBest;
+        int best = 0;
+        int bestNumber = 0;
+        for (int i = 0; i < array.length; i++) {
+            int value = array[i];
+            if (value > best) {
+                bestNumber = list.get(i);
+                best = value;
             }
         }
+        System.out.println(best);
+        longest = setLongest(bestNumber, map);
         return longest;
+    }
+    private static LinkedList<Integer> setLongest(int start, HashMap<Integer, Integer> map) {
+        LinkedList<Integer> list = new LinkedList<>();
+        int current = start;
+        while (map.containsKey(current)) {
+            list.add(current);
+            current = map.get(current);
+        }
+        list.add(current);
+        return list;
+    }
+    private static LinkedList<Integer> setList(LinkedList<Elephant> elephantList) {
+        LinkedList<Integer> list = new LinkedList<>();
+        for (Elephant elephant : elephantList) {
+            list.add(elephant.getIq());
+        }
+        return list;
     }
     public static void main(String[]args) {
         try {
             Scanner source = new Scanner(new File("Smart.txt"));
             LinkedList<Elephant> elephantList = new LinkedList<>();
+            LinkedList<Integer> list;
             int iterator = 0;
             while (source.hasNext()) {
                 iterator++;
                 elephantList.add(new Elephant(source.nextInt(), source.nextInt(), iterator));
             }
             sort(elephantList);
-            LinkedList<Elephant> longest = longestDecreasingSequence(elephantList);
-            print(longest);
+            list = setList(elephantList);
+            LinkedList<Integer> longest = longestDecreasingSequence(list);
+            System.out.println(longest);
         } catch (Exception e) {
             e.printStackTrace();
         }
