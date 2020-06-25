@@ -1,35 +1,41 @@
 package DynamicProgramming.D2;/* Created by oguzkeremyildiz on 24.06.2020 */
 
 import java.io.File;
+import java.math.BigInteger;
 import java.util.Scanner;
 
 public class DistinctSubsequences {
-    private static int find(String first, String second) {
-        int[][] array = new int[first.length()][second.length()];
-        for (int i = 0; i < array.length; i++) {
-            for (int j = 0; j < array[0].length; j++) {
+    private static void find(String first, String second) {
+        BigInteger[][] dp = new BigInteger[first.length()][second.length()];
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
+                dp[i][j] = new BigInteger("0");
+            }
+        }
+        for (int i = 0; i < dp.length; i++) {
+            for (int j = 0; j < dp[0].length; j++) {
                 if (first.charAt(i) == second.charAt(j)) {
                     if (j > 0) {
                         if (i > 0) {
-                            array[i][j] = array[i - 1][j - 1] + array[i - 1][j];
+                            dp[i][j] = dp[i][j].add(dp[i - 1][j - 1]);
+                            dp[i][j] = dp[i][j].add(dp[i - 1][j]);
                         } else {
-                            array[i][j] = 0;
+                            dp[i][j] = new BigInteger("0");
                         }
                     } else {
                         if (i > 0) {
-                            array[i][j] = array[i - 1][j] + 1;
-                        } else {
-                            array[i][j]++;
+                            dp[i][j] = new BigInteger(dp[i - 1][j].toString());
                         }
+                        dp[i][j] = dp[i][j].add(new BigInteger("1"));
                     }
                 } else {
                     if (i > 0) {
-                        array[i][j] = array[i - 1][j];
+                        dp[i][j] = new BigInteger(dp[i - 1][j].toString());
                     }
                 }
             }
         }
-        return array[first.length() - 1][second.length() - 1];
+        System.out.println(dp[first.length() - 1][second.length() - 1]);
     }
     public static void main(String[]args) {
         try {
@@ -38,7 +44,7 @@ public class DistinctSubsequences {
             for (int i = 0; i < times; i++) {
                 String first = source.next();
                 String second = source.next();
-                System.out.println(find(first, second));
+                find(first, second);
             }
         } catch (Exception e) {
             e.printStackTrace();
