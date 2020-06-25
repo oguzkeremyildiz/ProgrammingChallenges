@@ -1,4 +1,4 @@
-package DynamicProgramming;/* Created by oguzkeremyildiz on 12.06.2020 */
+package DynamicProgramming.D1;/* Created by oguzkeremyildiz on 12.06.2020 */
 
 public class Elephant {
 

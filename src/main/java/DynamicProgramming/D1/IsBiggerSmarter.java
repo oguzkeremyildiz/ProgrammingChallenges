@@ -1,4 +1,6 @@
-package DynamicProgramming;/* Created by oguzkeremyildiz on 11.06.2020 */
+package DynamicProgramming.D1;/* Created by oguzkeremyildiz on 11.06.2020 */
+
+import DynamicProgramming.D1.Elephant;
 
 import java.io.File;
 import java.util.Arrays;
