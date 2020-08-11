@@ -9,70 +9,6 @@ import java.util.Scanner;
 
 public class TheNecklace {
     private static boolean finished;
-    private static void constructCandidates(LinkedList<Pair<Integer, Integer>> subsets, Graph<Pair<Integer, Integer>> graph, LinkedList<Pair<Integer, Integer>> sequence) {
-        if (sequence.size() > 0) {
-            if (graph.containsKey(sequence.getLast())) {
-                for (int i = 0; i < graph.get(sequence.getLast()).size(); i++) {
-                    Pair<Integer, Integer> current = graph.get(sequence.getLast()).get(i);
-                    if (!sequence.contains(current)) {
-                        if (sequence.getLast().getValue().equals(current.getKey())) {
-                            subsets.add(current);
-                        } else if (sequence.getLast().getValue().equals(current.getValue())) {
-                            subsets.add(new Pair<>(current.getValue(), current.getKey()));
-                        }
-                    }
-                }
-            } else {
-                for (int i = 0; i < graph.get(new Pair<>(sequence.getLast().getValue(), sequence.getLast().getKey())).size(); i++) {
-                    Pair<Integer, Integer> current = graph.get(new Pair<>(sequence.getLast().getValue(), sequence.getLast().getKey())).get(i);
-                    if (!sequence.contains(current)) {
-                        if (sequence.getLast().getValue().equals(current.getKey())) {
-                            subsets.add(current);
-                        } else if (sequence.getLast().getValue().equals(current.getValue())) {
-                            subsets.add(new Pair<>(current.getValue(), current.getKey()));
-                        }
-                    }
-                }
-            }
-        } else {
-            subsets.addAll(graph.getKeySet());
-        }
-    }
-    private static boolean isASolution(LinkedList<Pair<Integer, Integer>> sequence) {
-        if (sequence.getFirst().getKey().equals(sequence.getLast().getValue())) {
-            for (int i = 0; i < sequence.size(); i++) {
-                if (i + 1 < sequence.size()) {
-                    if (!sequence.get(i).getValue().equals(sequence.get(i + 1).getKey())) {
-                        return false;
-                    }
-                }
-            }
-        } else {
-            return false;
-        }
-        return true;
-    }
-    private static void backtrack(Graph<Pair<Integer, Integer>> graph, LinkedList<Pair<Integer, Integer>> sequence, int number) {
-        if (sequence.size() == graph.size()) {
-            if (isASolution(sequence)) {
-                System.out.println("Case #" + number);
-                for (Pair<Integer, Integer> integerPair : sequence) {
-                    System.out.println(integerPair);
-                }
-                finished = true;
-            }
-        } else {
-            if (!finished) {
-                LinkedList<Pair<Integer, Integer>> subsets = new LinkedList<>();
-                constructCandidates(subsets, graph, sequence);
-                for (Pair<Integer, Integer> subset : subsets) {
-                    sequence.add(subset);
-                    backtrack(graph, sequence, number);
-                    sequence.removeLast();
-                }
-            }
-        }
-    }
     private static Graph<Pair<Integer, Integer>> addEdges(LinkedList<Pair<Integer, Integer>> pairs) {
         Graph<Pair<Integer, Integer>> graph = new Graph<>();
         for (Pair<Integer, Integer> pair : pairs) {
@@ -87,6 +23,36 @@ public class TheNecklace {
         }
         return graph;
     }
+    private static void depthFirstSearch(Graph<Pair<Integer, Integer>> graph, Pair<Integer, Integer> current, LinkedList<Pair<Integer, Integer>> visited, Pair<Integer, Integer> start) {
+        if (finished) {
+            return;
+        }
+        for (int i = 0; i < graph.get(current).size(); i++) {
+            if (!visited.contains(graph.get(current, i)) && graph.containsKey(graph.get(current, i))) {
+                visited.add(graph.get(current, i));
+                if (visited.size() == graph.size() && graph.get(current, i).equals(start)) {
+                    System.out.println(visited);
+                    finished = true;
+                } else {
+                    depthFirstSearch(graph, graph.get(current, i), visited, start);
+                    visited.remove(graph.get(current, i));
+                }
+            } else {
+                if (visited.size() == graph.size() && graph.get(current, i).equals(start)) {
+                    System.out.println(visited);
+                    finished = true;
+                }
+            }
+        }
+    }
+    private static void find(Graph<Pair<Integer, Integer>> graph, Pair<Integer, Integer> pair) {
+        LinkedList<Pair<Integer, Integer>> visited = new LinkedList<>();
+        visited.add(pair);
+        depthFirstSearch(graph, pair, visited, pair);
+        if (!finished) {
+            System.out.println("some beads may be lost");
+        }
+    }
     public static void main(String[]args) {
         try {
             Scanner source = new Scanner(new File("Necklace.txt"));
@@ -100,11 +66,8 @@ public class TheNecklace {
                     pairs.add(new Pair<>(source.nextInt(), source.nextInt()));
                 }
                 graph = addEdges(pairs);
-                backtrack(graph, new LinkedList<>(), (i + 1));
-                if (!finished) {
-                    System.out.println("Case #" + (i + 1));
-                    System.out.println("some beads may be lost");
-                }
+                System.out.println("Case #" + (i + 1));
+                find(graph, pairs.getFirst());
                 graph.clear();
                 pairs.clear();
             }
