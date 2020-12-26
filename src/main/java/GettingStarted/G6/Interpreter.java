@@ -6,10 +6,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Interpreter {
+
     static int t = 0;
 
-    public static void ram(int digit1, int digit2, int digit3, int[] register, int[] ram){
-            switch (digit1){
+    public static void ram(int digit1, int digit2, int digit3, int[] register, int[] ram) {
+            switch (digit1) {
                 case 2:
                     register[digit2] = digit3;
                     t++;
@@ -51,7 +52,8 @@ public class Interpreter {
                     break;
             }
     }
-    public static void main(String[] args){
+
+    public static void main(String[]args) {
         try {
             int [] register = new int[10];
             int count = 1;
@@ -60,7 +62,7 @@ public class Interpreter {
             int number;
             String line = source.nextLine();
             int j = 0;
-            for (int i = 0; i < firstLine; i++){
+            for (int i = 0; i < firstLine; i++) {
                 int [] ram = new int[1000];
                 while (source.hasNext()){
                     line = source.nextLine();
@@ -72,7 +74,7 @@ public class Interpreter {
                     j++;
                 }
                 t = 0;
-                while (ram[t] != 100){
+                while (ram[t] != 100) {
                     int temporary;
                     ArrayList<Integer> digit = new ArrayList<>();
                     temporary = ram[t] / 100;
@@ -84,9 +86,12 @@ public class Interpreter {
                     ram(digit.get(digit.size() - 3), digit.get(digit.size() - 2), digit.get(digit.size() - 1), register, ram);
                     count++;
                 }
+                System.out.println(count);
+                register = new int[10];
+                j = 0;
+                count = 1;
             }
-            System.out.println(count);
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
