@@ -6,35 +6,24 @@ import java.util.Collections;
 import java.util.Scanner;
 
 public class VitosFamily {
-    private static void choose(ArrayList<Integer> streets){
-        int smallest = 0;
-        int current;
-        int smallestValue = 0;
-        if (streets.size() == 2){
-            System.out.println(streets.get(0));
-        }else {
-            for (int i = 0; i < streets.size(); i++){
-                if (i != 0 || i != streets.size() - 1){
-                    current = streets.get(i) - streets.get(0);
-                    if (streets.get(streets.size() - 1) - streets.get(i) > current){
-                        current = streets.get(streets.size() - 1) - streets.get(i);
-                    }
-                    if (smallest == 0){
-                        smallest = current;
-                        smallestValue = streets.get(i);
-                    } else if (current < smallest){
-                        smallest = current;
-                        smallestValue = streets.get(i);
-                    }
+
+    private static void choose(ArrayList<Integer> streets) {
+        int best = Integer.MAX_VALUE;
+        for (int i = 0; i < streets.size(); i++) {
+            int total = 0;
+            for (int j = 0; j < streets.size(); j++) {
+                if (i != j) {
+                    total += Math.abs(streets.get(i) - streets.get(j));
                 }
             }
-            System.out.println(smallestValue);
+            if (total < best) {
+                best = total;
+            }
         }
+        System.out.println(best);
     }
-    private static void sort(ArrayList<Integer> streets){
-        Collections.sort(streets);
-    }
-    public static void main(String[]args){
+
+    public static void main(String[]args) {
        try {
            int testCase;
            int number;
@@ -42,17 +31,16 @@ public class VitosFamily {
            ArrayList<Integer> streets = new ArrayList<>();
            Scanner source = new Scanner(new File("Vito.txt"));
            testCase = source.nextInt();
-           for (int i = 0; i < testCase; i++){
+           for (int i = 0; i < testCase; i++) {
                number = source.nextInt();
-               for (int j = 0; j < number; j++){
+               for (int j = 0; j < number; j++) {
                    street = source.nextInt();
                    streets.add(street);
                }
-               sort(streets);
                choose(streets);
                streets.clear();
            }
-       } catch (Exception e){
+       } catch (Exception e) {
            e.printStackTrace();
        }
     }
