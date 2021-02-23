@@ -5,87 +5,124 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class FerryLoading {
-    private static LinkedList<Boolean> best;
-    private static LinkedList<Boolean> constructCandidates(int current, LinkedList<Boolean> sequence, int ferry, LinkedList<Integer> list) {
-        LinkedList<Boolean> subsets = new LinkedList<>();
-        if (sequence.size() > 0) {
-            int sum1 = 0;
-            int sum2 = 0;
-            for (int i = 0; i < sequence.size(); i++) {
-                if (sequence.get(i)) {
-                    sum1 += list.get(i);
-                } else {
-                    sum2 += list.get(i);
+
+    private static boolean control(LinkedList<Node> list, int current, int ferry) {
+        LinkedList<Node> port = new LinkedList<>();
+        LinkedList<Node> starboard = new LinkedList<>();
+        int endIndex = Integer.MAX_VALUE;
+        for (int n = list.size() - 1; n > -1; n--) {
+            if (list.get(n).getValue() <= current) {
+                if (endIndex == Integer.MAX_VALUE) {
+                    endIndex = n;
                 }
+                current -= list.get(n).getValue();
+                port.add(list.get(n));
             }
-            if (sum1 + current <= ferry) {
-                subsets.add(true);
-            }
-            if (sum2 + current <= ferry) {
-                subsets.add(false);
-            }
-        } else {
-            subsets.add(true);
-            subsets.add(false);
         }
-        return subsets;
+        for (int n = 0; n < endIndex; ++n) {
+            if (!port.contains(list.get(n))) {
+                starboard.add(list.get(n));
+            }
+        }
+        int total1 = 0, total2 = 0;
+        for (Node k : port) {
+            total1 += k.getWeight();
+        }
+        for (Node k : starboard) {
+            total2 += k.getWeight();
+        }
+        return ferry >= total1 && ferry >= total2;
     }
-    private static boolean isASolution(LinkedList<Boolean> sequence, LinkedList<Integer> list, int ferry) {
-        if (sequence.size() > 0) {
-            int sum1 = 0;
-            int sum2 = 0;
-            for (int i = 0; i < sequence.size(); i++) {
-                if (sequence.get(i)) {
-                    sum1 += list.get(i);
-                } else {
-                    sum2 += list.get(i);
+
+    private static void print(int[][] dp, int ferry, LinkedList<Node> list) {
+        LinkedList<Node> port = new LinkedList<>();
+        LinkedList<Node> starboard = new LinkedList<>();
+        int totalScore = dp[list.size() - 1][ferry];
+        for (int i = list.size() - 1; i > -1; i--) {
+            if (list.get(i).getValue() <= totalScore) {
+                totalScore -= list.get(i).getValue();
+                port.add(list.get(i));
+            }
+        }
+        int total = 0;
+        for (Node i : list) {
+            if (!port.contains(i)) {
+                if (total + i.getWeight() > ferry) {
+                    break;
                 }
-            }
-            return ferry >= sum1 && ferry >= sum2;
-        }
-        return false;
-    }
-    private static void backtrack(LinkedList<Integer> list, int ferry, LinkedList<Boolean> sequence, int iterate) {
-        if (sequence.size() > best.size() && isASolution(sequence, list, ferry)) {
-            best = (LinkedList<Boolean>) sequence.clone();
-        }
-        if (iterate < list.size()) {
-            LinkedList<Boolean> subsets = constructCandidates(list.get(iterate), sequence, ferry, list);
-            for (Boolean subset : subsets) {
-                sequence.add(subset);
-                backtrack(list, ferry, sequence, iterate + 1);
-                sequence.removeLast();
+                total += i.getWeight();
+                starboard.add(i);
             }
         }
-    }
-    private static void print() {
-        System.out.println(best.size());
-        for (Boolean element : best) {
-            if (element) {
+        System.out.println(port.size() + starboard.size());
+        for (Node i : list) {
+            if (port.contains(i)) {
                 System.out.println("port");
-            } else {
+            } else if (starboard.add(i)) {
                 System.out.println("starboard");
             }
         }
-        System.out.println();
     }
+
+    private static void dp(LinkedList<Node> list, int ferry) {
+        int[][] dp = new int[list.size()][ferry + 1];
+        for (int i = 0; i < ferry + 1; i++) {
+            if (i >= list.getFirst().getWeight()) {
+                dp[0][i] = list.getFirst().getValue();
+            }
+        }
+        for (int i = 1; i < list.size(); ++i) {
+            if (list.get(i).getWeight() < ferry + 1) {
+                for (int j = 1; j < ferry + 1; ++j) {
+                    if (j - list.get(i).getWeight() > -1 && dp[i - 1][j - list.get(i).getWeight()] + list.get(i).getValue() > dp[i - 1][j] && control(list, dp[i - 1][j - list.get(i).getWeight()] + list.get(i).getValue(), ferry)) {
+                        dp[i][j] = dp[i - 1][j - list.get(i).getWeight()] + list.get(i).getValue();
+                    } else {
+                        dp[i][j] = dp[i - 1][j];
+                    }
+                }
+            }
+        }
+        print(dp, ferry, list);
+    }
+
+    private static int setValues(LinkedList<Integer> values) {
+        if (values.isEmpty()) {
+            values.add(1);
+        } else {
+            int total = 1;
+            for (Integer value : values) {
+                total += value;
+            }
+            values.add(total);
+        }
+        return values.get(values.size() - 1);
+    }
+
     public static void main(String[]args) {
         try {
             Scanner source = new Scanner(new File("Ferry.txt"));
-            LinkedList<Integer> list = new LinkedList<>();
-            int times = source.nextInt();
+            LinkedList<Node> list = new LinkedList<>();
+            int times, ferry, index;
+            times = source.nextInt();
             for (int i = 0; i < times; i++) {
-                int ferry = source.nextInt();
+                index = 0;
+                ferry = source.nextInt();
                 int current = Integer.MAX_VALUE;
+                LinkedList<Integer> values = new LinkedList<>();
                 while (current != 0) {
                     current = source.nextInt();
                     if (current != 0) {
-                        list.add(current);
+                        index++;
+                        int value = setValues(values);
+                        list.add(new Node(value, current));
                     }
                 }
-                best = new LinkedList<>();
-                backtrack(list, ferry * 100, new LinkedList<>(), 0);
-                print();
+                if (list.get(0).getWeight() <= ferry * 100) {
+                    dp(list, ferry * 100);
+                } else {
+                    System.out.println("0");
+                }
+                System.out.println();
                 list.clear();
             }
         } catch (Exception e) {
