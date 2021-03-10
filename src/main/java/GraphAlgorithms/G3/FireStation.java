@@ -1,5 +1,6 @@
 package GraphAlgorithms.G3;/* Created by oguzkeremyildiz on 20.05.2020 */
 
+import Cookies.Graph.Edge;
 import Cookies.Graph.IntegerLength;
 import Cookies.Graph.WeightedGraph;
 import Cookies.Tuple.Pair;
@@ -68,7 +69,7 @@ public class FireStation {
                     set.add(stations[j]);
                 }
                 for (int j = 0; j < buildNumber; j++) {
-                    graph.addUndirectedEdge(source.nextInt(), source.nextInt(), source.nextInt());
+                    graph.addUndirectedEdge(source.nextInt(), source.nextInt(), new Edge<>(source.nextInt()));
                 }
                 System.out.println(findSmallest(graph, stations, set));
                 graph.clear();

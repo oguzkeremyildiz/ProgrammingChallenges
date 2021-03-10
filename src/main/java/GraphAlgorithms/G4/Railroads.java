@@ -1,5 +1,6 @@
 package GraphAlgorithms.G4;/* Created by oguzkeremyildiz on 22.05.2020 */
 
+import Cookies.Graph.Edge;
 import Cookies.Graph.IntegerLength;
 import Cookies.Graph.WeightedGraph;
 import Cookies.Tuple.Pair;
@@ -15,16 +16,16 @@ public class Railroads {
         if (graph.size() > 0) {
             graph.put(list.getFirst(), new LinkedList<>());
             for (int i = 1; i < list.size(); i++) {
-                graph.addDirectedEdge(list.getFirst(), list.get(i), Math.abs(list.get(i).getHour() - list.getFirst().getHour()));
+                graph.addDirectedEdge(list.getFirst(), list.get(i), new Edge<>(Math.abs(list.get(i).getHour() - list.getFirst().getHour())));
             }
             for (int i = 0; i < list.size(); i++) {
                 Set<Road> keys = addSet(graph.getVertexList());
                 for (Road key : keys) {
                     if (key.getName().equals(list.get(i).getName()) && !key.equals(list.get(i))) {
                         if (key.getHour() < list.get(i).getHour()) {
-                            graph.addDirectedEdge(key, list.get(i), Math.abs(list.get(i).getHour() - key.getHour()));
+                            graph.addDirectedEdge(key, list.get(i), new Edge<>(Math.abs(list.get(i).getHour() - key.getHour())));
                         } else {
-                            graph.addDirectedEdge(list.get(i), key, Math.abs(list.get(i).getHour() - key.getHour()));
+                            graph.addDirectedEdge(list.get(i), key, new Edge<>(Math.abs(list.get(i).getHour() - key.getHour())));
                         }
                     }
                 }
@@ -32,7 +33,7 @@ public class Railroads {
         } else {
             graph.put(list.getFirst(), new LinkedList<>());
             for (int i = 1; i < list.size(); i++) {
-                graph.addDirectedEdge(list.getFirst(), list.get(i), Math.abs(list.get(i).getHour() - list.getFirst().getHour()));
+                graph.addDirectedEdge(list.getFirst(), list.get(i), new Edge<>(Math.abs(list.get(i).getHour() - list.getFirst().getHour())));
             }
         }
     }

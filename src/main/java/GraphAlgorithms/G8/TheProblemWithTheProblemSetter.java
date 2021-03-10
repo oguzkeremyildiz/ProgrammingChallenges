@@ -2,7 +2,7 @@ package GraphAlgorithms.G8;/* Created by oguzkeremyildiz on 8.06.2020 */
 
 import Cookies.Graph.Edge;
 import Cookies.Graph.IntegerLength;
-import Cookies.Graph.WeightedGraphEdge;
+import Cookies.Graph.WeightedGraph;
 
 import java.io.File;
 import java.util.*;
@@ -15,7 +15,7 @@ public class TheProblemWithTheProblemSetter {
         }
         return totalElement == size.stream().mapToInt(Integer::intValue).sum();
     }
-    private static LinkedHashMap<String, String> breadthFirstSearch(WeightedGraphEdge<String, Integer> graph, String source) {
+    private static LinkedHashMap<String, String> breadthFirstSearch(WeightedGraph<String, Integer> graph, String source) {
         LinkedHashMap<String, String> returning = new LinkedHashMap<>();
         HashSet<String> set = new HashSet<>();
         HashMap<Integer, LinkedList<String>> map = new HashMap<>();
@@ -51,7 +51,7 @@ public class TheProblemWithTheProblemSetter {
             System.out.println(list);
         }
     }
-    private static void fordFulkerson(WeightedGraphEdge<String, Integer> graph, LinkedList<Problem> list, LinkedList<Integer> boundary) {
+    private static void fordFulkerson(WeightedGraph<String, Integer> graph, LinkedList<Problem> list, LinkedList<Integer> boundary) {
         String source = "s";
         String sink = "t";
         HashMap<String, LinkedList<Problem>> used = new HashMap<>();
@@ -89,7 +89,7 @@ public class TheProblemWithTheProblemSetter {
             System.out.println("0");
         }
     }
-    private static boolean check(WeightedGraphEdge<String, Integer> graph, LinkedList<String> path, int now, Problem problem) {
+    private static boolean check(WeightedGraph<String, Integer> graph, LinkedList<String> path, int now, Problem problem) {
         int total = problem.find(now);
         for (int j = 0; j < graph.get(path.get(3)).size(); j++) {
             String current = graph.get(path.get(3), j).getKey();
@@ -107,7 +107,7 @@ public class TheProblemWithTheProblemSetter {
         }
         return false;
     }
-    private static void setGraphAndMap(WeightedGraphEdge<String, Integer> graph, HashMap<String, LinkedList<Problem>> map, LinkedList<String> path, HashMap<String, LinkedList<Problem>> used, LinkedList<Problem> list) {
+    private static void setGraphAndMap(WeightedGraph<String, Integer> graph, HashMap<String, LinkedList<Problem>> map, LinkedList<String> path, HashMap<String, LinkedList<Problem>> used, LinkedList<Problem> list) {
         LinkedList<Problem> currentList = (LinkedList<Problem>) list.clone();
         for (String key : used.keySet()) {
             currentList.removeAll(used.get(key));
@@ -218,8 +218,8 @@ public class TheProblemWithTheProblemSetter {
             }
         }
     }
-    private static WeightedGraphEdge<String, Integer> setGraph(LinkedList<Problem> list, LinkedList<Integer> boundary) {
-        WeightedGraphEdge<String, Integer> graph = new WeightedGraphEdge<>(new IntegerLength());
+    private static WeightedGraph<String, Integer> setGraph(LinkedList<Problem> list, LinkedList<Integer> boundary) {
+        WeightedGraph<String, Integer> graph = new WeightedGraph<>(new IntegerLength());
         String source = "s";
         String sink = "t";
         graph.addUndirectedEdge(source, "problems", new Edge<>(list.size(), 0, new IntegerLength()), new Edge<>(list.size(), new IntegerLength()));
@@ -251,7 +251,7 @@ public class TheProblemWithTheProblemSetter {
                 int problems = source.nextInt();
                 LinkedList<Problem> list = new LinkedList<>();
                 LinkedList<Integer> boundary = new LinkedList<>();
-                WeightedGraphEdge<String, Integer> graph;
+                WeightedGraph<String, Integer> graph;
                 if (categories != 0 && problems != 0) {
                     for (int i = 0; i < categories; i++) {
                         boundary.add(source.nextInt());

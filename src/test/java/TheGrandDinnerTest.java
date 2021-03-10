@@ -1,6 +1,6 @@
 import Cookies.Graph.Edge;
 import Cookies.Graph.IntegerLength;
-import Cookies.Graph.WeightedGraphEdge;
+import Cookies.Graph.WeightedGraph;
 import GraphAlgorithms.G7.TheGrandDinner;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ class TheGrandDinnerTest extends TheGrandDinner {
     @Test
     void testBreadthFirstSearch() {
         HashMap<String, String> returning = new HashMap<>();
-        WeightedGraphEdge<String, Integer> graph = new WeightedGraphEdge<>(new IntegerLength());
+        WeightedGraph<String, Integer> graph = new WeightedGraph<>(new IntegerLength());
         graph.addUndirectedEdge("s", "team1", new Edge<>(4, new IntegerLength()));
         graph.addUndirectedEdge("s", "team2", new Edge<>(5, new IntegerLength()));
         graph.addUndirectedEdge("s", "team3", new Edge<>(3, new IntegerLength()));

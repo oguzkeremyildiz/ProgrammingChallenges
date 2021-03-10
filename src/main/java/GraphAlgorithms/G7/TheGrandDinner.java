@@ -2,7 +2,7 @@ package GraphAlgorithms.G7;
 
 import Cookies.Graph.Edge;
 import Cookies.Graph.IntegerLength;
-import Cookies.Graph.WeightedGraphEdge;
+import Cookies.Graph.WeightedGraph;
 
 import java.io.File;
 import java.util.*;
@@ -30,7 +30,7 @@ public class TheGrandDinner {
         }
         return total == teamList.stream().mapToInt(Integer::intValue).sum();
     }
-    private static void fordFulkerson(LinkedList<Integer> teamList, LinkedList<Integer> tableList, WeightedGraphEdge<String, Integer> graph) {
+    private static void fordFulkerson(LinkedList<Integer> teamList, LinkedList<Integer> tableList, WeightedGraph<String, Integer> graph) {
         String source = "s";
         String sink = "t";
         HashMap<String, LinkedList<String>> map = new HashMap<>();
@@ -59,7 +59,7 @@ public class TheGrandDinner {
             System.out.println("0");
         }
     }
-    private static void setGraphAndMap(WeightedGraphEdge<String, Integer> graph, HashMap<String, LinkedList<String>> map, LinkedList<String> list) {
+    private static void setGraphAndMap(WeightedGraph<String, Integer> graph, HashMap<String, LinkedList<String>> map, LinkedList<String> list) {
         if (!map.get(list.get(1)).contains(list.get(2))) {
             Collections.reverse(list);
             for (int i = 0; i < list.size(); i++) {
@@ -82,8 +82,8 @@ public class TheGrandDinner {
             map.get(list.get(2)).add(list.get(1));
         }
     }
-    private static WeightedGraphEdge<String, Integer> setGraph(LinkedList<Integer> teamList, LinkedList<Integer> tableList) {
-        WeightedGraphEdge<String, Integer> graph = new WeightedGraphEdge<>(new IntegerLength());
+    private static WeightedGraph<String, Integer> setGraph(LinkedList<Integer> teamList, LinkedList<Integer> tableList) {
+        WeightedGraph<String, Integer> graph = new WeightedGraph<>(new IntegerLength());
         for (int i = 0; i < teamList.size(); i++) {
             graph.addUndirectedEdge("s", "team" + (i + 1), new Edge<>(teamList.get(i), 0, new IntegerLength()), new Edge<>(teamList.get(i), new IntegerLength()));
         }
@@ -97,7 +97,7 @@ public class TheGrandDinner {
         }
         return graph;
     }
-    protected static LinkedHashMap<String, String> breadthFirstSearch(WeightedGraphEdge<String, Integer> graph, String source) {
+    protected static LinkedHashMap<String, String> breadthFirstSearch(WeightedGraph<String, Integer> graph, String source) {
         LinkedHashMap<String, String> returning = new LinkedHashMap<>();
         HashSet<String> set = new HashSet<>();
         HashMap<Integer, LinkedList<String>> map = new HashMap<>();
@@ -127,7 +127,7 @@ public class TheGrandDinner {
     public static void main(String[]args) {
         try {
             Scanner source = new Scanner(new File("Dinner.txt"));
-            WeightedGraphEdge<String, Integer> graph;
+            WeightedGraph<String, Integer> graph;
             int teams = 1000;
             int tables = 1000;
             while (teams != 0 && tables != 0) {

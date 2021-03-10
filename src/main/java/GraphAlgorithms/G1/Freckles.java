@@ -1,6 +1,7 @@
 package GraphAlgorithms.G1;/* Created by oguzkeremyildiz on 17.05.2020 */
 
 import Cookies.Graph.DoubleLength;
+import Cookies.Graph.Edge;
 import Cookies.Graph.WeightedGraph;
 import Cookies.Tuple.Pair;
 
@@ -18,10 +19,10 @@ public class Freckles {
                 if (!second.equals(first)) {
                     if (graph.containsKey(i)) {
                         if (!graph.get(i).contains(new Pair<>(j, length(first, second)))) {
-                            graph.addUndirectedEdge(i, j, length(first, second), length(first, second));
+                            graph.addUndirectedEdge(i, j, new Edge<>(length(first, second)), new Edge<>(length(first, second)));
                         }
                     } else {
-                        graph.addUndirectedEdge(i, j, length(first, second), length(first, second));
+                        graph.addUndirectedEdge(i, j, new Edge<>(length(first, second)), new Edge<>(length(first, second)));
                     }
                 }
             }
