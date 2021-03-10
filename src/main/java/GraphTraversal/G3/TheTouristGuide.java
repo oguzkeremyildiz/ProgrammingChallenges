@@ -1,5 +1,6 @@
 package GraphTraversal.G3;/* Created by oguzkeremyildiz on 27.04.2020 */
 
+import Cookies.Graph.Edge;
 import Cookies.Graph.IntegerLength;
 import Cookies.Graph.LinkedWeightedGraph;
 import Cookies.Tuple.Pair;
@@ -23,15 +24,15 @@ public class TheTouristGuide {
         sequence.removeAll(outputs);
         return outputs;
     }
-    private static void next(LinkedWeightedGraph<Integer, Integer> graph, LinkedList<Pair<Integer, Integer>> currentEdge, int index, int finish, int max, int length) {
+    private static void next(LinkedWeightedGraph<Integer, Integer> graph, LinkedList<Pair<Integer, Edge<Integer>>> currentEdge, int index, int finish, int max, int length) {
         LinkedList<Triplet<Integer, Integer, Integer>> sequence = new LinkedList<>();
-        for (Pair<Integer, Integer> nextEdge : currentEdge) {
+        for (Pair<Integer, Edge<Integer>> nextEdge : currentEdge) {
             if (!visited.contains(nextEdge.getKey())) {
-                if (length > nextEdge.getValue()) {
-                    if (nextEdge.getValue() > max) {
+                if (length > nextEdge.getValue().getCapacity()) {
+                    if (nextEdge.getValue().getCapacity() > max) {
                         sequence.add(new Triplet<>(nextEdge.getKey(), max, index));
                     } else {
-                        sequence.add(new Triplet<>(nextEdge.getKey(), nextEdge.getValue(), index));
+                        sequence.add(new Triplet<>(nextEdge.getKey(), nextEdge.getValue().getCapacity(), index));
                     }
                 } else {
                     if (length > max) {
@@ -55,7 +56,7 @@ public class TheTouristGuide {
         visited = new HashSet<>();
         visited.add(1);
         int index = 2;
-        next(graph, graph.get(start), index, finish, max, graph.getFirst().getFirst().getValue());
+        next(graph, graph.get(start), index, finish, max, graph.getFirst().getFirst().getValue().getCapacity());
         printBestOutput();
     }
     private static void printBestOutput() {
