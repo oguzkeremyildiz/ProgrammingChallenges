@@ -1,7 +1,7 @@
 package GraphAlgorithms.G7;
 
-import Cookies.Graph.Edge;
 import Cookies.Graph.IntegerLength;
+import Cookies.Graph.ResidualEdge;
 import Cookies.Graph.WeightedGraph;
 
 import java.io.File;
@@ -67,11 +67,11 @@ public class TheGrandDinner {
                     if (graph.containsKey(list.get(i))) {
                         for (int j = 0; j < graph.get(list.get(i)).size(); j++) {
                             if (list.get(i + 1).equals(graph.get(list.get(i), j).getKey())) {
-                                graph.get(list.get(i), j).getValue().setFlow(graph.get(list.get(i), j).getValue().getFlow() + 1);
+                                ((ResidualEdge<Integer>) graph.get(list.get(i), j).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(list.get(i), j).getValue()).getFlow() + 1);
                                 for (int k = 0; k < graph.get(list.get(i + 1)).size(); k++) {
                                     String current = graph.get(list.get(i + 1)).get(k).getKey();
                                     if (current.equals(list.get(i))) {
-                                        graph.get(list.get(i + 1), k).getValue().setFlow(graph.get(list.get(i + 1), k).getValue().getFlow() - 1);
+                                        ((ResidualEdge<Integer>) graph.get(list.get(i + 1), k).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(list.get(i + 1), k).getValue()).getFlow() - 1);
                                     }
                                 }
                             }
@@ -85,14 +85,14 @@ public class TheGrandDinner {
     private static WeightedGraph<String, Integer> setGraph(LinkedList<Integer> teamList, LinkedList<Integer> tableList) {
         WeightedGraph<String, Integer> graph = new WeightedGraph<>(new IntegerLength());
         for (int i = 0; i < teamList.size(); i++) {
-            graph.addUndirectedEdge("s", "team" + (i + 1), new Edge<>(teamList.get(i), 0, new IntegerLength()), new Edge<>(teamList.get(i), new IntegerLength()));
+            graph.addUndirectedEdge("s", "team" + (i + 1), new ResidualEdge<>(teamList.get(i), 0, new IntegerLength()), new ResidualEdge<>(teamList.get(i), new IntegerLength()));
         }
         for (int i = 0; i < tableList.size(); i++) {
-            graph.addUndirectedEdge("table" + (i + 1), "t", new Edge<>(tableList.get(i), 0, new IntegerLength()), new Edge<>(tableList.get(i), new IntegerLength()));
+            graph.addUndirectedEdge("table" + (i + 1), "t", new ResidualEdge<>(tableList.get(i), 0, new IntegerLength()), new ResidualEdge<>(tableList.get(i), new IntegerLength()));
         }
         for (int i = 0; i < teamList.size(); i++) {
             for (int j = 0; j < tableList.size(); j++) {
-                graph.addUndirectedEdge("team" + (i + 1), "table" + (j + 1), new Edge<>(1, 0, new IntegerLength()), new Edge<>(1, new IntegerLength()));
+                graph.addUndirectedEdge("team" + (i + 1), "table" + (j + 1), new ResidualEdge<>(1, 0, new IntegerLength()), new ResidualEdge<>(1, new IntegerLength()));
             }
         }
         return graph;
@@ -112,7 +112,7 @@ public class TheGrandDinner {
                 if (graph.containsKey(current)) {
                     set.add(current);
                     for (int j = 0; j < graph.get(current).size(); j++) {
-                        if (!set.contains(graph.get(current).get(j).getKey()) && graph.get(current).get(j).getValue().getResidual() > 0) {
+                        if (!set.contains(graph.get(current).get(j).getKey()) && ((ResidualEdge<Integer>) graph.get(current).get(j).getValue()).getResidual() > 0) {
                             set.add(graph.get(current, j).getKey());
                             map.get(iterate + 1).add(graph.get(current, j).getKey());
                             returning.put(graph.get(current, j).getKey(), current);

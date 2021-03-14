@@ -1,7 +1,7 @@
 package GraphAlgorithms.G8;/* Created by oguzkeremyildiz on 8.06.2020 */
 
-import Cookies.Graph.Edge;
 import Cookies.Graph.IntegerLength;
+import Cookies.Graph.ResidualEdge;
 import Cookies.Graph.WeightedGraph;
 
 import java.io.File;
@@ -30,7 +30,7 @@ public class TheProblemWithTheProblemSetter {
                 if (graph.containsKey(current)) {
                     set.add(current);
                     for (int j = 0; j < graph.get(current).size(); j++) {
-                        if (!set.contains(graph.get(current).get(j).getKey()) && graph.get(current).get(j).getValue().getResidual() > 0) {
+                        if (!set.contains(graph.get(current).get(j).getKey()) && ((ResidualEdge<Integer>) graph.get(current).get(j).getValue()).getResidual() > 0) {
                             set.add(graph.get(current, j).getKey());
                             map.get(iterate + 1).add(graph.get(current, j).getKey());
                             returning.put(graph.get(current, j).getKey(), current);
@@ -94,10 +94,10 @@ public class TheProblemWithTheProblemSetter {
         for (int j = 0; j < graph.get(path.get(3)).size(); j++) {
             String current = graph.get(path.get(3), j).getKey();
             if (current.equals(path.get(2))) {
-                if (graph.get(path.get(3), j).getValue().getFlow() + total <= graph.get(path.get(3), j).getValue().getCapacity()) {
+                if (((ResidualEdge<Integer>) graph.get(path.get(3), j).getValue()).getFlow() + total <= graph.get(path.get(3), j).getValue().getLength()) {
                     for (int i = 0; i < graph.get(path.get(1)).size(); i++) {
                         if (graph.get(path.get(1), i).getKey().equals(path.get(0))) {
-                            return graph.get(path.get(1), i).getValue().getFlow() + total <= graph.get(path.get(1), i).getValue().getCapacity();
+                            return ((ResidualEdge<Integer>) graph.get(path.get(1), i).getValue()).getFlow() + total <= graph.get(path.get(1), i).getValue().getLength();
                         }
                     }
                 } else {
@@ -122,10 +122,10 @@ public class TheProblemWithTheProblemSetter {
                 for (int j = 0; j < graph.get(path.get(3)).size(); j++) {
                     String current = graph.get(path.get(3), j).getKey();
                     if (current.equals(path.get(2))) {
-                        graph.get(path.get(3), j).getValue().setFlow(graph.get(path.get(3), j).getValue().getFlow() + total);
+                        ((ResidualEdge<Integer>) graph.get(path.get(3), j).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(path.get(3), j).getValue()).getFlow() + total);
                         for (int k = 0; k < graph.get(path.get(2)).size(); k++) {
                             if (graph.get(path.get(2), k).getKey().equals(path.get(3))) {
-                                graph.get(path.get(2), k).getValue().setFlow(graph.get(path.get(2), k).getValue().getFlow() - total);
+                                ((ResidualEdge<Integer>) graph.get(path.get(2), k).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(path.get(2), k).getValue()).getFlow() - total);
                                 break;
                             }
                         }
@@ -135,10 +135,10 @@ public class TheProblemWithTheProblemSetter {
                 for (int j = 0; j < graph.get(path.get(1)).size(); j++) {
                     String current = graph.get(path.get(1), j).getKey();
                     if (current.equals(path.get(0))) {
-                        graph.get(path.get(1), j).getValue().setFlow(graph.get(path.get(1), j).getValue().getFlow() + total);
+                        ((ResidualEdge<Integer>) graph.get(path.get(1), j).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(path.get(1), j).getValue()).getFlow() + total);
                         for (int k = 0; k < graph.get(path.get(0)).size(); k++) {
                             if (graph.get(path.get(0), k).getKey().equals(path.get(1))) {
-                                graph.get(path.get(0), k).getValue().setFlow(graph.get(path.get(0), k).getValue().getFlow() - total);
+                                ((ResidualEdge<Integer>) graph.get(path.get(0), k).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(path.get(0), k).getValue()).getFlow() - total);
                                 break;
                             }
                         }
@@ -160,10 +160,10 @@ public class TheProblemWithTheProblemSetter {
                             for (int j = 0; j < graph.get(path.get(3)).size(); j++) {
                                 String current = graph.get(path.get(3), j).getKey();
                                 if (current.equals(path.get(2))) {
-                                    graph.get(path.get(3), j).getValue().setFlow(graph.get(path.get(3), j).getValue().getFlow() + total);
+                                    ((ResidualEdge<Integer>) graph.get(path.get(3), j).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(path.get(3), j).getValue()).getFlow() + total);
                                     for (int k = 0; k < graph.get(path.get(2)).size(); k++) {
                                         if (graph.get(path.get(2), k).getKey().equals(path.get(3))) {
-                                            graph.get(path.get(2), k).getValue().setFlow(graph.get(path.get(2), k).getValue().getFlow() - total);
+                                            ((ResidualEdge<Integer>) graph.get(path.get(2), k).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(path.get(2), k).getValue()).getFlow() - total);
                                             break;
                                         }
                                     }
@@ -173,10 +173,10 @@ public class TheProblemWithTheProblemSetter {
                             for (int j = 0; j < graph.get(path.get(1)).size(); j++) {
                                 String current = graph.get(path.get(1), j).getKey();
                                 if (current.equals(path.get(0))) {
-                                    graph.get(path.get(1), j).getValue().setFlow(graph.get(path.get(1), j).getValue().getFlow() + total);
+                                    ((ResidualEdge<Integer>) graph.get(path.get(1), j).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(path.get(1), j).getValue()).getFlow() + total);
                                     for (int k = 0; k < graph.get(path.get(0)).size(); k++) {
                                         if (graph.get(path.get(0), k).getKey().equals(path.get(1))) {
-                                            graph.get(path.get(0), k).getValue().setFlow(graph.get(path.get(0), k).getValue().getFlow() - total);
+                                            ((ResidualEdge<Integer>) graph.get(path.get(0), k).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(path.get(0), k).getValue()).getFlow() - total);
                                             break;
                                         }
                                     }
@@ -188,10 +188,10 @@ public class TheProblemWithTheProblemSetter {
                             for (int j = 0; j < graph.get(anotherPath.get(3)).size(); j++) {
                                 String current = graph.get(anotherPath.get(3), j).getKey();
                                 if (current.equals(anotherPath.get(2))) {
-                                    graph.get(anotherPath.get(3), j).getValue().setFlow(graph.get(anotherPath.get(3), j).getValue().getFlow() - total);
+                                    ((ResidualEdge<Integer>) graph.get(anotherPath.get(3), j).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(anotherPath.get(3), j).getValue()).getFlow() - total);
                                     for (int k = 0; k < graph.get(anotherPath.get(2)).size(); k++) {
                                         if (graph.get(anotherPath.get(2), k).getKey().equals(anotherPath.get(3))) {
-                                            graph.get(anotherPath.get(2), k).getValue().setFlow(graph.get(anotherPath.get(2), k).getValue().getFlow() + total);
+                                            ((ResidualEdge<Integer>) graph.get(anotherPath.get(2), k).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(anotherPath.get(2), k).getValue()).getFlow() + total);
                                             break;
                                         }
                                     }
@@ -201,10 +201,10 @@ public class TheProblemWithTheProblemSetter {
                             for (int j = 0; j < graph.get(anotherPath.get(1)).size(); j++) {
                                 String current = graph.get(anotherPath.get(1), j).getKey();
                                 if (current.equals(anotherPath.get(0))) {
-                                    graph.get(anotherPath.get(1), j).getValue().setFlow(graph.get(anotherPath.get(1), j).getValue().getFlow() - total);
+                                    ((ResidualEdge<Integer>) graph.get(anotherPath.get(1), j).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(anotherPath.get(1), j).getValue()).getFlow() - total);
                                     for (int k = 0; k < graph.get(anotherPath.get(0)).size(); k++) {
                                         if (graph.get(anotherPath.get(0), k).getKey().equals(anotherPath.get(1))) {
-                                            graph.get(anotherPath.get(0), k).getValue().setFlow(graph.get(anotherPath.get(0), k).getValue().getFlow() + total);
+                                            ((ResidualEdge<Integer>) graph.get(anotherPath.get(0), k).getValue()).setFlow(((ResidualEdge<Integer>) graph.get(anotherPath.get(0), k).getValue()).getFlow() + total);
                                             break;
                                         }
                                     }
@@ -222,12 +222,12 @@ public class TheProblemWithTheProblemSetter {
         WeightedGraph<String, Integer> graph = new WeightedGraph<>(new IntegerLength());
         String source = "s";
         String sink = "t";
-        graph.addUndirectedEdge(source, "problems", new Edge<>(list.size(), 0, new IntegerLength()), new Edge<>(list.size(), new IntegerLength()));
+        graph.addUndirectedEdge(source, "problems", new ResidualEdge<>(list.size(), 0, new IntegerLength()), new ResidualEdge<>(list.size(), new IntegerLength()));
         for (int i = 0; i < boundary.size(); i++) {
-            graph.addUndirectedEdge("problems", "category" + (i + 1), new Edge<>(boundary.get(i), 0, new IntegerLength()), new Edge<>(boundary.get(i), new IntegerLength()));
+            graph.addUndirectedEdge("problems", "category" + (i + 1), new ResidualEdge<>(boundary.get(i), 0, new IntegerLength()), new ResidualEdge<>(boundary.get(i), new IntegerLength()));
         }
         for (int i = 0; i < boundary.size(); i++) {
-            graph.addUndirectedEdge("category" + (i + 1), sink, new Edge<>(boundary.get(i), 0, new IntegerLength()), new Edge<>(boundary.get(i), new IntegerLength()));
+            graph.addUndirectedEdge("category" + (i + 1), sink, new ResidualEdge<>(boundary.get(i), 0, new IntegerLength()), new ResidualEdge<>(boundary.get(i), new IntegerLength()));
         }
         return graph;
     }

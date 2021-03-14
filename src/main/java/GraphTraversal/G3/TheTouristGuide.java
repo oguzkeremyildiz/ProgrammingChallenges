@@ -28,11 +28,11 @@ public class TheTouristGuide {
         LinkedList<Triplet<Integer, Integer, Integer>> sequence = new LinkedList<>();
         for (Pair<Integer, Edge<Integer>> nextEdge : currentEdge) {
             if (!visited.contains(nextEdge.getKey())) {
-                if (length > nextEdge.getValue().getCapacity()) {
-                    if (nextEdge.getValue().getCapacity() > max) {
+                if (length > nextEdge.getValue().getLength()) {
+                    if (nextEdge.getValue().getLength() > max) {
                         sequence.add(new Triplet<>(nextEdge.getKey(), max, index));
                     } else {
-                        sequence.add(new Triplet<>(nextEdge.getKey(), nextEdge.getValue().getCapacity(), index));
+                        sequence.add(new Triplet<>(nextEdge.getKey(), nextEdge.getValue().getLength(), index));
                     }
                 } else {
                     if (length > max) {
@@ -56,7 +56,7 @@ public class TheTouristGuide {
         visited = new HashSet<>();
         visited.add(1);
         int index = 2;
-        next(graph, graph.get(start), index, finish, max, graph.getFirst().getFirst().getValue().getCapacity());
+        next(graph, graph.get(start), index, finish, max, graph.getFirst().getFirst().getValue().getLength());
         printBestOutput();
     }
     private static void printBestOutput() {
