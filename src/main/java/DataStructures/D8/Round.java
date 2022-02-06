@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Round {
-    ArrayList<Integer> dices;
+    private final ArrayList<Integer> dices;
 
     public Round(String readNext){
         String[] split = readNext.split(" ");
