@@ -17,9 +17,15 @@ public class Yahtzee2 {
         return count;
     }
 
-    private static int[] solveDp(int index, HashMap<String, int[]>[] maps, int[][] scores, String current, int currentScore) {
-        if (maps[index].containsKey(current)) {
-            return maps[index].get(current);
+    private static int[] solveDp(int index, HashMap<String, int[]>[] maps, HashMap<String, int[]>[] extras, int[][] scores, String current, int currentScore) {
+        if (index == onesCount(current)) {
+            if (maps[index].containsKey(current)) {
+                return maps[index].get(current);
+            }
+        } else {
+            if (extras[index].containsKey(current)) {
+                return extras[index].get(current);
+            }
         }
         int bestIndex = -1;
         int bestPoint = 0;
@@ -32,9 +38,11 @@ public class Yahtzee2 {
                     if (index < 6 && currentScore < 63 && currentScore + scores[index][i] > 62) {
                         plus += 35;
                     }
-                    int[] points = solveDp(index + 1, maps, scores, str, currentScore + plus);
+                    int[] points = solveDp(index + 1, maps, extras, scores, str, currentScore + plus);
                     if (index == onesCount(current)) {
                         maps[index].put(str, points);
+                    } else {
+                        extras[index].put(str, points);
                     }
                     if (points[14] + plus > bestPoint) {
                         bestIndex = i;
@@ -50,7 +58,8 @@ public class Yahtzee2 {
             }
         }
         if (index < 12) {
-            int[] points = solveDp(index + 1, maps, scores, current, currentScore);
+            int[] points = solveDp(index + 1, maps, extras, scores, current, currentScore);
+            extras[index + 1].put(current, points);
             if (points[14] > bestPoint) {
                 return points;
             }
@@ -74,11 +83,12 @@ public class Yahtzee2 {
                 scores[j][i] = rounds.get(i).calculate(j);
             }
         }
-        HashMap<String, int[]>[] maps = new HashMap[13];
+        HashMap<String, int[]>[] maps = new HashMap[13], extras = new HashMap[13];
         for (int i = 0; i < 13; i++) {
             maps[i] = new HashMap<>();
+            extras[i] = new HashMap<>();
         }
-        int[] best = solveDp(0, maps, scores, "0000000000000", 0);
+        int[] best = solveDp(0, maps, extras, scores, "0000000000000", 0);
         for (int j : best) {
             System.out.print(j + " ");
         }
