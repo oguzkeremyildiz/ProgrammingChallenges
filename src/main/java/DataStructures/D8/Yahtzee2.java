@@ -24,8 +24,8 @@ public class Yahtzee2 {
             return new int[15];
         }
         int onesCount = onesCount(current);
-        if (map.containsKey(new Triplet<>(current, index, onesCount))) {
-            return map.get(new Triplet<>(current, index, onesCount));
+        if (map.containsKey(new Triplet<>(current, index, index - onesCount))) {
+            return map.get(new Triplet<>(current, index, index - onesCount));
         }
         int[] bestPoints = new int[15];
         for (int i = 0; i < 13; i++) {
@@ -36,7 +36,7 @@ public class Yahtzee2 {
                     plus += 35;
                 }
                 int[] points = solveDp(index + 1, map, scores, str, currentScore + plus);
-                map.put(new Triplet<>(str, index, onesCount(current)), points);
+                map.put(new Triplet<>(str, index, index + 1 - onesCount(str)), points);
                 if (points[14] + plus > bestPoints[14]) {
                     bestPoints = points.clone();
                     bestPoints[14] = points[14] + plus;
@@ -48,7 +48,7 @@ public class Yahtzee2 {
             }
         }
         int[] points = solveDp(index + 1, map, scores, current, currentScore);
-        map.put(new Triplet<>(current, index + 1, onesCount(current)), points);
+        map.put(new Triplet<>(current, index + 1, index + 1 - onesCount(current)), points);
         if (points[14] > bestPoints[14]) {
             return points;
         }
@@ -73,7 +73,9 @@ public class Yahtzee2 {
         try {
             ArrayList<Round> rounds = new ArrayList<>();
             Scanner source = new Scanner(new File("Yahtzee.txt"));
+            int co = 0;
             while (source.hasNext()) {
+                co++;
                 for (int i = 0; i < 13; i++) {
                     rounds.add(new Round(source.nextLine()));
                 }

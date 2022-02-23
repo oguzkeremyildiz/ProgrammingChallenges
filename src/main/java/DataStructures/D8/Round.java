@@ -2,6 +2,7 @@ package DataStructures.D8;/* Created by oguzkeremyildiz on 1.02.2020 */
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 
 public class Round {
     private final ArrayList<Integer> dices;
@@ -100,22 +101,22 @@ public class Round {
     }
 
     private int shortStraight(){
-        boolean flag = true;
-        for (int i = 0; i < dices.size() - 2; i++){
-            if (dices.get(i) + 1 != dices.get(i + 1)){
-                flag = false;
-                break;
+        int flag = 1;
+        int previous = dices.get(0);
+        for (int i = 1; i < dices.size(); i++) {
+            if (previous != dices.get(i)) {
+                if (dices.get(i) == previous + 1) {
+                    flag++;
+                } else {
+                    flag = 1;
+                }
             }
-        }
-        if (flag){
-            return 25;
-        }
-        for (int i = 1; i < dices.size() - 1; i++){
-            if (dices.get(i) + 1 != dices.get(i + 1)){
-                return 0;
+            if (flag == 4) {
+                return 25;
             }
+            previous = dices.get(i);
         }
-        return 25;
+        return 0;
     }
 
     private int fullHouse(){
